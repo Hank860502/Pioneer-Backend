@@ -677,3 +677,55 @@ Processing by WishlistsController#show as HTML
   [1m[35m (0.3ms)[0m  SELECT "places_wishlists"."place_id" FROM "places_wishlists" WHERE "places_wishlists"."wishlist_id" = $1 AND "places_wishlists"."liked" = $2  [["wishlist_id", 1], ["liked", "t"]]
   [1m[36mPlace Load (0.5ms)[0m  [1mSELECT "places".* FROM "places" WHERE "places"."id" IN (1, 3, 4)[0m
 Completed 200 OK in 6ms (Views: 0.1ms | ActiveRecord: 1.3ms)
+
+
+Started GET "/users/1/wishlists/1" for ::1 at 2016-06-24 17:25:51 -0700
+  [1m[36mActiveRecord::SchemaMigration Load (0.4ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+Processing by WishlistsController#show as HTML
+  Parameters: {"user_id"=>"1", "id"=>"1"}
+  [1m[35mWishlist Load (0.5ms)[0m  SELECT  "wishlists".* FROM "wishlists" WHERE "wishlists"."id" = $1 LIMIT 1  [["id", 1]]
+Completed 200 OK in 21ms (ActiveRecord: 3.0ms)
+
+
+Started GET "/users/1/wishlists" for ::1 at 2016-06-24 17:25:55 -0700
+Processing by WishlistsController#index as HTML
+  Parameters: {"user_id"=>"1"}
+  [1m[36mWishlist Load (0.2ms)[0m  [1mSELECT "wishlists".* FROM "wishlists" WHERE "wishlists"."user_id" = $1[0m  [["user_id", 1]]
+Completed 200 OK in 3ms (Views: 0.1ms | ActiveRecord: 0.2ms)
+
+
+Started GET "/users/1/wishlists" for ::1 at 2016-06-24 17:26:31 -0700
+Processing by WishlistsController#index as HTML
+  Parameters: {"user_id"=>"1"}
+  [1m[35mWishlist Load (0.2ms)[0m  SELECT "wishlists".* FROM "wishlists" WHERE "wishlists"."user_id" = $1  [["user_id", 1]]
+Completed 200 OK in 11ms (Views: 0.1ms | ActiveRecord: 2.3ms)
+
+
+Started GET "/users/1/wishlists/1" for ::1 at 2016-06-24 17:27:00 -0700
+Processing by WishlistsController#show as HTML
+  Parameters: {"user_id"=>"1", "id"=>"1"}
+  [1m[36mWishlist Load (0.2ms)[0m  [1mSELECT  "wishlists".* FROM "wishlists" WHERE "wishlists"."id" = $1 LIMIT 1[0m  [["id", 1]]
+Completed 200 OK in 11ms (ActiveRecord: 2.1ms)
+
+
+Started GET "/users/1/wishlists/1" for ::1 at 2016-06-24 17:27:51 -0700
+Processing by WishlistsController#show as HTML
+  Parameters: {"user_id"=>"1", "id"=>"1"}
+  [1m[35mWishlist Load (0.2ms)[0m  SELECT  "wishlists".* FROM "wishlists" WHERE "wishlists"."id" = $1 LIMIT 1  [["id", 1]]
+Completed 200 OK in 9ms (ActiveRecord: 1.8ms)
+
+
+Started GET "/users/1/wishlists/1" for ::1 at 2016-06-24 17:28:07 -0700
+Processing by WishlistsController#show as HTML
+  Parameters: {"user_id"=>"1", "id"=>"1"}
+  [1m[36mWishlist Load (0.2ms)[0m  [1mSELECT  "wishlists".* FROM "wishlists" WHERE "wishlists"."id" = $1 LIMIT 1[0m  [["id", 1]]
+Completed 200 OK in 11ms (ActiveRecord: 2.2ms)
+
+
+Started GET "/users/1/wishlists/1" for ::1 at 2016-06-24 17:28:18 -0700
+Processing by WishlistsController#show as HTML
+  Parameters: {"user_id"=>"1", "id"=>"1"}
+  [1m[35mWishlist Load (0.2ms)[0m  SELECT  "wishlists".* FROM "wishlists" WHERE "wishlists"."id" = $1 LIMIT 1  [["id", 1]]
+  [1m[36m (0.3ms)[0m  [1mSELECT "places_wishlists"."place_id" FROM "places_wishlists" WHERE "places_wishlists"."wishlist_id" = $1 AND "places_wishlists"."liked" = $2[0m  [["wishlist_id", 1], ["liked", "t"]]
+  [1m[35mPlace Load (0.5ms)[0m  SELECT "places".* FROM "places" WHERE "places"."id" IN (1, 3, 4)
+Completed 200 OK in 39ms (Views: 0.1ms | ActiveRecord: 4.8ms)

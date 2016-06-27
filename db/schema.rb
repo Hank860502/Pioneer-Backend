@@ -26,13 +26,13 @@ ActiveRecord::Schema.define(version: 20160627172845) do
   create_table "places", force: :cascade do |t|
     t.string   "name"
     t.string   "description"
-    t.float    "suggested_time"
+    t.integer  "duration"
     t.integer  "price"
     t.float    "longitude"
     t.float    "latitude"
     t.float    "rating"
-    t.datetime "created_at",     null: false
-    t.datetime "updated_at",     null: false
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
   end
 
   create_table "places_types", force: :cascade do |t|

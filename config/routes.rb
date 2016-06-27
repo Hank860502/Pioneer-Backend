@@ -30,9 +30,11 @@ Rails.application.routes.draw do
     resources :wishlists
   end
 
-  resources :places
+  resources :places do
+    resources :photos
+  end
 
-
+  resources :types
 
   # Example resource route with sub-resources:
   #   resources :products do

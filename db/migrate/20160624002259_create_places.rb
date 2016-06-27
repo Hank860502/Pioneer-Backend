@@ -3,11 +3,11 @@ class CreatePlaces < ActiveRecord::Migration
     create_table :places do |t|
       t.string :name
       t.string :description
-      t.string :image_url
       t.float :suggested_time
-      t.float :price
+      t.integer :price
       t.float :longitude
       t.float :latitude
+      t.float :rating
 
       t.timestamps null: false
     end

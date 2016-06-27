@@ -965,3 +965,16 @@ ORDER BY c.conname
   [1m[35mPhoto Load (0.3ms)[0m  SELECT "photos".* FROM "photos" WHERE "photos"."place_id" = $1  [["place_id", 1]]
   [1m[36mPhoto Load (0.5ms)[0m  [1mSELECT  "photos".* FROM "photos"  ORDER BY "photos"."id" ASC LIMIT 1[0m
   [1m[35mPlace Load (0.4ms)[0m  SELECT  "places".* FROM "places" WHERE "places"."id" = $1 LIMIT 1  [["id", 1]]
+  [1m[36mType Load (0.6ms)[0m  [1mSELECT "types".* FROM "types"[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.6ms)[0m  [1mINSERT INTO "types" ("name", "created_at", "updated_at") VALUES ($1, $2, $3) RETURNING "id"[0m  [["name", "food"], ["created_at", "2016-06-27 17:37:33.773869"], ["updated_at", "2016-06-27 17:37:33.773869"]]
+  [1m[35m (0.6ms)[0m  COMMIT
+  [1m[36mPlacesType Load (0.6ms)[0m  [1mSELECT "places_types".* FROM "places_types"[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.4ms)[0m  [1mINSERT INTO "places_types" ("place_id", "type_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["place_id", 1], ["type_id", 1], ["created_at", "2016-06-27 17:38:00.503722"], ["updated_at", "2016-06-27 17:38:00.503722"]]
+  [1m[35m (0.4ms)[0m  COMMIT
+  [1m[36mPlace Load (0.6ms)[0m  [1mSELECT  "places".* FROM "places"  ORDER BY "places"."id" ASC LIMIT 1[0m
+  [1m[35mPlace Load (0.5ms)[0m  SELECT  "places".* FROM "places"  ORDER BY "places"."id" ASC LIMIT 1
+  [1m[36mType Load (0.3ms)[0m  [1mSELECT "types".* FROM "types" INNER JOIN "places_types" ON "types"."id" = "places_types"."type_id" WHERE "places_types"."place_id" = $1[0m  [["place_id", 1]]
+  [1m[35mType Load (0.5ms)[0m  SELECT  "types".* FROM "types"  ORDER BY "types"."id" ASC LIMIT 1
+  [1m[36mPlace Load (0.3ms)[0m  [1mSELECT "places".* FROM "places" INNER JOIN "places_types" ON "places"."id" = "places_types"."place_id" WHERE "places_types"."type_id" = $1[0m  [["type_id", 1]]

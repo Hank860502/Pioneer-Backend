@@ -1,11 +1,11 @@
 class PlacesController < ApplicationController
   def index
     if params[:type].nil?
-      places = Place.all
+      places = Place.within(20, :origin => [params[:latitude],params[:longitude]]).limit(20)
     else
-      type_id = Type.find_by(name: params[:type])
-      place_ids = PlacesType.where(type_id: type_id).pluck(:place_id)
-      places = Place.find(place_ids)
+      type_id = Type.find_by(name: params[:type]).id
+      # place_ids = PlacesType.where(type_id: type_id).pluck(:place_id)
+      places = Place.within(20, :origin => [params[:latitude],params[:longitude]]).joins(:places_types).where("places_types.type_id = #{type_id}").limit(5)
     end
     result = places.map do |place|
       {
@@ -15,8 +15,8 @@ class PlacesController < ApplicationController
         rating: place.rating,
         duration: place.duration,
         price: place.price,
-        longitude: place.longitude,
-        latitude: place.latitude,
+        longitude: place.lng,
+        latitude: place.lat,
         types: place.types.map {|type| type.name}
       }
     end
@@ -40,8 +40,8 @@ class PlacesController < ApplicationController
       rating: params[:rating],
       duration: params[:duration],
       price: params[:price],
-      longitude: params[:longitude],
-      latitude: params[:latitude],
+      lng: params[:longitude],
+      lat: params[:latitude],
     }
     new_place = Place.new(info)
     if new_place.save

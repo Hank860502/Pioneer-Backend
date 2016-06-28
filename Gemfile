@@ -5,6 +5,7 @@ gem 'pg'
 gem 'rack-cors'
 gem 'bcrypt'
 gem 'faker'
+gem 'geokit-rails'
 
 group :development, :test do
   gem 'pry-rails'

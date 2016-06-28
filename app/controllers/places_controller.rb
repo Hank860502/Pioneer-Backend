@@ -28,22 +28,25 @@ class PlacesController < ApplicationController
     render json: place.to_json
   end
 
+  def new
+    @types = Type.all
+    render 'new.html.haml'
+  end
+
   def create
-    if params[:password] == "123"
-      info = {
-        name: params[:name],
-        description: params[:description],
-        rating: params[:rating],
-        duration: params[:duration],
-        price: params[:price],
-        longitude: params[:longitude],
-        latitude: params[:latitude],
-      }
-      new_place = Place.new(info)
-      if new_place.save
-        # add type
-        # add photos
-      end
+    info = {
+      name: params[:name],
+      description: params[:description],
+      rating: params[:rating],
+      duration: params[:duration],
+      price: params[:price],
+      longitude: params[:longitude],
+      latitude: params[:latitude],
+    }
+    new_place = Place.new(info)
+    if new_place.save
+      # add type
+      # add photos
     end
   end
 

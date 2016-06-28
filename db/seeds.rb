@@ -12,8 +12,8 @@ tourist_destination = Type.create(name: 'tourist_destination') # Pioneer Only
 
 # Alcatraz
 alcatraz = Place.create(
-  name: "Alcatraz",
-  description: "This is Alcatraz description",
+  name: "Alcatraz Island",
+  description: "Notorious prison & once home to Al Capone, now a museum with audio tour, accessible by ferry.",
   latitude: 37.826986,
   longitude: -122.422972,
   rating: 4.9,
@@ -39,6 +39,32 @@ PlacesType.create(
 Photo.create(
   place_id: alcatraz.id,
   image_url: "https://instagram.fsnc1-1.fna.fbcdn.net/t51.2885-15/e35/11311457_1435769073419954_921661701_n.jpg"
+)
+
+# Comstock Saloon
+comstock_saloon = Place.create(
+  name: "Comstock Saloon",
+  description: "Fancy, turn-of-the-century digs house vintage cocktails, upscale bar fare, cozy booths & live jazz.",
+  latitude: 37.796795,
+  longitude: -122.405626,
+  rating: 4.4,
+  duration: 180,
+  price: 2
+  )
+
+PlacesType.create(
+  place_id: comstock_saloon.id,
+  type_id: bar.id
+  )
+
+PlacesType.create(
+  place_id: comstock_saloon.id,
+  type_id: tourist_destination.id
+  )
+
+Photo.create(
+  place_id: comstock_saloon.id,
+  image_url: "https://s3-media3.fl.yelpcdn.com/bphoto/Rmo7lQ0HG2B2FZmwD7iLoQ/o.jpg"
 )
 
 # Aquarium Of The Bay
@@ -165,6 +191,7 @@ Photo.create(
   image_url: "https://instagram.fsnc1-1.fna.fbcdn.net/t51.2885-15/e35/13109081_1723896514559583_614709634_n.jpg"
 )
 
+# Battery Spencer
 battery_spencer = Place.create(
   name: "Battery Spencer",
   description: "Battery Spencer description",
@@ -195,6 +222,7 @@ Photo.create(
   image_url: "https://instagram.fsnc1-1.fna.fbcdn.net/t51.2885-15/sh0.08/e35/p750x750/12724618_1571822593147746_505749575_n.jpg"
 )
 
+# Chinatown
 china_town = Place.create(
   name: "China Town",
   description: "China Town Description",
@@ -220,6 +248,7 @@ Photo.create(
   image_url: "https://instagram.fsnc1-1.fna.fbcdn.net/t51.2885-15/e35/1516888_166301770399020_702906097_n.jpg"
 )
 
+# Alamo Square
 alamo_square = Place.create(
   name: "Alamo Square",
   description: "Painted ladies and old houses with great view on SF",
@@ -250,6 +279,27 @@ Photo.create(
   image_url: "https://instagram.fsnc1-1.fna.fbcdn.net/t51.2885-15/e35/12751408_259692627695424_311922490_n.jpg"
 )
 
+z_and_y_restaurant = Place.create(
+  name: "Z + Y Restaurant",
+  description: "Basic quarters for dining on Sichuan & Northern Chinese dishes packed with plenty of spice.",
+  latitude: 37.795927,
+  longitude: -122.406017,
+  rating: 3.9,
+  duration: 90,
+  price: 2
+  )
+
+PlacesType.create(
+  place_id: z_and_y_restaurant.id,
+  type_id: restaurant.id
+  )
+
+Photo.create(
+  place_id: z_and_y_restaurant.id,
+  image_url: "https://scontent-ord1-1.cdninstagram.com/t51.2885-15/e35/12822315_1572804843038082_501174903_n.jpg"
+)
+
+# Castro District
 castro_district = Place.create(
   name: "Castro District",
   description: "Castro District Description",
@@ -275,27 +325,338 @@ Photo.create(
   image_url: "https://instagram.fsnc1-1.fna.fbcdn.net/t51.2885-15/e35/13397451_285829265095213_2012320115_n.jpg"
 )
 
-# civic_center = Place.create(
-#   name: "Civic Center",
-#   image_url: "https://instagram.fsnc1-1.fna.fbcdn.net/t51.2885-15/e35/12960174_1685985931618996_1337015684_n.jpg"
-#   )
+# Lombard Street
+lombard_street = Place.create(
+  name: "Lombard Street",
+  description: "Lombard Street - 'World's mot crooked street' - is famous for a steep, one-block section with eight hairpin turns and a flowery sidewalk.",
+  latitude: 37.802071,
+  longitude: -122.419083,
+  rating: 4.5,
+  duration: 30,
+  price: 0
+  )
 
-# lombard_street = Place.create(
-#   name: "Lombard Street",
-#   image_url: "https://instagram.fsnc1-1.fna.fbcdn.net/t51.2885-15/e35/12912355_267495800257880_1905434648_n.jpg"
-#   )
+PlacesType.create(
+  place_id: lombard_street.id,
+  type_id: place_of_interest.id
+  )
 
-# palace_of_fine_arts = Place.create(
-#   name: "Palace of Fine Arts",
-#   image_url: "https://instagram.fsnc1-1.fna.fbcdn.net/t51.2885-15/e35/11347790_1166531286695489_2021504333_n.jpg"
-#   )
+PlacesType.create(
+  place_id: lombard_street.id,
+  type_id: tourist_destination.id
+  )
 
-# transamerica_tower = Place.create(
-#   name: "Trans-america Tower",
-#   image_url: "https://instagram.fsnc1-1.fna.fbcdn.net/t51.2885-15/sh0.08/e35/p750x750/12825796_528342577326118_1262316311_n.jpg"
-#   )
+Photo.create(
+  place_id: lombard_street.id,
+  image_url: "https://instagram.fsnc1-1.fna.fbcdn.net/t51.2885-15/e35/12912355_267495800257880_1905434648_n.jpg"
+)
 
-# sutro_tower = Place.create(
-#   name: "Sutro Tower",
-#   image_url: "https://instagram.fsnc1-1.fna.fbcdn.net/t51.2885-15/e35/12093482_626976757445643_1739892906_n.jpg"
-#   )
+# Palace of Fine Arts
+palace_of_fine_arts = Place.create(
+  name: "Palace of Fine Arts",
+  description: "The Palace of Fine Arts in the Marina District of San Francisco, California, is a monumental structure originally constructed for the 1915 Panama-Pacific Exposition in order to exhibit works of art presented there",
+  latitude: 37.801470,
+  longitude: -122.448154,
+  rating: 4.8,
+  duration: 30,
+  price: 0
+  )
+
+PlacesType.create(
+  place_id: palace_of_fine_arts.id,
+  type_id: park.id
+  )
+
+PlacesType.create(
+  place_id: palace_of_fine_arts.id,
+  type_id: place_of_interest.id
+  )
+
+PlacesType.create(
+  place_id: palace_of_fine_arts.id,
+  type_id: tourist_destination.id
+  )
+
+Photo.create(
+  place_id: palace_of_fine_arts.id,
+  image_url: "https://instagram.fsnc1-1.fna.fbcdn.net/t51.2885-15/e35/11347790_1166531286695489_2021504333_n.jpg"
+)
+
+transamerica_pyramid = Place.create(
+  name: "Trans-america Pyramid",
+  description: "The Transamerica Pyramid is the tallest skyscraper in the San Francisco skyline",
+  latitude: 37.795177,
+  longitude: -122.402693,
+  rating: 4.5,
+  duration: 15,
+  price: 0
+  )
+
+PlacesType.create(
+  place_id: transamerica_pyramid.id,
+  type_id: place_of_interest.id
+  )
+
+PlacesType.create(
+  place_id: transamerica_pyramid.id,
+  type_id: tourist_destination.id
+  )
+
+Photo.create(
+  place_id: transamerica_pyramid.id,
+  image_url: "https://instagram.fsnc1-1.fna.fbcdn.net/t51.2885-15/sh0.08/e35/p750x750/12825796_528342577326118_1262316311_n.jpg"
+)
+
+sutro_tower = Place.create(
+  name: "Sutro Tower",
+  description: "Sutro Tower is a 977 ft (298 m) three-pronged TV and radio antenna tower in San Francisco, CA. Rising from a hill between Twin Peaks and Mount Sutro near Clarendon Heights, it is a prominent feature of the city skyline and a landmark for city residents and visitors.",
+  latitude: 37.755183,
+  longitude: -122.452811,
+  rating: 2.8,
+  duration: 0,
+  price: 0,
+  )
+
+PlacesType.create(
+  place_id: sutro_tower.id,
+  type_id: place_of_interest.id
+  )
+
+PlacesType.create(
+  place_id: sutro_tower.id,
+  type_id: tourist_destination.id
+  )
+
+Photo.create(
+  place_id: sutro_tower.id,
+  image_url: "https://instagram.fsnc1-1.fna.fbcdn.net/t51.2885-15/e35/12093482_626976757445643_1739892906_n.jpg"
+)
+1760_restaurant = Place.create(
+  name: "1760 Restaurant & Cocktail Bar",
+  description: "Carefully sourced, ambitious New American cuisine & cocktails in a sleek space with a long bar.",
+  latitude: 37.793144,
+  longitude: -122.421024,
+  rating: 4.4,
+  duration: 90,
+  price: 3
+  )
+
+PlacesType.create(
+  place_id: 1760_restaurant.id,
+  type_id: restaurant.id
+  )
+
+PlacesType.create(
+  place_id: 1760_restaurant.id,
+  type_id: bar.id
+  )
+
+Photo.create(
+  place_id: 1760_restaurant.id,
+  image_url: "https://s3-media2.fl.yelpcdn.com/bphoto/-HTjDquqxj7EmQobBK3fTA/o.jpg"
+)
+
+twin_peaks = Place.create(
+  name: "Twin Peaks",
+  description: "The Twin Peaks are two prominent hills with an elevation of about 925 feet located near the geographic center of San Francisco, California.",
+  latitude: 37.752098,
+  longitude: -122.447303,
+  rating: 4.8,
+  duration: 45,
+  price: 0,
+  )
+
+PlacesType.create(
+  place_id: twin_peaks.id,
+  type_id: place_of_interest.id
+  )
+
+PlacesType.create(
+  place_id: twin_peaks.id,
+  type_id: tourist_destination.id
+  )
+
+Photo.create(
+  place_id: twin_peaks.id,
+  image_url: "https://scontent-ord1-1.cdninstagram.com/t51.2885-15/e35/13549344_642567335893188_812231539_n.jpg"
+)
+
+lands_end = Place.create(
+  name: "Land End Trail",
+  description: "Lands End is a park in San Francisco within the Golden Gate National Recreation Area. It is a rocky and windswept shoreline at the mouth of the Golden Gate",
+  latitude: 37.786376,
+  longitude: -122.505750,
+  rating: 4.8,
+  duration: 180,
+  price: 0,
+  )
+
+PlacesType.create(
+  place_id: lands_end.id,
+  type_id: place_of_interest.id
+  )
+
+PlacesType.create(
+  place_id: lands_end.id,
+  type_id: tourist_destination.id
+  )
+
+Photo.create(
+  place_id: lands_end.id,
+  image_url: "https://scontent-ord1-1.cdninstagram.com/l/t51.2885-15/e35/13557010_1707891832818246_1852511319_n.jpg"
+)
+
+sutro_baths = Place.create(
+  name: "Sutro Baths",
+  description: "The Sutro Baths were (now ruins) a large, privately owned public saltwater swimming pool complex in the Lands End area of the Outer Richmond District in western San Francisco, California",
+  latitude: 37.780356,
+  longitude: -122.513671,
+  rating: 4.7,
+  duration: 60,
+  price: 0,
+  )
+
+PlacesType.create(
+  place_id: sutro_baths.id,
+  type_id: place_of_interest.id
+  )
+
+PlacesType.create(
+  place_id: sutro_baths.id,
+  type_id: tourist_destination.id
+  )
+
+Photo.create(
+  place_id: sutro_baths.id,
+  image_url: "https://scontent-ord1-1.cdninstagram.com/t51.2885-15/e35/13531860_656196461194008_916778377_n.jpg"
+)
+
+civic_center = Place.create(
+  name: "Civic Center",
+  description: "The Civic Center in San Francisco, California, is an area of a few blocks north of the intersection of Market Street and Van Ness Avenue that contains many of the city's largest government and cultural institutions.",
+  latitude: 37.779515,
+  longitude: -122.417643,
+  rating: 3.1,
+  duration: 30,
+  price: 0
+  )
+
+PlacesType.create(
+  place_id: civic_center.id,
+  type_id: place_of_interest.id
+  )
+
+PlacesType.create(
+  place_id: civic_center.id,
+  type_id: tourist_destination.id
+  )
+
+Photo.create(
+  place_id: civic_center.id,
+  image_url: "https://instagram.fsnc1-1.fna.fbcdn.net/t51.2885-15/e35/12960174_1685985931618996_1337015684_n.jpg"
+)
+
+golden_gate_bridge = Place.create(
+  name: "Golden Gate Bridge",
+  description: "The Golden Gate Bridge is a suspension bridge spanning the Golden Gate strait, the one-mile-wide, three-mile-long channel between San Francisco Bay and the Pacific Ocean.",
+  latitude: 37.819946,
+  longitude: -122.478234,
+  rating: 4.7,
+  duration: 45,
+  price: 0
+  )
+
+PlacesType.create(
+  place_id: golden_gate_bridge.id,
+  type_id: place_of_interest.id
+  )
+
+PlacesType.create(
+  place_id: golden_gate_bridge.id,
+  type_id: tourist_destination.id
+  )
+
+Photo.create(
+  place_id: golden_gate_bridge.id,
+  image_url: "https://scontent-ord1-1.cdninstagram.com/t51.2885-15/e35/12339059_941804632578634_2076641008_n.jpg"
+)
+
+chiang_kai_shek_memorial_hall = Place.create(
+  name: "chiang kai-shek memorial hall",
+  description: "The National Chiang Kai-shek Memorial Hall is a Taiwanese national monument, landmark and tourist attraction erected in memory of Chiang Kai-shek, former President of the Republic of China.",
+  latitude: 25.035368,
+  longitude: 121.519588,
+  rating: 4.4,
+  duration: 45,
+  price: 0
+  )
+
+PlacesType.create(
+  place_id: chiang_kai_shek_memorial_hall.id,
+  type_id: place_of_interest.id
+  )
+
+PlacesType.create(
+  place_id: chiang_kai_shek_memorial_hall.id,
+  type_id: tourist_destination.id
+  )
+
+PlacesType.create(
+  place_id: chiang_kai_shek_memorial_hall.id,
+  type_id: museum.id
+  )
+
+Photo.create(
+  place_id: chiang_kai_shek_memorial_hall.id,
+  image_url: "https://scontent-ord1-1.cdninstagram.com/t51.2885-15/e35/12530934_999508493451333_806608021_n.jpg"
+)
+
+long_shan_temple = Place.create(
+  name: "Long Shan Temple",
+  description: "Lungshan Temple of Manka is a temple in Wanhua District, Taipei, Taiwan. The temple was built in Taipei in 1738 by settlers from Fujian during Qing rule. It served as a place of worship and a gathering place for the Chinese settlers.",
+  latitude: 25.037007,
+  longitude: 121.499772,
+  rating: 4.3,
+  duration: 60,
+  price: 0
+  )
+
+PlacesType.create(
+  place_id: long_shan_temple.id,
+  type_id: place_of_interest.id
+  )
+
+PlacesType.create(
+  place_id: long_shan_temple.id,
+  type_id: tourist_destination.id
+  )
+
+PlacesType.create(
+  place_id: long_shan_temple.id,
+  type_id: museum.id
+  )
+
+Photo.create(
+  place_id: long_shan_temple.id,
+  image_url: "https://scontent-ord1-1.cdninstagram.com/t51.2885-15/s1080x1080/e15/fr/13525539_1188879921145432_140057277_n.jpg"
+)
+
+din_tai_fung = Place.create(
+  name: "鼎泰豐 Din Tai Fung",
+  description: "Popular global chain known for elevated dim sum & Asian dishes served in bustling quarters.",
+  latitude: 25.041061,
+  longitude: 121.543277,
+  rating: 4.6,
+  duration: 60,
+  price: 2
+  )
+
+PlacesType.create(
+  place_id: din_tai_fung.id,
+  type_id: restaurant.id
+  )
+
+Photo.create(
+  place_id: din_tai_fung.id,
+  image_url: "https://scontent-ord1-1.cdninstagram.com/t51.2885-15/e15/10724197_1632237020336765_235564369_n.jpg"
+)

@@ -1,0 +1,42 @@
+!!!
+%html
+  %head
+    %meta{:content => "text/html; charset=UTF-8", "http-equiv" => "Content-Type"}/
+    %title Shoppe
+  %body
+    %div
+      %h2 Enter Your New Place:
+      = form_for :places, url: places_path do |f|
+        %p
+          = f.label :Name
+          .form-text= f.text_field :name
+        %p
+          = f.label :Description
+          .form-text= f.text_field :description
+        %p
+          = f.label :Rating
+          .form-text= f.text_field :rating
+        %p
+          = f.label :Duration
+          .form-text= f.text_field :duration
+        %p
+          = f.label :Price
+          .form-text= f.text_field :price
+        %p
+          = f.label :Longitude
+          .form-text= f.text_field :longitude
+        %p
+          = f.label :Latitude
+          .form-text= f.text_field :latitude
+        %p
+          = f.label :Categories
+          %br
+          - @types.each do |type|
+            %input{:type => "checkbox", :name => "place[types][]", :value => "#{type.id}"}
+            = f.label type.title, class: "check_label"
+
+        %p
+          = f.label :image
+          .form-text= f.text_field :image
+        %p.form-text
+          = f.submit

@@ -5,7 +5,7 @@ class PlacesController < ApplicationController
     else
       type_id = Type.find_by(name: params[:type]).id
       # place_ids = PlacesType.where(type_id: type_id).pluck(:place_id)
-      places = Place.within(20, :origin => [params[:latitude],params[:longitude]]).joins(:places_types).where("places_types.type_id = #{type_id}").limit(5)
+      places = Place.within(20, :origin => [params[:latitude],params[:longitude]]).joins(:places_types).where("places_types.type_id = #{type_id}").limit(20)
     end
     result = places.map do |place|
       {

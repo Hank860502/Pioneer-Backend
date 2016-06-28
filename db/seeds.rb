@@ -431,7 +431,7 @@ Photo.create(
   place_id: sutro_tower.id,
   image_url: "https://instagram.fsnc1-1.fna.fbcdn.net/t51.2885-15/e35/12093482_626976757445643_1739892906_n.jpg"
 )
-1760_restaurant = Place.create(
+seventeen_sixty_restaurant = Place.create(
   name: "1760 Restaurant & Cocktail Bar",
   description: "Carefully sourced, ambitious New American cuisine & cocktails in a sleek space with a long bar.",
   latitude: 37.793144,
@@ -442,17 +442,17 @@ Photo.create(
   )
 
 PlacesType.create(
-  place_id: 1760_restaurant.id,
+  place_id: seventeen_sixty_restaurant.id,
   type_id: restaurant.id
   )
 
 PlacesType.create(
-  place_id: 1760_restaurant.id,
+  place_id: seventeen_sixty_restaurant.id,
   type_id: bar.id
   )
 
 Photo.create(
-  place_id: 1760_restaurant.id,
+  place_id: seventeen_sixty_restaurant.id,
   image_url: "https://s3-media2.fl.yelpcdn.com/bphoto/-HTjDquqxj7EmQobBK3fTA/o.jpg"
 )
 

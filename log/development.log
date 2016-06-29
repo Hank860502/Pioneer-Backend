@@ -3417,3 +3417,37 @@ Processing by PlacesController#index as HTML
           SIN(0.0)*SIN(RADIANS(places.lat))))*3963.1899999999996)
           <= 20)) LIMIT 20
 Completed 200 OK in 18ms (Views: 0.1ms | ActiveRecord: 2.5ms)
+
+
+Started GET "/places/new" for ::1 at 2016-06-29 11:01:25 -0700
+Processing by PlacesController#new as HTML
+Completed 200 OK in 4ms (ActiveRecord: 0.0ms)
+
+
+Started GET "/types" for ::1 at 2016-06-29 11:03:51 -0700
+Processing by TypesController#index as HTML
+  [1m[36mType Load (0.5ms)[0m  [1mSELECT "types".* FROM "types"[0m
+Completed 200 OK in 14ms (Views: 0.1ms | ActiveRecord: 2.9ms)
+
+
+Started GET "/types" for ::1 at 2016-06-29 11:04:46 -0700
+Processing by TypesController#index as HTML
+Completed 200 OK in 4ms (Views: 0.1ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/types" for ::1 at 2016-06-29 11:05:01 -0700
+
+SyntaxError (/Users/apprentice/Desktop/Pioneer-Backend/app/controllers/types_controller.rb:4: syntax error, unexpected tIDENTIFIER, expecting keyword_end):
+  app/controllers/types_controller.rb:4: syntax error, unexpected tIDENTIFIER, expecting keyword_end
+
+
+  Rendered /Users/apprentice/.rbenv/versions/2.2.5/lib/ruby/gems/2.2.0/gems/actionpack-4.2.5/lib/action_dispatch/middleware/templates/rescues/_source.erb (4.0ms)
+  Rendered /Users/apprentice/.rbenv/versions/2.2.5/lib/ruby/gems/2.2.0/gems/actionpack-4.2.5/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb (2.1ms)
+  Rendered /Users/apprentice/.rbenv/versions/2.2.5/lib/ruby/gems/2.2.0/gems/actionpack-4.2.5/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb (0.9ms)
+  Rendered /Users/apprentice/.rbenv/versions/2.2.5/lib/ruby/gems/2.2.0/gems/actionpack-4.2.5/lib/action_dispatch/middleware/templates/rescues/diagnostics.html.erb within rescues/layout (57.5ms)
+
+
+Started GET "/types" for ::1 at 2016-06-29 11:05:05 -0700
+Processing by TypesController#index as HTML
+  [1m[35m (0.2ms)[0m  SELECT "types"."name" FROM "types"
+Completed 200 OK in 8ms (Views: 0.1ms | ActiveRecord: 1.0ms)

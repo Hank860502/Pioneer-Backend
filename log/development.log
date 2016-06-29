@@ -3451,3 +3451,60 @@ Started GET "/types" for ::1 at 2016-06-29 11:05:05 -0700
 Processing by TypesController#index as HTML
   [1m[35m (0.2ms)[0m  SELECT "types"."name" FROM "types"
 Completed 200 OK in 8ms (Views: 0.1ms | ActiveRecord: 1.0ms)
+  [1m[36mPlace Load (0.8ms)[0m  [1mSELECT  "places".* FROM "places"  ORDER BY "places"."id" DESC LIMIT 1[0m
+
+
+Started POST "/places?name=test&description=testtest&types=bar,casino" for ::1 at 2016-06-29 11:19:34 -0700
+Processing by PlacesController#create as */*
+  Parameters: {"name"=>"test", "description"=>"testtest", "types"=>"bar,casino"}
+  [1m[36m (0.2ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (24.7ms)[0m  INSERT INTO "places" ("name", "description", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"  [["name", "test"], ["description", "testtest"], ["created_at", "2016-06-29 18:19:35.087839"], ["updated_at", "2016-06-29 18:19:35.087839"]]
+  [1m[36m (28.8ms)[0m  [1mCOMMIT[0m
+  [1m[35mType Load (0.3ms)[0m  SELECT  "types".* FROM "types" WHERE "types"."name" = $1 LIMIT 1  [["name", "bar"]]
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.4ms)[0m  INSERT INTO "places_types" ("place_id", "type_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"  [["place_id", 25], ["type_id", 2], ["created_at", "2016-06-29 18:19:35.203749"], ["updated_at", "2016-06-29 18:19:35.203749"]]
+  [1m[36m (15.6ms)[0m  [1mCOMMIT[0m
+  [1m[35mType Load (0.3ms)[0m  SELECT  "types".* FROM "types" WHERE "types"."name" = $1 LIMIT 1  [["name", "casino"]]
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "places_types" ("place_id", "type_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"  [["place_id", 25], ["type_id", 3], ["created_at", "2016-06-29 18:19:35.223037"], ["updated_at", "2016-06-29 18:19:35.223037"]]
+  [1m[36m (0.4ms)[0m  [1mCOMMIT[0m
+Completed 200 OK in 178ms (ActiveRecord: 75.5ms)
+  [1m[36mPlace Load (0.8ms)[0m  [1mSELECT  "places".* FROM "places"  ORDER BY "places"."id" DESC LIMIT 1[0m
+  [1m[35mPlace Load (0.5ms)[0m  SELECT  "places".* FROM "places"  ORDER BY "places"."id" DESC LIMIT 1
+  [1m[36mType Load (0.9ms)[0m  [1mSELECT "types".* FROM "types" INNER JOIN "places_types" ON "types"."id" = "places_types"."type_id" WHERE "places_types"."place_id" = $1[0m  [["place_id", 25]]
+  [1m[35mPlace Load (0.5ms)[0m  SELECT  "places".* FROM "places"  ORDER BY "places"."id" DESC LIMIT 1
+  [1m[36mPhoto Load (0.3ms)[0m  [1mSELECT "photos".* FROM "photos" WHERE "photos"."place_id" = $1[0m  [["place_id", 25]]
+  [1m[35mPlace Load (0.5ms)[0m  SELECT  "places".* FROM "places"  ORDER BY "places"."id" DESC LIMIT 1
+  [1m[36mType Load (0.3ms)[0m  [1mSELECT "types".* FROM "types" INNER JOIN "places_types" ON "types"."id" = "places_types"."type_id" WHERE "places_types"."place_id" = $1[0m  [["place_id", 25]]
+  [1m[35mPlace Load (0.5ms)[0m  SELECT  "places".* FROM "places"  ORDER BY "places"."id" DESC LIMIT 1
+
+
+Started POST "/places?name=test2&description=testtest&types=bar,casino&photos=url1,url2,url3" for ::1 at 2016-06-29 11:20:43 -0700
+Processing by PlacesController#create as */*
+  Parameters: {"name"=>"test2", "description"=>"testtest", "types"=>"bar,casino", "photos"=>"url1,url2,url3"}
+  [1m[35m (0.2ms)[0m  BEGIN
+  [1m[36mSQL (0.3ms)[0m  [1mINSERT INTO "places" ("name", "description", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["name", "test2"], ["description", "testtest"], ["created_at", "2016-06-29 18:20:43.021421"], ["updated_at", "2016-06-29 18:20:43.021421"]]
+  [1m[35m (51.4ms)[0m  COMMIT
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (23.5ms)[0m  INSERT INTO "photos" ("place_id", "image_url", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"  [["place_id", 26], ["image_url", "url1"], ["created_at", "2016-06-29 18:20:43.086088"], ["updated_at", "2016-06-29 18:20:43.086088"]]
+  [1m[36m (0.6ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.3ms)[0m  [1mINSERT INTO "photos" ("place_id", "image_url", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["place_id", 26], ["image_url", "url2"], ["created_at", "2016-06-29 18:20:43.113292"], ["updated_at", "2016-06-29 18:20:43.113292"]]
+  [1m[35m (0.4ms)[0m  COMMIT
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.3ms)[0m  INSERT INTO "photos" ("place_id", "image_url", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"  [["place_id", 26], ["image_url", "url3"], ["created_at", "2016-06-29 18:20:43.116222"], ["updated_at", "2016-06-29 18:20:43.116222"]]
+  [1m[36m (0.4ms)[0m  [1mCOMMIT[0m
+  [1m[35mType Load (0.2ms)[0m  SELECT  "types".* FROM "types" WHERE "types"."name" = $1 LIMIT 1  [["name", "bar"]]
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "places_types" ("place_id", "type_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"  [["place_id", 26], ["type_id", 2], ["created_at", "2016-06-29 18:20:43.119581"], ["updated_at", "2016-06-29 18:20:43.119581"]]
+  [1m[36m (0.3ms)[0m  [1mCOMMIT[0m
+  [1m[35mType Load (0.2ms)[0m  SELECT  "types".* FROM "types" WHERE "types"."name" = $1 LIMIT 1  [["name", "casino"]]
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "places_types" ("place_id", "type_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"  [["place_id", 26], ["type_id", 3], ["created_at", "2016-06-29 18:20:43.122484"], ["updated_at", "2016-06-29 18:20:43.122484"]]
+  [1m[36m (0.3ms)[0m  [1mCOMMIT[0m
+Completed 200 OK in 104ms (ActiveRecord: 81.2ms)
+  [1m[36mPlace Load (0.7ms)[0m  [1mSELECT  "places".* FROM "places"  ORDER BY "places"."id" DESC LIMIT 1[0m
+  [1m[35mPlace Load (0.6ms)[0m  SELECT  "places".* FROM "places"  ORDER BY "places"."id" DESC LIMIT 1
+  [1m[36mType Load (0.7ms)[0m  [1mSELECT "types".* FROM "types" INNER JOIN "places_types" ON "types"."id" = "places_types"."type_id" WHERE "places_types"."place_id" = $1[0m  [["place_id", 26]]
+  [1m[35mPlace Load (0.5ms)[0m  SELECT  "places".* FROM "places"  ORDER BY "places"."id" DESC LIMIT 1
+  [1m[36mPhoto Load (0.3ms)[0m  [1mSELECT "photos".* FROM "photos" WHERE "photos"."place_id" = $1[0m  [["place_id", 26]]

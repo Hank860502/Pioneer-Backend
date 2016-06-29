@@ -46,8 +46,12 @@ class PlacesController < ApplicationController
     }
     new_place = Place.new(info)
     if new_place.save
-      add_photos(params[:photos], new_place.id)
-      add_types(params[:types], new_place.id)
+      if params[:photos]
+        add_photos(params[:photos], new_place.id)
+      end
+      if params[:types]
+        add_types(params[:types], new_place.id)
+      end
     end
   end
 

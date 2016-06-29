@@ -2402,3 +2402,879 @@ Processing by PlacesController#index as HTML
   [1m[35mPhoto Load (0.2ms)[0m  SELECT "photos".* FROM "photos" WHERE "photos"."place_id" = $1  [["place_id", 13]]
   [1m[36mType Load (0.3ms)[0m  [1mSELECT "types".* FROM "types" INNER JOIN "places_types" ON "types"."id" = "places_types"."type_id" WHERE "places_types"."place_id" = $1[0m  [["place_id", 13]]
 Completed 200 OK in 41ms (Views: 0.1ms | ActiveRecord: 6.4ms)
+
+
+Started GET "/" for ::1 at 2016-06-28 12:10:13 -0700
+  [1m[36mActiveRecord::SchemaMigration Load (19.8ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+
+ActiveRecord::PendingMigrationError (
+
+Migrations are pending. To resolve this issue, run:
+
+	bin/rake db:migrate RAILS_ENV=development
+
+):
+  activerecord (4.2.5) lib/active_record/migration.rb:392:in `check_pending!'
+  activerecord (4.2.5) lib/active_record/migration.rb:373:in `call'
+  actionpack (4.2.5) lib/action_dispatch/middleware/callbacks.rb:29:in `block in call'
+  activesupport (4.2.5) lib/active_support/callbacks.rb:88:in `__run_callbacks__'
+  activesupport (4.2.5) lib/active_support/callbacks.rb:778:in `_run_call_callbacks'
+  activesupport (4.2.5) lib/active_support/callbacks.rb:81:in `run_callbacks'
+  actionpack (4.2.5) lib/action_dispatch/middleware/callbacks.rb:27:in `call'
+  actionpack (4.2.5) lib/action_dispatch/middleware/reloader.rb:73:in `call'
+  actionpack (4.2.5) lib/action_dispatch/middleware/remote_ip.rb:78:in `call'
+  actionpack (4.2.5) lib/action_dispatch/middleware/debug_exceptions.rb:17:in `call'
+  actionpack (4.2.5) lib/action_dispatch/middleware/show_exceptions.rb:30:in `call'
+  railties (4.2.5) lib/rails/rack/logger.rb:38:in `call_app'
+  railties (4.2.5) lib/rails/rack/logger.rb:20:in `block in call'
+  activesupport (4.2.5) lib/active_support/tagged_logging.rb:68:in `block in tagged'
+  activesupport (4.2.5) lib/active_support/tagged_logging.rb:26:in `tagged'
+  activesupport (4.2.5) lib/active_support/tagged_logging.rb:68:in `tagged'
+  railties (4.2.5) lib/rails/rack/logger.rb:20:in `call'
+  actionpack (4.2.5) lib/action_dispatch/middleware/request_id.rb:21:in `call'
+  rack (1.6.4) lib/rack/runtime.rb:18:in `call'
+  activesupport (4.2.5) lib/active_support/cache/strategy/local_cache_middleware.rb:28:in `call'
+  rack (1.6.4) lib/rack/lock.rb:17:in `call'
+  actionpack (4.2.5) lib/action_dispatch/middleware/static.rb:116:in `call'
+  railties (4.2.5) lib/rails/engine.rb:518:in `call'
+  railties (4.2.5) lib/rails/application.rb:165:in `call'
+  rack (1.6.4) lib/rack/lock.rb:17:in `call'
+  rack (1.6.4) lib/rack/content_length.rb:15:in `call'
+  rack (1.6.4) lib/rack/handler/webrick.rb:88:in `service'
+  /Users/apprentice/.rbenv/versions/2.2.5/lib/ruby/2.2.0/webrick/httpserver.rb:138:in `service'
+  /Users/apprentice/.rbenv/versions/2.2.5/lib/ruby/2.2.0/webrick/httpserver.rb:94:in `run'
+  /Users/apprentice/.rbenv/versions/2.2.5/lib/ruby/2.2.0/webrick/server.rb:294:in `block in start_thread'
+
+
+  Rendered /Users/apprentice/.rbenv/versions/2.2.5/lib/ruby/gems/2.2.0/gems/actionpack-4.2.5/lib/action_dispatch/middleware/templates/rescues/_source.erb (2.6ms)
+  Rendered /Users/apprentice/.rbenv/versions/2.2.5/lib/ruby/gems/2.2.0/gems/actionpack-4.2.5/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb (1.6ms)
+  Rendered /Users/apprentice/.rbenv/versions/2.2.5/lib/ruby/gems/2.2.0/gems/actionpack-4.2.5/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb (1.1ms)
+  Rendered /Users/apprentice/.rbenv/versions/2.2.5/lib/ruby/gems/2.2.0/gems/actionpack-4.2.5/lib/action_dispatch/middleware/templates/rescues/diagnostics.html.erb within rescues/layout (60.8ms)
+  [1m[36mActiveRecord::SchemaMigration Load (0.4ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+Migrating to ChangeColumnLatLngInPlaces (20160628175928)
+  [1m[35m (0.3ms)[0m  BEGIN
+  [1m[36m (23.9ms)[0m  [1mALTER TABLE "places" RENAME COLUMN "latitude" TO "lat"[0m
+  [1m[35m (0.4ms)[0m  ALTER TABLE "places" RENAME COLUMN "longitude" TO "lng"
+  [1m[36mSQL (0.3ms)[0m  [1mINSERT INTO "schema_migrations" ("version") VALUES ($1)[0m  [["version", "20160628175928"]]
+  [1m[35m (16.9ms)[0m  COMMIT
+  [1m[36mActiveRecord::SchemaMigration Load (0.2ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[35m (2.3ms)[0m  SELECT t2.oid::regclass::text AS to_table, a1.attname AS column, a2.attname AS primary_key, c.conname AS name, c.confupdtype AS on_update, c.confdeltype AS on_delete
+FROM pg_constraint c
+JOIN pg_class t1 ON c.conrelid = t1.oid
+JOIN pg_class t2 ON c.confrelid = t2.oid
+JOIN pg_attribute a1 ON a1.attnum = c.conkey[1] AND a1.attrelid = t1.oid
+JOIN pg_attribute a2 ON a2.attnum = c.confkey[1] AND a2.attrelid = t2.oid
+JOIN pg_namespace t3 ON c.connamespace = t3.oid
+WHERE c.contype = 'f'
+  AND t1.relname = 'photos'
+  AND t3.nspname = ANY (current_schemas(false))
+ORDER BY c.conname
+
+  [1m[36m (1.7ms)[0m  [1mSELECT t2.oid::regclass::text AS to_table, a1.attname AS column, a2.attname AS primary_key, c.conname AS name, c.confupdtype AS on_update, c.confdeltype AS on_delete
+FROM pg_constraint c
+JOIN pg_class t1 ON c.conrelid = t1.oid
+JOIN pg_class t2 ON c.confrelid = t2.oid
+JOIN pg_attribute a1 ON a1.attnum = c.conkey[1] AND a1.attrelid = t1.oid
+JOIN pg_attribute a2 ON a2.attnum = c.confkey[1] AND a2.attrelid = t2.oid
+JOIN pg_namespace t3 ON c.connamespace = t3.oid
+WHERE c.contype = 'f'
+  AND t1.relname = 'places'
+  AND t3.nspname = ANY (current_schemas(false))
+ORDER BY c.conname
+[0m
+  [1m[35m (1.6ms)[0m  SELECT t2.oid::regclass::text AS to_table, a1.attname AS column, a2.attname AS primary_key, c.conname AS name, c.confupdtype AS on_update, c.confdeltype AS on_delete
+FROM pg_constraint c
+JOIN pg_class t1 ON c.conrelid = t1.oid
+JOIN pg_class t2 ON c.confrelid = t2.oid
+JOIN pg_attribute a1 ON a1.attnum = c.conkey[1] AND a1.attrelid = t1.oid
+JOIN pg_attribute a2 ON a2.attnum = c.confkey[1] AND a2.attrelid = t2.oid
+JOIN pg_namespace t3 ON c.connamespace = t3.oid
+WHERE c.contype = 'f'
+  AND t1.relname = 'places_types'
+  AND t3.nspname = ANY (current_schemas(false))
+ORDER BY c.conname
+
+  [1m[36m (1.6ms)[0m  [1mSELECT t2.oid::regclass::text AS to_table, a1.attname AS column, a2.attname AS primary_key, c.conname AS name, c.confupdtype AS on_update, c.confdeltype AS on_delete
+FROM pg_constraint c
+JOIN pg_class t1 ON c.conrelid = t1.oid
+JOIN pg_class t2 ON c.confrelid = t2.oid
+JOIN pg_attribute a1 ON a1.attnum = c.conkey[1] AND a1.attrelid = t1.oid
+JOIN pg_attribute a2 ON a2.attnum = c.confkey[1] AND a2.attrelid = t2.oid
+JOIN pg_namespace t3 ON c.connamespace = t3.oid
+WHERE c.contype = 'f'
+  AND t1.relname = 'places_wishlists'
+  AND t3.nspname = ANY (current_schemas(false))
+ORDER BY c.conname
+[0m
+  [1m[35m (1.6ms)[0m  SELECT t2.oid::regclass::text AS to_table, a1.attname AS column, a2.attname AS primary_key, c.conname AS name, c.confupdtype AS on_update, c.confdeltype AS on_delete
+FROM pg_constraint c
+JOIN pg_class t1 ON c.conrelid = t1.oid
+JOIN pg_class t2 ON c.confrelid = t2.oid
+JOIN pg_attribute a1 ON a1.attnum = c.conkey[1] AND a1.attrelid = t1.oid
+JOIN pg_attribute a2 ON a2.attnum = c.confkey[1] AND a2.attrelid = t2.oid
+JOIN pg_namespace t3 ON c.connamespace = t3.oid
+WHERE c.contype = 'f'
+  AND t1.relname = 'types'
+  AND t3.nspname = ANY (current_schemas(false))
+ORDER BY c.conname
+
+  [1m[36m (3.4ms)[0m  [1mSELECT t2.oid::regclass::text AS to_table, a1.attname AS column, a2.attname AS primary_key, c.conname AS name, c.confupdtype AS on_update, c.confdeltype AS on_delete
+FROM pg_constraint c
+JOIN pg_class t1 ON c.conrelid = t1.oid
+JOIN pg_class t2 ON c.confrelid = t2.oid
+JOIN pg_attribute a1 ON a1.attnum = c.conkey[1] AND a1.attrelid = t1.oid
+JOIN pg_attribute a2 ON a2.attnum = c.confkey[1] AND a2.attrelid = t2.oid
+JOIN pg_namespace t3 ON c.connamespace = t3.oid
+WHERE c.contype = 'f'
+  AND t1.relname = 'users'
+  AND t3.nspname = ANY (current_schemas(false))
+ORDER BY c.conname
+[0m
+  [1m[35m (1.7ms)[0m  SELECT t2.oid::regclass::text AS to_table, a1.attname AS column, a2.attname AS primary_key, c.conname AS name, c.confupdtype AS on_update, c.confdeltype AS on_delete
+FROM pg_constraint c
+JOIN pg_class t1 ON c.conrelid = t1.oid
+JOIN pg_class t2 ON c.confrelid = t2.oid
+JOIN pg_attribute a1 ON a1.attnum = c.conkey[1] AND a1.attrelid = t1.oid
+JOIN pg_attribute a2 ON a2.attnum = c.confkey[1] AND a2.attrelid = t2.oid
+JOIN pg_namespace t3 ON c.connamespace = t3.oid
+WHERE c.contype = 'f'
+  AND t1.relname = 'wishlists'
+  AND t3.nspname = ANY (current_schemas(false))
+ORDER BY c.conname
+
+
+
+Started GET "/" for ::1 at 2016-06-28 12:10:43 -0700
+  [1m[36mActiveRecord::SchemaMigration Load (0.4ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+Processing by PlacesController#index as HTML
+  [1m[35mPlace Load (50.6ms)[0m  SELECT  "places".* FROM "places" WHERE ((
+          (ACOS(least(1,COS(0.0)*COS(0.0)*COS(RADIANS(places.lat))*COS(RADIANS(places.lng))+
+          COS(0.0)*SIN(0.0)*COS(RADIANS(places.lat))*SIN(RADIANS(places.lng))+
+          SIN(0.0)*SIN(RADIANS(places.lat))))*3963.1899999999996)
+          <= 20)) LIMIT 20
+Completed 200 OK in 97ms (Views: 0.1ms | ActiveRecord: 51.4ms)
+
+
+Started GET "/" for ::1 at 2016-06-28 12:10:52 -0700
+Processing by PlacesController#index as HTML
+  [1m[36mPlace Load (0.5ms)[0m  [1mSELECT  "places".* FROM "places" WHERE ((
+          (ACOS(least(1,COS(0.0)*COS(0.0)*COS(RADIANS(places.lat))*COS(RADIANS(places.lng))+
+          COS(0.0)*SIN(0.0)*COS(RADIANS(places.lat))*SIN(RADIANS(places.lng))+
+          SIN(0.0)*SIN(RADIANS(places.lat))))*3963.1899999999996)
+          <= 20)) LIMIT 20[0m
+Completed 200 OK in 1ms (Views: 0.1ms | ActiveRecord: 0.5ms)
+
+
+Started GET "/places?type=park&longitude=-122&latitude=37" for ::1 at 2016-06-28 12:11:04 -0700
+Processing by PlacesController#index as HTML
+  Parameters: {"type"=>"park", "longitude"=>"-122", "latitude"=>"37"}
+  [1m[35mType Load (0.6ms)[0m  SELECT  "types".* FROM "types" WHERE "types"."name" = $1 LIMIT 1  [["name", "park"]]
+  [1m[36mPlace Load (18.2ms)[0m  [1mSELECT  "places".* FROM "places" INNER JOIN "places_types" ON "places_types"."place_id" = "places"."id" WHERE ((
+          (ACOS(least(1,COS(0.6457718232379019)*COS(-2.129301687433082)*COS(RADIANS(places.lat))*COS(RADIANS(places.lng))+
+          COS(0.6457718232379019)*SIN(-2.129301687433082)*COS(RADIANS(places.lat))*SIN(RADIANS(places.lng))+
+          SIN(0.6457718232379019)*SIN(RADIANS(places.lat))))*3963.1899999999996)
+          <= 20)) AND (places_types.type_id = 6) LIMIT 20[0m
+Completed 200 OK in 147ms (Views: 0.1ms | ActiveRecord: 22.4ms)
+  [1m[36mPlace Load (0.6ms)[0m  [1mSELECT "places".* FROM "places"[0m
+  [1m[36m (176.4ms)[0m  [1mDROP DATABASE IF EXISTS "api_development"[0m
+  [1m[35m (117.7ms)[0m  DROP DATABASE IF EXISTS "api_test"
+  [1m[36m (421.2ms)[0m  [1mCREATE DATABASE "api_development" ENCODING = 'unicode'[0m
+  [1m[35m (249.6ms)[0m  CREATE DATABASE "api_test" ENCODING = 'unicode'
+  [1m[36mSQL (0.3ms)[0m  [1mCREATE EXTENSION IF NOT EXISTS "plpgsql"[0m
+  [1m[35m (163.4ms)[0m  CREATE TABLE "photos" ("id" serial primary key, "image_url" character varying, "place_id" integer, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL) 
+  [1m[36m (4.9ms)[0m  [1mCREATE TABLE "places" ("id" serial primary key, "name" character varying, "description" character varying, "duration" integer, "price" integer, "lng" float, "lat" float, "rating" float, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL) [0m
+  [1m[35m (2.3ms)[0m  CREATE TABLE "places_types" ("id" serial primary key, "place_id" integer, "type_id" integer, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL) 
+  [1m[36m (2.8ms)[0m  [1mCREATE TABLE "places_wishlists" ("id" serial primary key, "place_id" integer, "wishlist_id" integer, "liked" boolean, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL) [0m
+  [1m[35m (3.5ms)[0m  CREATE TABLE "types" ("id" serial primary key, "name" character varying, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL) 
+  [1m[36m (4.1ms)[0m  [1mCREATE TABLE "users" ("id" serial primary key, "username" character varying, "password_digest" character varying, "email" character varying, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL) [0m
+  [1m[35m (4.2ms)[0m  CREATE TABLE "wishlists" ("id" serial primary key, "user_id" integer, "description" character varying, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL) 
+  [1m[36m (2.3ms)[0m  [1mCREATE TABLE "schema_migrations" ("version" character varying NOT NULL) [0m
+  [1m[35m (1.3ms)[0m  CREATE UNIQUE INDEX  "unique_schema_migrations" ON "schema_migrations"  ("version")
+  [1m[36m (0.3ms)[0m  [1mSELECT version FROM "schema_migrations"[0m
+  [1m[35m (0.5ms)[0m  INSERT INTO "schema_migrations" (version) VALUES ('20160628175928')
+  [1m[36m (0.4ms)[0m  [1mINSERT INTO "schema_migrations" (version) VALUES ('20160624001700')[0m
+  [1m[35m (0.3ms)[0m  INSERT INTO "schema_migrations" (version) VALUES ('20160624002043')
+  [1m[36m (0.4ms)[0m  [1mINSERT INTO "schema_migrations" (version) VALUES ('20160624002259')[0m
+  [1m[35m (0.4ms)[0m  INSERT INTO "schema_migrations" (version) VALUES ('20160624002833')
+  [1m[36m (0.4ms)[0m  [1mINSERT INTO "schema_migrations" (version) VALUES ('20160627172302')[0m
+  [1m[35m (0.4ms)[0m  INSERT INTO "schema_migrations" (version) VALUES ('20160627172435')
+  [1m[36m (0.4ms)[0m  [1mINSERT INTO "schema_migrations" (version) VALUES ('20160627172845')[0m
+  [1m[35mSQL (0.3ms)[0m  CREATE EXTENSION IF NOT EXISTS "plpgsql"
+  [1m[36m (6.1ms)[0m  [1mCREATE TABLE "photos" ("id" serial primary key, "image_url" character varying, "place_id" integer, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL) [0m
+  [1m[35m (3.7ms)[0m  CREATE TABLE "places" ("id" serial primary key, "name" character varying, "description" character varying, "duration" integer, "price" integer, "lng" float, "lat" float, "rating" float, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL) 
+  [1m[36m (2.3ms)[0m  [1mCREATE TABLE "places_types" ("id" serial primary key, "place_id" integer, "type_id" integer, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL) [0m
+  [1m[35m (2.4ms)[0m  CREATE TABLE "places_wishlists" ("id" serial primary key, "place_id" integer, "wishlist_id" integer, "liked" boolean, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL) 
+  [1m[36m (3.5ms)[0m  [1mCREATE TABLE "types" ("id" serial primary key, "name" character varying, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL) [0m
+  [1m[35m (3.3ms)[0m  CREATE TABLE "users" ("id" serial primary key, "username" character varying, "password_digest" character varying, "email" character varying, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL) 
+  [1m[36m (3.5ms)[0m  [1mCREATE TABLE "wishlists" ("id" serial primary key, "user_id" integer, "description" character varying, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL) [0m
+  [1m[35m (2.0ms)[0m  CREATE TABLE "schema_migrations" ("version" character varying NOT NULL) 
+  [1m[36m (1.4ms)[0m  [1mCREATE UNIQUE INDEX  "unique_schema_migrations" ON "schema_migrations"  ("version")[0m
+  [1m[35m (0.3ms)[0m  SELECT version FROM "schema_migrations"
+  [1m[36m (0.6ms)[0m  [1mINSERT INTO "schema_migrations" (version) VALUES ('20160628175928')[0m
+  [1m[35m (0.4ms)[0m  INSERT INTO "schema_migrations" (version) VALUES ('20160624001700')
+  [1m[36m (0.4ms)[0m  [1mINSERT INTO "schema_migrations" (version) VALUES ('20160624002043')[0m
+  [1m[35m (0.5ms)[0m  INSERT INTO "schema_migrations" (version) VALUES ('20160624002259')
+  [1m[36m (0.4ms)[0m  [1mINSERT INTO "schema_migrations" (version) VALUES ('20160624002833')[0m
+  [1m[35m (0.4ms)[0m  INSERT INTO "schema_migrations" (version) VALUES ('20160627172302')
+  [1m[36m (0.4ms)[0m  [1mINSERT INTO "schema_migrations" (version) VALUES ('20160627172435')[0m
+  [1m[35m (0.4ms)[0m  INSERT INTO "schema_migrations" (version) VALUES ('20160627172845')
+  [1m[36mActiveRecord::SchemaMigration Load (0.5ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.6ms)[0m  [1mINSERT INTO "types" ("name", "created_at", "updated_at") VALUES ($1, $2, $3) RETURNING "id"[0m  [["name", "aquarium"], ["created_at", "2016-06-28 19:11:58.676586"], ["updated_at", "2016-06-28 19:11:58.676586"]]
+  [1m[35m (15.7ms)[0m  COMMIT
+  [1m[36m (0.2ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.3ms)[0m  INSERT INTO "types" ("name", "created_at", "updated_at") VALUES ($1, $2, $3) RETURNING "id"  [["name", "bar"], ["created_at", "2016-06-28 19:11:58.698744"], ["updated_at", "2016-06-28 19:11:58.698744"]]
+  [1m[36m (0.5ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  BEGIN
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "types" ("name", "created_at", "updated_at") VALUES ($1, $2, $3) RETURNING "id"[0m  [["name", "casino"], ["created_at", "2016-06-28 19:11:58.701533"], ["updated_at", "2016-06-28 19:11:58.701533"]]
+  [1m[35m (0.8ms)[0m  COMMIT
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "types" ("name", "created_at", "updated_at") VALUES ($1, $2, $3) RETURNING "id"  [["name", "museum"], ["created_at", "2016-06-28 19:11:58.704183"], ["updated_at", "2016-06-28 19:11:58.704183"]]
+  [1m[36m (0.4ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "types" ("name", "created_at", "updated_at") VALUES ($1, $2, $3) RETURNING "id"[0m  [["name", "night_club"], ["created_at", "2016-06-28 19:11:58.706158"], ["updated_at", "2016-06-28 19:11:58.706158"]]
+  [1m[35m (0.8ms)[0m  COMMIT
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "types" ("name", "created_at", "updated_at") VALUES ($1, $2, $3) RETURNING "id"  [["name", "park"], ["created_at", "2016-06-28 19:11:58.708499"], ["updated_at", "2016-06-28 19:11:58.708499"]]
+  [1m[36m (0.4ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "types" ("name", "created_at", "updated_at") VALUES ($1, $2, $3) RETURNING "id"[0m  [["name", "restaurant"], ["created_at", "2016-06-28 19:11:58.710282"], ["updated_at", "2016-06-28 19:11:58.710282"]]
+  [1m[35m (0.4ms)[0m  COMMIT
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.1ms)[0m  INSERT INTO "types" ("name", "created_at", "updated_at") VALUES ($1, $2, $3) RETURNING "id"  [["name", "zoo"], ["created_at", "2016-06-28 19:11:58.712035"], ["updated_at", "2016-06-28 19:11:58.712035"]]
+  [1m[36m (0.7ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "types" ("name", "created_at", "updated_at") VALUES ($1, $2, $3) RETURNING "id"[0m  [["name", "place_of_interest"], ["created_at", "2016-06-28 19:11:58.714383"], ["updated_at", "2016-06-28 19:11:58.714383"]]
+  [1m[35m (0.5ms)[0m  COMMIT
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.1ms)[0m  INSERT INTO "types" ("name", "created_at", "updated_at") VALUES ($1, $2, $3) RETURNING "id"  [["name", "tourist_destination"], ["created_at", "2016-06-28 19:11:58.716378"], ["updated_at", "2016-06-28 19:11:58.716378"]]
+  [1m[36m (0.4ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.5ms)[0m  [1mINSERT INTO "places" ("name", "description", "lat", "lng", "rating", "duration", "price", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9) RETURNING "id"[0m  [["name", "Alcatraz Island"], ["description", "Notorious prison & once home to Al Capone, now a museum with audio tour, accessible by ferry."], ["lat", 37.826986], ["lng", -122.422972], ["rating", 4.9], ["duration", 300], ["price", 2], ["created_at", "2016-06-28 19:11:58.733233"], ["updated_at", "2016-06-28 19:11:58.733233"]]
+  [1m[35m (0.5ms)[0m  COMMIT
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.5ms)[0m  INSERT INTO "places_types" ("place_id", "type_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"  [["place_id", 1], ["type_id", 4], ["created_at", "2016-06-28 19:11:58.743283"], ["updated_at", "2016-06-28 19:11:58.743283"]]
+  [1m[36m (15.6ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  BEGIN
+  [1m[36mSQL (0.3ms)[0m  [1mINSERT INTO "places_types" ("place_id", "type_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["place_id", 1], ["type_id", 9], ["created_at", "2016-06-28 19:11:58.761809"], ["updated_at", "2016-06-28 19:11:58.761809"]]
+  [1m[35m (0.5ms)[0m  COMMIT
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.3ms)[0m  INSERT INTO "places_types" ("place_id", "type_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"  [["place_id", 1], ["type_id", 10], ["created_at", "2016-06-28 19:11:58.764574"], ["updated_at", "2016-06-28 19:11:58.764574"]]
+  [1m[36m (0.4ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.4ms)[0m  [1mINSERT INTO "photos" ("place_id", "image_url", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["place_id", 1], ["image_url", "https://instagram.fsnc1-1.fna.fbcdn.net/t51.2885-15/e35/11311457_1435769073419954_921661701_n.jpg"], ["created_at", "2016-06-28 19:11:58.773477"], ["updated_at", "2016-06-28 19:11:58.773477"]]
+  [1m[35m (15.9ms)[0m  COMMIT
+  [1m[36m (0.2ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.3ms)[0m  INSERT INTO "places" ("name", "description", "lat", "lng", "rating", "duration", "price", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9) RETURNING "id"  [["name", "Comstock Saloon"], ["description", "Fancy, turn-of-the-century digs house vintage cocktails, upscale bar fare, cozy booths & live jazz."], ["lat", 37.796795], ["lng", -122.405626], ["rating", 4.4], ["duration", 180], ["price", 2], ["created_at", "2016-06-28 19:11:58.792600"], ["updated_at", "2016-06-28 19:11:58.792600"]]
+  [1m[36m (0.5ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "places_types" ("place_id", "type_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["place_id", 2], ["type_id", 2], ["created_at", "2016-06-28 19:11:58.795706"], ["updated_at", "2016-06-28 19:11:58.795706"]]
+  [1m[35m (0.4ms)[0m  COMMIT
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "places_types" ("place_id", "type_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"  [["place_id", 2], ["type_id", 10], ["created_at", "2016-06-28 19:11:58.797586"], ["updated_at", "2016-06-28 19:11:58.797586"]]
+  [1m[36m (0.4ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "photos" ("place_id", "image_url", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["place_id", 2], ["image_url", "https://s3-media3.fl.yelpcdn.com/bphoto/Rmo7lQ0HG2B2FZmwD7iLoQ/o.jpg"], ["created_at", "2016-06-28 19:11:58.799492"], ["updated_at", "2016-06-28 19:11:58.799492"]]
+  [1m[35m (0.4ms)[0m  COMMIT
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "places" ("name", "description", "lat", "lng", "rating", "duration", "price", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9) RETURNING "id"  [["name", "Aquarium of the Bay"], ["description", "Aquarium by the bay description"], ["lat", 37.808678], ["lng", -122.4092], ["rating", 3.9], ["duration", 120], ["price", 2], ["created_at", "2016-06-28 19:11:58.801679"], ["updated_at", "2016-06-28 19:11:58.801679"]]
+  [1m[36m (0.4ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "places_types" ("place_id", "type_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["place_id", 3], ["type_id", 1], ["created_at", "2016-06-28 19:11:58.804035"], ["updated_at", "2016-06-28 19:11:58.804035"]]
+  [1m[35m (0.4ms)[0m  COMMIT
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.1ms)[0m  INSERT INTO "places_types" ("place_id", "type_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"  [["place_id", 3], ["type_id", 9], ["created_at", "2016-06-28 19:11:58.805856"], ["updated_at", "2016-06-28 19:11:58.805856"]]
+  [1m[36m (0.3ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.1ms)[0m  [1mINSERT INTO "places_types" ("place_id", "type_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["place_id", 3], ["type_id", 10], ["created_at", "2016-06-28 19:11:58.807479"], ["updated_at", "2016-06-28 19:11:58.807479"]]
+  [1m[35m (0.4ms)[0m  COMMIT
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "photos" ("place_id", "image_url", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"  [["place_id", 3], ["image_url", "https://instagram.fsnc1-1.fna.fbcdn.net/t51.2885-15/e35/11820625_156774028000203_656280027_n.jpg"], ["created_at", "2016-06-28 19:11:58.809122"], ["updated_at", "2016-06-28 19:11:58.809122"]]
+  [1m[36m (0.4ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "places" ("name", "description", "lat", "lng", "rating", "duration", "price", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9) RETURNING "id"[0m  [["name", "Cable Car"], ["description", "Old cable cars, long waiting lines"], ["lat", 37.784814], ["lng", -122.40774], ["rating", 3.5], ["duration", 45], ["price", 1], ["created_at", "2016-06-28 19:11:58.811100"], ["updated_at", "2016-06-28 19:11:58.811100"]]
+  [1m[35m (0.4ms)[0m  COMMIT
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.1ms)[0m  INSERT INTO "places_types" ("place_id", "type_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"  [["place_id", 4], ["type_id", 4], ["created_at", "2016-06-28 19:11:58.813222"], ["updated_at", "2016-06-28 19:11:58.813222"]]
+  [1m[36m (0.4ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  BEGIN
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "places_types" ("place_id", "type_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["place_id", 4], ["type_id", 10], ["created_at", "2016-06-28 19:11:58.815227"], ["updated_at", "2016-06-28 19:11:58.815227"]]
+  [1m[35m (0.4ms)[0m  COMMIT
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "photos" ("place_id", "image_url", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"  [["place_id", 4], ["image_url", "https://instagram.fsnc1-1.fna.fbcdn.net/t51.2885-15/e35/12135272_895455643886085_1883463243_n.jpg"], ["created_at", "2016-06-28 19:11:58.816905"], ["updated_at", "2016-06-28 19:11:58.816905"]]
+  [1m[36m (0.4ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "places" ("name", "description", "lat", "lng", "rating", "duration", "price", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9) RETURNING "id"[0m  [["name", "Muir Woods National Monument"], ["description", "Redwoods by the bay"], ["lat", 37.895386], ["lng", -122.578141], ["rating", 4.6], ["duration", 300], ["price", 1], ["created_at", "2016-06-28 19:11:58.818822"], ["updated_at", "2016-06-28 19:11:58.818822"]]
+  [1m[35m (0.5ms)[0m  COMMIT
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.1ms)[0m  INSERT INTO "places_types" ("place_id", "type_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"  [["place_id", 5], ["type_id", 6], ["created_at", "2016-06-28 19:11:58.821070"], ["updated_at", "2016-06-28 19:11:58.821070"]]
+  [1m[36m (0.3ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.1ms)[0m  [1mINSERT INTO "places_types" ("place_id", "type_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["place_id", 5], ["type_id", 9], ["created_at", "2016-06-28 19:11:58.822718"], ["updated_at", "2016-06-28 19:11:58.822718"]]
+  [1m[35m (0.4ms)[0m  COMMIT
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.1ms)[0m  INSERT INTO "places_types" ("place_id", "type_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"  [["place_id", 3], ["type_id", 10], ["created_at", "2016-06-28 19:11:58.824305"], ["updated_at", "2016-06-28 19:11:58.824305"]]
+  [1m[36m (0.4ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "photos" ("place_id", "image_url", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["place_id", 5], ["image_url", "https://instagram.fsnc1-1.fna.fbcdn.net/t51.2885-15/e35/13092278_1156458994386146_1264682601_n.jpg"], ["created_at", "2016-06-28 19:11:58.826010"], ["updated_at", "2016-06-28 19:11:58.826010"]]
+  [1m[35m (0.4ms)[0m  COMMIT
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "photos" ("place_id", "image_url", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"  [["place_id", 5], ["image_url", "https://scontent-ord1-1.cdninstagram.com/t51.2885-15/e35/13534628_271839613176555_233902339_n.jpg"], ["created_at", "2016-06-28 19:11:58.827941"], ["updated_at", "2016-06-28 19:11:58.827941"]]
+  [1m[36m (0.4ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "places" ("name", "description", "lat", "lng", "rating", "duration", "price", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9) RETURNING "id"[0m  [["name", "SFMOMA San Francisco Museum of Modern Art"], ["description", "SFMOMA description"], ["lat", 37.785735], ["lng", -122.400992], ["rating", 4.5], ["duration", 120], ["price", 1], ["created_at", "2016-06-28 19:11:58.829926"], ["updated_at", "2016-06-28 19:11:58.829926"]]
+  [1m[35m (0.4ms)[0m  COMMIT
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.1ms)[0m  INSERT INTO "places_types" ("place_id", "type_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"  [["place_id", 6], ["type_id", 4], ["created_at", "2016-06-28 19:11:58.832002"], ["updated_at", "2016-06-28 19:11:58.832002"]]
+  [1m[36m (0.4ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "places_types" ("place_id", "type_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["place_id", 6], ["type_id", 9], ["created_at", "2016-06-28 19:11:58.833674"], ["updated_at", "2016-06-28 19:11:58.833674"]]
+  [1m[35m (0.4ms)[0m  COMMIT
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "places_types" ("place_id", "type_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"  [["place_id", 6], ["type_id", 10], ["created_at", "2016-06-28 19:11:58.835229"], ["updated_at", "2016-06-28 19:11:58.835229"]]
+  [1m[36m (0.4ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "photos" ("place_id", "image_url", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["place_id", 6], ["image_url", "https://instagram.fsnc1-1.fna.fbcdn.net/t51.2885-15/e35/13109081_1723896514559583_614709634_n.jpg"], ["created_at", "2016-06-28 19:11:58.837326"], ["updated_at", "2016-06-28 19:11:58.837326"]]
+  [1m[35m (0.4ms)[0m  COMMIT
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "places" ("name", "description", "lat", "lng", "rating", "duration", "price", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9) RETURNING "id"  [["name", "Battery Spencer"], ["description", "Battery Spencer description"], ["lat", 37.827698], ["lng", -122.481799], ["rating", 4.2], ["duration", 30], ["price", 0], ["created_at", "2016-06-28 19:11:58.839823"], ["updated_at", "2016-06-28 19:11:58.839823"]]
+  [1m[36m (0.4ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "places_types" ("place_id", "type_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["place_id", 7], ["type_id", 6], ["created_at", "2016-06-28 19:11:58.842020"], ["updated_at", "2016-06-28 19:11:58.842020"]]
+  [1m[35m (0.4ms)[0m  COMMIT
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.1ms)[0m  INSERT INTO "places_types" ("place_id", "type_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"  [["place_id", 7], ["type_id", 9], ["created_at", "2016-06-28 19:11:58.843745"], ["updated_at", "2016-06-28 19:11:58.843745"]]
+  [1m[36m (0.4ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "places_types" ("place_id", "type_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["place_id", 7], ["type_id", 10], ["created_at", "2016-06-28 19:11:58.845382"], ["updated_at", "2016-06-28 19:11:58.845382"]]
+  [1m[35m (0.4ms)[0m  COMMIT
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "photos" ("place_id", "image_url", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"  [["place_id", 7], ["image_url", "https://instagram.fsnc1-1.fna.fbcdn.net/t51.2885-15/sh0.08/e35/p750x750/12724618_1571822593147746_505749575_n.jpg"], ["created_at", "2016-06-28 19:11:58.847376"], ["updated_at", "2016-06-28 19:11:58.847376"]]
+  [1m[36m (0.5ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "places" ("name", "description", "lat", "lng", "rating", "duration", "price", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9) RETURNING "id"[0m  [["name", "China Town"], ["description", "China Town Description"], ["lat", 37.793346], ["lng", -122.406139], ["rating", 4.1], ["duration", 120], ["price", 1], ["created_at", "2016-06-28 19:11:58.850208"], ["updated_at", "2016-06-28 19:11:58.850208"]]
+  [1m[35m (0.3ms)[0m  COMMIT
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.1ms)[0m  INSERT INTO "places_types" ("place_id", "type_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"  [["place_id", 8], ["type_id", 9], ["created_at", "2016-06-28 19:11:58.852260"], ["updated_at", "2016-06-28 19:11:58.852260"]]
+  [1m[36m (0.4ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.1ms)[0m  [1mINSERT INTO "places_types" ("place_id", "type_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["place_id", 8], ["type_id", 10], ["created_at", "2016-06-28 19:11:58.854012"], ["updated_at", "2016-06-28 19:11:58.854012"]]
+  [1m[35m (0.4ms)[0m  COMMIT
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "photos" ("place_id", "image_url", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"  [["place_id", 8], ["image_url", "https://instagram.fsnc1-1.fna.fbcdn.net/t51.2885-15/e35/1516888_166301770399020_702906097_n.jpg"], ["created_at", "2016-06-28 19:11:58.855789"], ["updated_at", "2016-06-28 19:11:58.855789"]]
+  [1m[36m (0.4ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "places" ("name", "description", "lat", "lng", "rating", "duration", "price", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9) RETURNING "id"[0m  [["name", "Alamo Square"], ["description", "Painted ladies and old houses with great view on SF"], ["lat", 37.776269], ["lng", -122.432967], ["rating", 4.2], ["duration", 45], ["price", 0], ["created_at", "2016-06-28 19:11:58.857793"], ["updated_at", "2016-06-28 19:11:58.857793"]]
+  [1m[35m (0.4ms)[0m  COMMIT
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "places_types" ("place_id", "type_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"  [["place_id", 9], ["type_id", 6], ["created_at", "2016-06-28 19:11:58.859922"], ["updated_at", "2016-06-28 19:11:58.859922"]]
+  [1m[36m (0.4ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "places_types" ("place_id", "type_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["place_id", 9], ["type_id", 9], ["created_at", "2016-06-28 19:11:58.861605"], ["updated_at", "2016-06-28 19:11:58.861605"]]
+  [1m[35m (0.4ms)[0m  COMMIT
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "places_types" ("place_id", "type_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"  [["place_id", 9], ["type_id", 10], ["created_at", "2016-06-28 19:11:58.863172"], ["updated_at", "2016-06-28 19:11:58.863172"]]
+  [1m[36m (0.4ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.1ms)[0m  [1mINSERT INTO "photos" ("place_id", "image_url", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["place_id", 9], ["image_url", "https://instagram.fsnc1-1.fna.fbcdn.net/t51.2885-15/e35/12751408_259692627695424_311922490_n.jpg"], ["created_at", "2016-06-28 19:11:58.864877"], ["updated_at", "2016-06-28 19:11:58.864877"]]
+  [1m[35m (0.4ms)[0m  COMMIT
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "places" ("name", "description", "lat", "lng", "rating", "duration", "price", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9) RETURNING "id"  [["name", "Z + Y Restaurant"], ["description", "Basic quarters for dining on Sichuan & Northern Chinese dishes packed with plenty of spice."], ["lat", 37.795927], ["lng", -122.406017], ["rating", 3.9], ["duration", 90], ["price", 2], ["created_at", "2016-06-28 19:11:58.866844"], ["updated_at", "2016-06-28 19:11:58.866844"]]
+  [1m[36m (0.4ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "places_types" ("place_id", "type_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["place_id", 10], ["type_id", 7], ["created_at", "2016-06-28 19:11:58.869333"], ["updated_at", "2016-06-28 19:11:58.869333"]]
+  [1m[35m (0.4ms)[0m  COMMIT
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.1ms)[0m  INSERT INTO "photos" ("place_id", "image_url", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"  [["place_id", 10], ["image_url", "https://scontent-ord1-1.cdninstagram.com/t51.2885-15/e35/12822315_1572804843038082_501174903_n.jpg"], ["created_at", "2016-06-28 19:11:58.871216"], ["updated_at", "2016-06-28 19:11:58.871216"]]
+  [1m[36m (0.4ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "places" ("name", "description", "lat", "lng", "rating", "duration", "price", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9) RETURNING "id"[0m  [["name", "Castro District"], ["description", "Castro District Description"], ["lat", 37.762], ["lng", -122.434875], ["rating", 4.1], ["duration", 60], ["price", 0], ["created_at", "2016-06-28 19:11:58.873180"], ["updated_at", "2016-06-28 19:11:58.873180"]]
+  [1m[35m (0.4ms)[0m  COMMIT
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "places_types" ("place_id", "type_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"  [["place_id", 11], ["type_id", 9], ["created_at", "2016-06-28 19:11:58.875224"], ["updated_at", "2016-06-28 19:11:58.875224"]]
+  [1m[36m (0.4ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "places_types" ("place_id", "type_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["place_id", 11], ["type_id", 10], ["created_at", "2016-06-28 19:11:58.876921"], ["updated_at", "2016-06-28 19:11:58.876921"]]
+  [1m[35m (0.4ms)[0m  COMMIT
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.1ms)[0m  INSERT INTO "photos" ("place_id", "image_url", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"  [["place_id", 11], ["image_url", "https://instagram.fsnc1-1.fna.fbcdn.net/t51.2885-15/e35/13397451_285829265095213_2012320115_n.jpg"], ["created_at", "2016-06-28 19:11:58.878619"], ["updated_at", "2016-06-28 19:11:58.878619"]]
+  [1m[36m (0.4ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "places" ("name", "description", "lat", "lng", "rating", "duration", "price", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9) RETURNING "id"[0m  [["name", "Lombard Street"], ["description", "Lombard Street - 'World's mot crooked street' - is famous for a steep, one-block section with eight hairpin turns and a flowery sidewalk."], ["lat", 37.802071], ["lng", -122.419083], ["rating", 4.5], ["duration", 30], ["price", 0], ["created_at", "2016-06-28 19:11:58.880590"], ["updated_at", "2016-06-28 19:11:58.880590"]]
+  [1m[35m (0.4ms)[0m  COMMIT
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.1ms)[0m  INSERT INTO "places_types" ("place_id", "type_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"  [["place_id", 12], ["type_id", 9], ["created_at", "2016-06-28 19:11:58.882702"], ["updated_at", "2016-06-28 19:11:58.882702"]]
+  [1m[36m (0.4ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "places_types" ("place_id", "type_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["place_id", 12], ["type_id", 10], ["created_at", "2016-06-28 19:11:58.884363"], ["updated_at", "2016-06-28 19:11:58.884363"]]
+  [1m[35m (0.3ms)[0m  COMMIT
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "photos" ("place_id", "image_url", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"  [["place_id", 12], ["image_url", "https://instagram.fsnc1-1.fna.fbcdn.net/t51.2885-15/e35/12912355_267495800257880_1905434648_n.jpg"], ["created_at", "2016-06-28 19:11:58.885970"], ["updated_at", "2016-06-28 19:11:58.885970"]]
+  [1m[36m (0.4ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "places" ("name", "description", "lat", "lng", "rating", "duration", "price", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9) RETURNING "id"[0m  [["name", "Palace of Fine Arts"], ["description", "The Palace of Fine Arts in the Marina District of San Francisco, California, is a monumental structure originally constructed for the 1915 Panama-Pacific Exposition in order to exhibit works of art presented there"], ["lat", 37.80147], ["lng", -122.448154], ["rating", 4.8], ["duration", 30], ["price", 0], ["created_at", "2016-06-28 19:11:58.887967"], ["updated_at", "2016-06-28 19:11:58.887967"]]
+  [1m[35m (0.5ms)[0m  COMMIT
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.1ms)[0m  INSERT INTO "places_types" ("place_id", "type_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"  [["place_id", 13], ["type_id", 6], ["created_at", "2016-06-28 19:11:58.890113"], ["updated_at", "2016-06-28 19:11:58.890113"]]
+  [1m[36m (0.4ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.1ms)[0m  [1mINSERT INTO "places_types" ("place_id", "type_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["place_id", 13], ["type_id", 9], ["created_at", "2016-06-28 19:11:58.891852"], ["updated_at", "2016-06-28 19:11:58.891852"]]
+  [1m[35m (0.4ms)[0m  COMMIT
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.1ms)[0m  INSERT INTO "places_types" ("place_id", "type_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"  [["place_id", 13], ["type_id", 10], ["created_at", "2016-06-28 19:11:58.893453"], ["updated_at", "2016-06-28 19:11:58.893453"]]
+  [1m[36m (0.4ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.1ms)[0m  [1mINSERT INTO "photos" ("place_id", "image_url", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["place_id", 13], ["image_url", "https://instagram.fsnc1-1.fna.fbcdn.net/t51.2885-15/e35/11347790_1166531286695489_2021504333_n.jpg"], ["created_at", "2016-06-28 19:11:58.895179"], ["updated_at", "2016-06-28 19:11:58.895179"]]
+  [1m[35m (0.4ms)[0m  COMMIT
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "places" ("name", "description", "lat", "lng", "rating", "duration", "price", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9) RETURNING "id"  [["name", "Trans-america Pyramid"], ["description", "The Transamerica Pyramid is the tallest skyscraper in the San Francisco skyline"], ["lat", 37.795177], ["lng", -122.402693], ["rating", 4.5], ["duration", 15], ["price", 0], ["created_at", "2016-06-28 19:11:58.897165"], ["updated_at", "2016-06-28 19:11:58.897165"]]
+  [1m[36m (0.3ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "places_types" ("place_id", "type_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["place_id", 14], ["type_id", 9], ["created_at", "2016-06-28 19:11:58.899197"], ["updated_at", "2016-06-28 19:11:58.899197"]]
+  [1m[35m (0.4ms)[0m  COMMIT
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "places_types" ("place_id", "type_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"  [["place_id", 14], ["type_id", 10], ["created_at", "2016-06-28 19:11:58.900912"], ["updated_at", "2016-06-28 19:11:58.900912"]]
+  [1m[36m (0.3ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.1ms)[0m  [1mINSERT INTO "photos" ("place_id", "image_url", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["place_id", 14], ["image_url", "https://instagram.fsnc1-1.fna.fbcdn.net/t51.2885-15/sh0.08/e35/p750x750/12825796_528342577326118_1262316311_n.jpg"], ["created_at", "2016-06-28 19:11:58.902581"], ["updated_at", "2016-06-28 19:11:58.902581"]]
+  [1m[35m (0.4ms)[0m  COMMIT
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "places" ("name", "description", "lat", "lng", "rating", "duration", "price", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9) RETURNING "id"  [["name", "Sutro Tower"], ["description", "Sutro Tower is a 977 ft (298 m) three-pronged TV and radio antenna tower in San Francisco, CA. Rising from a hill between Twin Peaks and Mount Sutro near Clarendon Heights, it is a prominent feature of the city skyline and a landmark for city residents and visitors."], ["lat", 37.755183], ["lng", -122.452811], ["rating", 2.8], ["duration", 0], ["price", 0], ["created_at", "2016-06-28 19:11:58.904516"], ["updated_at", "2016-06-28 19:11:58.904516"]]
+  [1m[36m (0.4ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "places_types" ("place_id", "type_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["place_id", 15], ["type_id", 9], ["created_at", "2016-06-28 19:11:58.906604"], ["updated_at", "2016-06-28 19:11:58.906604"]]
+  [1m[35m (0.4ms)[0m  COMMIT
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.1ms)[0m  INSERT INTO "places_types" ("place_id", "type_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"  [["place_id", 15], ["type_id", 10], ["created_at", "2016-06-28 19:11:58.908318"], ["updated_at", "2016-06-28 19:11:58.908318"]]
+  [1m[36m (0.4ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "photos" ("place_id", "image_url", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["place_id", 15], ["image_url", "https://instagram.fsnc1-1.fna.fbcdn.net/t51.2885-15/e35/12093482_626976757445643_1739892906_n.jpg"], ["created_at", "2016-06-28 19:11:58.909947"], ["updated_at", "2016-06-28 19:11:58.909947"]]
+  [1m[35m (0.4ms)[0m  COMMIT
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "places" ("name", "description", "lat", "lng", "rating", "duration", "price", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9) RETURNING "id"  [["name", "1760 Restaurant & Cocktail Bar"], ["description", "Carefully sourced, ambitious New American cuisine & cocktails in a sleek space with a long bar."], ["lat", 37.793144], ["lng", -122.421024], ["rating", 4.4], ["duration", 90], ["price", 3], ["created_at", "2016-06-28 19:11:58.911923"], ["updated_at", "2016-06-28 19:11:58.911923"]]
+  [1m[36m (0.4ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "places_types" ("place_id", "type_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["place_id", 16], ["type_id", 7], ["created_at", "2016-06-28 19:11:58.913876"], ["updated_at", "2016-06-28 19:11:58.913876"]]
+  [1m[35m (0.4ms)[0m  COMMIT
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "places_types" ("place_id", "type_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"  [["place_id", 16], ["type_id", 2], ["created_at", "2016-06-28 19:11:58.915644"], ["updated_at", "2016-06-28 19:11:58.915644"]]
+  [1m[36m (0.4ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "photos" ("place_id", "image_url", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["place_id", 16], ["image_url", "https://s3-media2.fl.yelpcdn.com/bphoto/-HTjDquqxj7EmQobBK3fTA/o.jpg"], ["created_at", "2016-06-28 19:11:58.917369"], ["updated_at", "2016-06-28 19:11:58.917369"]]
+  [1m[35m (0.3ms)[0m  COMMIT
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "places" ("name", "description", "lat", "lng", "rating", "duration", "price", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9) RETURNING "id"  [["name", "Twin Peaks"], ["description", "The Twin Peaks are two prominent hills with an elevation of about 925 feet located near the geographic center of San Francisco, California."], ["lat", 37.752098], ["lng", -122.447303], ["rating", 4.8], ["duration", 45], ["price", 0], ["created_at", "2016-06-28 19:11:58.919264"], ["updated_at", "2016-06-28 19:11:58.919264"]]
+  [1m[36m (0.4ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "places_types" ("place_id", "type_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["place_id", 17], ["type_id", 9], ["created_at", "2016-06-28 19:11:58.921318"], ["updated_at", "2016-06-28 19:11:58.921318"]]
+  [1m[35m (0.4ms)[0m  COMMIT
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "places_types" ("place_id", "type_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"  [["place_id", 17], ["type_id", 10], ["created_at", "2016-06-28 19:11:58.923019"], ["updated_at", "2016-06-28 19:11:58.923019"]]
+  [1m[36m (0.4ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.1ms)[0m  [1mINSERT INTO "photos" ("place_id", "image_url", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["place_id", 17], ["image_url", "https://scontent-ord1-1.cdninstagram.com/t51.2885-15/e35/13549344_642567335893188_812231539_n.jpg"], ["created_at", "2016-06-28 19:11:58.924720"], ["updated_at", "2016-06-28 19:11:58.924720"]]
+  [1m[35m (0.4ms)[0m  COMMIT
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.1ms)[0m  INSERT INTO "places" ("name", "description", "lat", "lng", "rating", "duration", "price", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9) RETURNING "id"  [["name", "Land End Trail"], ["description", "Lands End is a park in San Francisco within the Golden Gate National Recreation Area. It is a rocky and windswept shoreline at the mouth of the Golden Gate"], ["lat", 37.786376], ["lng", -122.50575], ["rating", 4.8], ["duration", 180], ["price", 0], ["created_at", "2016-06-28 19:11:58.926720"], ["updated_at", "2016-06-28 19:11:58.926720"]]
+  [1m[36m (0.4ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.1ms)[0m  [1mINSERT INTO "places_types" ("place_id", "type_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["place_id", 18], ["type_id", 9], ["created_at", "2016-06-28 19:11:58.928867"], ["updated_at", "2016-06-28 19:11:58.928867"]]
+  [1m[35m (0.3ms)[0m  COMMIT
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.1ms)[0m  INSERT INTO "places_types" ("place_id", "type_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"  [["place_id", 18], ["type_id", 10], ["created_at", "2016-06-28 19:11:58.930559"], ["updated_at", "2016-06-28 19:11:58.930559"]]
+  [1m[36m (0.4ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.1ms)[0m  [1mINSERT INTO "photos" ("place_id", "image_url", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["place_id", 18], ["image_url", "https://scontent-ord1-1.cdninstagram.com/l/t51.2885-15/e35/13557010_1707891832818246_1852511319_n.jpg"], ["created_at", "2016-06-28 19:11:58.932362"], ["updated_at", "2016-06-28 19:11:58.932362"]]
+  [1m[35m (0.4ms)[0m  COMMIT
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "places" ("name", "description", "lat", "lng", "rating", "duration", "price", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9) RETURNING "id"  [["name", "Sutro Baths"], ["description", "The Sutro Baths were (now ruins) a large, privately owned public saltwater swimming pool complex in the Lands End area of the Outer Richmond District in western San Francisco, California"], ["lat", 37.780356], ["lng", -122.513671], ["rating", 4.7], ["duration", 60], ["price", 0], ["created_at", "2016-06-28 19:11:58.934325"], ["updated_at", "2016-06-28 19:11:58.934325"]]
+  [1m[36m (0.3ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  BEGIN
+  [1m[36mSQL (0.1ms)[0m  [1mINSERT INTO "places_types" ("place_id", "type_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["place_id", 19], ["type_id", 9], ["created_at", "2016-06-28 19:11:58.936686"], ["updated_at", "2016-06-28 19:11:58.936686"]]
+  [1m[35m (0.4ms)[0m  COMMIT
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.1ms)[0m  INSERT INTO "places_types" ("place_id", "type_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"  [["place_id", 19], ["type_id", 10], ["created_at", "2016-06-28 19:11:58.938444"], ["updated_at", "2016-06-28 19:11:58.938444"]]
+  [1m[36m (0.4ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "photos" ("place_id", "image_url", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["place_id", 19], ["image_url", "https://scontent-ord1-1.cdninstagram.com/t51.2885-15/e35/13531860_656196461194008_916778377_n.jpg"], ["created_at", "2016-06-28 19:11:58.940199"], ["updated_at", "2016-06-28 19:11:58.940199"]]
+  [1m[35m (0.4ms)[0m  COMMIT
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "places" ("name", "description", "lat", "lng", "rating", "duration", "price", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9) RETURNING "id"  [["name", "Civic Center"], ["description", "The Civic Center in San Francisco, California, is an area of a few blocks north of the intersection of Market Street and Van Ness Avenue that contains many of the city's largest government and cultural institutions."], ["lat", 37.779515], ["lng", -122.417643], ["rating", 3.1], ["duration", 30], ["price", 0], ["created_at", "2016-06-28 19:11:58.942198"], ["updated_at", "2016-06-28 19:11:58.942198"]]
+  [1m[36m (0.4ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "places_types" ("place_id", "type_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["place_id", 20], ["type_id", 9], ["created_at", "2016-06-28 19:11:58.944336"], ["updated_at", "2016-06-28 19:11:58.944336"]]
+  [1m[35m (0.4ms)[0m  COMMIT
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.3ms)[0m  INSERT INTO "places_types" ("place_id", "type_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"  [["place_id", 20], ["type_id", 10], ["created_at", "2016-06-28 19:11:58.946073"], ["updated_at", "2016-06-28 19:11:58.946073"]]
+  [1m[36m (0.3ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.1ms)[0m  [1mINSERT INTO "photos" ("place_id", "image_url", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["place_id", 20], ["image_url", "https://instagram.fsnc1-1.fna.fbcdn.net/t51.2885-15/e35/12960174_1685985931618996_1337015684_n.jpg"], ["created_at", "2016-06-28 19:11:58.947979"], ["updated_at", "2016-06-28 19:11:58.947979"]]
+  [1m[35m (0.4ms)[0m  COMMIT
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "places" ("name", "description", "lat", "lng", "rating", "duration", "price", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9) RETURNING "id"  [["name", "Golden Gate Bridge"], ["description", "The Golden Gate Bridge is a suspension bridge spanning the Golden Gate strait, the one-mile-wide, three-mile-long channel between San Francisco Bay and the Pacific Ocean."], ["lat", 37.819946], ["lng", -122.478234], ["rating", 4.7], ["duration", 45], ["price", 0], ["created_at", "2016-06-28 19:11:58.950106"], ["updated_at", "2016-06-28 19:11:58.950106"]]
+  [1m[36m (0.4ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "places_types" ("place_id", "type_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["place_id", 21], ["type_id", 9], ["created_at", "2016-06-28 19:11:58.952210"], ["updated_at", "2016-06-28 19:11:58.952210"]]
+  [1m[35m (0.4ms)[0m  COMMIT
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "places_types" ("place_id", "type_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"  [["place_id", 21], ["type_id", 10], ["created_at", "2016-06-28 19:11:58.954021"], ["updated_at", "2016-06-28 19:11:58.954021"]]
+  [1m[36m (0.4ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.1ms)[0m  [1mINSERT INTO "photos" ("place_id", "image_url", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["place_id", 21], ["image_url", "https://scontent-ord1-1.cdninstagram.com/t51.2885-15/e35/12339059_941804632578634_2076641008_n.jpg"], ["created_at", "2016-06-28 19:11:58.955867"], ["updated_at", "2016-06-28 19:11:58.955867"]]
+  [1m[35m (0.3ms)[0m  COMMIT
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "places" ("name", "description", "lat", "lng", "rating", "duration", "price", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9) RETURNING "id"  [["name", "chiang kai-shek memorial hall"], ["description", "The National Chiang Kai-shek Memorial Hall is a Taiwanese national monument, landmark and tourist attraction erected in memory of Chiang Kai-shek, former President of the Republic of China."], ["lat", 25.035368], ["lng", 121.519588], ["rating", 4.4], ["duration", 45], ["price", 0], ["created_at", "2016-06-28 19:11:58.957895"], ["updated_at", "2016-06-28 19:11:58.957895"]]
+  [1m[36m (0.4ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "places_types" ("place_id", "type_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["place_id", 22], ["type_id", 9], ["created_at", "2016-06-28 19:11:58.959995"], ["updated_at", "2016-06-28 19:11:58.959995"]]
+  [1m[35m (0.4ms)[0m  COMMIT
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "places_types" ("place_id", "type_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"  [["place_id", 22], ["type_id", 10], ["created_at", "2016-06-28 19:11:58.961776"], ["updated_at", "2016-06-28 19:11:58.961776"]]
+  [1m[36m (0.4ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "places_types" ("place_id", "type_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["place_id", 22], ["type_id", 4], ["created_at", "2016-06-28 19:11:58.963490"], ["updated_at", "2016-06-28 19:11:58.963490"]]
+  [1m[35m (0.4ms)[0m  COMMIT
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.1ms)[0m  INSERT INTO "photos" ("place_id", "image_url", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"  [["place_id", 22], ["image_url", "https://scontent-ord1-1.cdninstagram.com/t51.2885-15/e35/12530934_999508493451333_806608021_n.jpg"], ["created_at", "2016-06-28 19:11:58.965293"], ["updated_at", "2016-06-28 19:11:58.965293"]]
+  [1m[36m (0.3ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "places" ("name", "description", "lat", "lng", "rating", "duration", "price", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9) RETURNING "id"[0m  [["name", "Long Shan Temple"], ["description", "Lungshan Temple of Manka is a temple in Wanhua District, Taipei, Taiwan. The temple was built in Taipei in 1738 by settlers from Fujian during Qing rule. It served as a place of worship and a gathering place for the Chinese settlers."], ["lat", 25.037007], ["lng", 121.499772], ["rating", 4.3], ["duration", 60], ["price", 0], ["created_at", "2016-06-28 19:11:58.967270"], ["updated_at", "2016-06-28 19:11:58.967270"]]
+  [1m[35m (0.3ms)[0m  COMMIT
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "places_types" ("place_id", "type_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"  [["place_id", 23], ["type_id", 9], ["created_at", "2016-06-28 19:11:58.969284"], ["updated_at", "2016-06-28 19:11:58.969284"]]
+  [1m[36m (0.4ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "places_types" ("place_id", "type_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["place_id", 23], ["type_id", 10], ["created_at", "2016-06-28 19:11:58.971171"], ["updated_at", "2016-06-28 19:11:58.971171"]]
+  [1m[35m (0.4ms)[0m  COMMIT
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "places_types" ("place_id", "type_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"  [["place_id", 23], ["type_id", 4], ["created_at", "2016-06-28 19:11:58.972963"], ["updated_at", "2016-06-28 19:11:58.972963"]]
+  [1m[36m (0.4ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.1ms)[0m  [1mINSERT INTO "photos" ("place_id", "image_url", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["place_id", 23], ["image_url", "https://scontent-ord1-1.cdninstagram.com/t51.2885-15/s1080x1080/e15/fr/13525539_1188879921145432_140057277_n.jpg"], ["created_at", "2016-06-28 19:11:58.974779"], ["updated_at", "2016-06-28 19:11:58.974779"]]
+  [1m[35m (0.4ms)[0m  COMMIT
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "places" ("name", "description", "lat", "lng", "rating", "duration", "price", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9) RETURNING "id"  [["name", "鼎泰豐 Din Tai Fung"], ["description", "Popular global chain known for elevated dim sum & Asian dishes served in bustling quarters."], ["lat", 25.041061], ["lng", 121.543277], ["rating", 4.6], ["duration", 60], ["price", 2], ["created_at", "2016-06-28 19:11:58.976842"], ["updated_at", "2016-06-28 19:11:58.976842"]]
+  [1m[36m (15.7ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.3ms)[0m  BEGIN
+  [1m[36mSQL (0.3ms)[0m  [1mINSERT INTO "places_types" ("place_id", "type_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["place_id", 24], ["type_id", 7], ["created_at", "2016-06-28 19:11:59.013429"], ["updated_at", "2016-06-28 19:11:59.013429"]]
+  [1m[35m (15.7ms)[0m  COMMIT
+  [1m[36m (0.2ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "photos" ("place_id", "image_url", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"  [["place_id", 24], ["image_url", "https://scontent-ord1-1.cdninstagram.com/t51.2885-15/e15/10724197_1632237020336765_235564369_n.jpg"], ["created_at", "2016-06-28 19:11:59.032162"], ["updated_at", "2016-06-28 19:11:59.032162"]]
+  [1m[36m (0.4ms)[0m  [1mCOMMIT[0m
+  [1m[36mPlace Load (0.6ms)[0m  [1mSELECT "places".* FROM "places"[0m
+
+
+Started GET "/places?type=park&longitude=-122&latitude=37" for ::1 at 2016-06-28 12:13:57 -0700
+  [1m[36mActiveRecord::SchemaMigration Load (0.5ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+Processing by PlacesController#index as HTML
+  Parameters: {"type"=>"park", "longitude"=>"-122", "latitude"=>"37"}
+  [1m[35mType Load (9.9ms)[0m  SELECT  "types".* FROM "types" WHERE "types"."name" = $1 LIMIT 1  [["name", "park"]]
+  [1m[36mPlace Load (34.0ms)[0m  [1mSELECT  "places".* FROM "places" INNER JOIN "places_types" ON "places_types"."place_id" = "places"."id" WHERE ((
+          (ACOS(least(1,COS(0.6457718232379019)*COS(-2.129301687433082)*COS(RADIANS(places.lat))*COS(RADIANS(places.lng))+
+          COS(0.6457718232379019)*SIN(-2.129301687433082)*COS(RADIANS(places.lat))*SIN(RADIANS(places.lng))+
+          SIN(0.6457718232379019)*SIN(RADIANS(places.lat))))*3963.1899999999996)
+          <= 20)) AND (places_types.type_id = 6) LIMIT 20[0m
+Completed 200 OK in 161ms (Views: 0.2ms | ActiveRecord: 48.9ms)
+
+
+Started GET "/places?type=park&longitude=-122&latitude=37.33" for ::1 at 2016-06-28 12:14:15 -0700
+Processing by PlacesController#index as HTML
+  Parameters: {"type"=>"park", "longitude"=>"-122", "latitude"=>"37.33"}
+  [1m[35mType Load (0.3ms)[0m  SELECT  "types".* FROM "types" WHERE "types"."name" = $1 LIMIT 1  [["name", "park"]]
+  [1m[36mPlace Load (0.6ms)[0m  [1mSELECT  "places".* FROM "places" INNER JOIN "places_types" ON "places_types"."place_id" = "places"."id" WHERE ((
+          (ACOS(least(1,COS(0.6515314097694832)*COS(-2.129301687433082)*COS(RADIANS(places.lat))*COS(RADIANS(places.lng))+
+          COS(0.6515314097694832)*SIN(-2.129301687433082)*COS(RADIANS(places.lat))*SIN(RADIANS(places.lng))+
+          SIN(0.6515314097694832)*SIN(RADIANS(places.lat))))*3963.1899999999996)
+          <= 20)) AND (places_types.type_id = 6) LIMIT 20[0m
+Completed 200 OK in 3ms (Views: 0.1ms | ActiveRecord: 0.9ms)
+
+
+Started GET "/places?type=park&longitude=-122.48&latitude=37.79" for ::1 at 2016-06-28 12:14:35 -0700
+Processing by PlacesController#index as HTML
+  Parameters: {"type"=>"park", "longitude"=>"-122.48", "latitude"=>"37.79"}
+  [1m[35mType Load (0.3ms)[0m  SELECT  "types".* FROM "types" WHERE "types"."name" = $1 LIMIT 1  [["name", "park"]]
+  [1m[36mPlace Load (0.6ms)[0m  [1mSELECT  "places".* FROM "places" INNER JOIN "places_types" ON "places_types"."place_id" = "places"."id" WHERE ((
+          (ACOS(least(1,COS(0.6595599243286571)*COS(-2.137679267842655)*COS(RADIANS(places.lat))*COS(RADIANS(places.lng))+
+          COS(0.6595599243286571)*SIN(-2.137679267842655)*COS(RADIANS(places.lat))*SIN(RADIANS(places.lng))+
+          SIN(0.6595599243286571)*SIN(RADIANS(places.lat))))*3963.1899999999996)
+          <= 20)) AND (places_types.type_id = 6) LIMIT 20[0m
+  [1m[35mPhoto Load (0.3ms)[0m  SELECT "photos".* FROM "photos" WHERE "photos"."place_id" = $1  [["place_id", 5]]
+  [1m[36mType Load (0.3ms)[0m  [1mSELECT "types".* FROM "types" INNER JOIN "places_types" ON "types"."id" = "places_types"."type_id" WHERE "places_types"."place_id" = $1[0m  [["place_id", 5]]
+  [1m[35mPhoto Load (0.2ms)[0m  SELECT "photos".* FROM "photos" WHERE "photos"."place_id" = $1  [["place_id", 7]]
+  [1m[36mType Load (0.3ms)[0m  [1mSELECT "types".* FROM "types" INNER JOIN "places_types" ON "types"."id" = "places_types"."type_id" WHERE "places_types"."place_id" = $1[0m  [["place_id", 7]]
+  [1m[35mPhoto Load (0.2ms)[0m  SELECT "photos".* FROM "photos" WHERE "photos"."place_id" = $1  [["place_id", 9]]
+  [1m[36mType Load (0.3ms)[0m  [1mSELECT "types".* FROM "types" INNER JOIN "places_types" ON "types"."id" = "places_types"."type_id" WHERE "places_types"."place_id" = $1[0m  [["place_id", 9]]
+  [1m[35mPhoto Load (0.2ms)[0m  SELECT "photos".* FROM "photos" WHERE "photos"."place_id" = $1  [["place_id", 13]]
+  [1m[36mType Load (0.3ms)[0m  [1mSELECT "types".* FROM "types" INNER JOIN "places_types" ON "types"."id" = "places_types"."type_id" WHERE "places_types"."place_id" = $1[0m  [["place_id", 13]]
+Completed 200 OK in 173ms (Views: 0.1ms | ActiveRecord: 5.1ms)
+
+
+Started GET "/places/new" for ::1 at 2016-06-29 09:35:21 -0700
+  [1m[36mActiveRecord::SchemaMigration Load (0.7ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+Processing by PlacesController#new as HTML
+  Rendered places/new.html.haml (2.2ms)
+Completed 200 OK in 82ms (Views: 62.8ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/places/new" for ::1 at 2016-06-29 09:35:31 -0700
+Processing by PlacesController#new as HTML
+  Rendered places/new.html.haml (0.1ms)
+Completed 200 OK in 7ms (Views: 3.4ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/places/new" for ::1 at 2016-06-29 09:35:34 -0700
+Processing by PlacesController#new as HTML
+  Rendered places/new.html.haml (0.0ms)
+Completed 200 OK in 2ms (Views: 1.2ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/places/new" for ::1 at 2016-06-29 09:35:55 -0700
+Processing by PlacesController#new as HTML
+  Rendered places/new.html.haml (0.1ms)
+Completed 200 OK in 3ms (Views: 2.1ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/places/new" for ::1 at 2016-06-29 09:36:09 -0700
+Processing by PlacesController#new as HTML
+  Rendered places/new.html.haml (0.1ms)
+Completed 200 OK in 2ms (Views: 1.9ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/places" for ::1 at 2016-06-29 09:36:12 -0700
+Processing by PlacesController#index as HTML
+  [1m[35mPlace Load (1.9ms)[0m  SELECT  "places".* FROM "places" WHERE ((
+          (ACOS(least(1,COS(0.0)*COS(0.0)*COS(RADIANS(places.lat))*COS(RADIANS(places.lng))+
+          COS(0.0)*SIN(0.0)*COS(RADIANS(places.lat))*SIN(RADIANS(places.lng))+
+          SIN(0.0)*SIN(RADIANS(places.lat))))*3963.1899999999996)
+          <= 20)) LIMIT 20
+Completed 200 OK in 71ms (Views: 0.1ms | ActiveRecord: 3.3ms)
+
+
+Started GET "/places/new" for ::1 at 2016-06-29 09:36:15 -0700
+Processing by PlacesController#new as HTML
+  Rendered places/new.html.haml (0.1ms)
+Completed 200 OK in 2ms (Views: 1.8ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/places" for ::1 at 2016-06-29 09:36:26 -0700
+Processing by PlacesController#index as HTML
+  [1m[36mPlace Load (0.6ms)[0m  [1mSELECT  "places".* FROM "places" WHERE ((
+          (ACOS(least(1,COS(0.0)*COS(0.0)*COS(RADIANS(places.lat))*COS(RADIANS(places.lng))+
+          COS(0.0)*SIN(0.0)*COS(RADIANS(places.lat))*SIN(RADIANS(places.lng))+
+          SIN(0.0)*SIN(RADIANS(places.lat))))*3963.1899999999996)
+          <= 20)) LIMIT 20[0m
+Completed 200 OK in 2ms (Views: 0.1ms | ActiveRecord: 0.6ms)
+
+
+Started GET "/places" for ::1 at 2016-06-29 09:36:28 -0700
+Processing by PlacesController#index as HTML
+  [1m[35mPlace Load (0.9ms)[0m  SELECT  "places".* FROM "places" WHERE ((
+          (ACOS(least(1,COS(0.0)*COS(0.0)*COS(RADIANS(places.lat))*COS(RADIANS(places.lng))+
+          COS(0.0)*SIN(0.0)*COS(RADIANS(places.lat))*SIN(RADIANS(places.lng))+
+          SIN(0.0)*SIN(RADIANS(places.lat))))*3963.1899999999996)
+          <= 20)) LIMIT 20
+Completed 200 OK in 3ms (Views: 0.1ms | ActiveRecord: 0.9ms)
+
+
+Started GET "/places/new" for ::1 at 2016-06-29 09:36:31 -0700
+Processing by PlacesController#new as HTML
+  Rendered places/new.html.haml (0.0ms)
+Completed 200 OK in 2ms (Views: 1.4ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/places/new" for ::1 at 2016-06-29 09:36:40 -0700
+Processing by PlacesController#new as HTML
+  Rendered places/new.html.haml (0.0ms)
+Completed 200 OK in 7ms (Views: 3.2ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/places/new" for ::1 at 2016-06-29 09:37:15 -0700
+Processing by PlacesController#new as HTML
+  Rendered places/new.html.haml (0.5ms)
+Completed 200 OK in 3ms (Views: 2.3ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/places/new" for ::1 at 2016-06-29 09:37:20 -0700
+Processing by PlacesController#new as HTML
+  Rendered places/new.html.haml (0.5ms)
+Completed 200 OK in 3ms (Views: 2.3ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/places/new" for ::1 at 2016-06-29 09:37:53 -0700
+Processing by PlacesController#new as HTML
+  Rendered places/new.html.haml (0.1ms)
+Completed 200 OK in 8ms (Views: 3.5ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/places" for ::1 at 2016-06-29 09:37:56 -0700
+Processing by PlacesController#index as HTML
+  [1m[36mPlace Load (0.6ms)[0m  [1mSELECT  "places".* FROM "places" WHERE ((
+          (ACOS(least(1,COS(0.0)*COS(0.0)*COS(RADIANS(places.lat))*COS(RADIANS(places.lng))+
+          COS(0.0)*SIN(0.0)*COS(RADIANS(places.lat))*SIN(RADIANS(places.lng))+
+          SIN(0.0)*SIN(RADIANS(places.lat))))*3963.1899999999996)
+          <= 20)) LIMIT 20[0m
+Completed 200 OK in 15ms (Views: 0.1ms | ActiveRecord: 1.5ms)
+
+
+Started GET "/places/1" for ::1 at 2016-06-29 09:37:59 -0700
+Processing by PlacesController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[35mPlace Load (0.5ms)[0m  SELECT  "places".* FROM "places" WHERE "places"."id" = $1 LIMIT 1  [["id", 1]]
+Completed 200 OK in 71ms (Views: 0.1ms | ActiveRecord: 2.9ms)
+
+
+Started GET "/places/new" for ::1 at 2016-06-29 09:38:03 -0700
+Processing by PlacesController#new as HTML
+  Rendered places/new.html.haml (0.1ms)
+Completed 200 OK in 2ms (Views: 1.7ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/places/new" for ::1 at 2016-06-29 09:38:09 -0700
+Processing by PlacesController#new as HTML
+Completed 200 OK in 7ms (ActiveRecord: 0.0ms)
+
+
+Started GET "/places/new" for ::1 at 2016-06-29 09:38:14 -0700
+Processing by PlacesController#new as HTML
+Completed 200 OK in 0ms (ActiveRecord: 0.0ms)
+
+
+Started GET "/places/new" for ::1 at 2016-06-29 09:42:36 -0700
+
+AbstractController::ActionNotFound (The action 'new' could not be found for PlacesController):
+  actionpack (4.2.5) lib/abstract_controller/base.rb:132:in `process'
+  actionview (4.2.5) lib/action_view/rendering.rb:30:in `process'
+  actionpack (4.2.5) lib/action_controller/metal.rb:196:in `dispatch'
+  actionpack (4.2.5) lib/action_controller/metal/rack_delegation.rb:13:in `dispatch'
+  actionpack (4.2.5) lib/action_controller/metal.rb:237:in `block in action'
+  actionpack (4.2.5) lib/action_dispatch/routing/route_set.rb:76:in `call'
+  actionpack (4.2.5) lib/action_dispatch/routing/route_set.rb:76:in `dispatch'
+  actionpack (4.2.5) lib/action_dispatch/routing/route_set.rb:45:in `serve'
+  actionpack (4.2.5) lib/action_dispatch/journey/router.rb:43:in `block in serve'
+  actionpack (4.2.5) lib/action_dispatch/journey/router.rb:30:in `each'
+  actionpack (4.2.5) lib/action_dispatch/journey/router.rb:30:in `serve'
+  actionpack (4.2.5) lib/action_dispatch/routing/route_set.rb:817:in `call'
+  rack (1.6.4) lib/rack/etag.rb:24:in `call'
+  rack (1.6.4) lib/rack/conditionalget.rb:25:in `call'
+  rack (1.6.4) lib/rack/head.rb:13:in `call'
+  actionpack (4.2.5) lib/action_dispatch/middleware/params_parser.rb:27:in `call'
+  activerecord (4.2.5) lib/active_record/query_cache.rb:36:in `call'
+  activerecord (4.2.5) lib/active_record/connection_adapters/abstract/connection_pool.rb:653:in `call'
+  activerecord (4.2.5) lib/active_record/migration.rb:377:in `call'
+  actionpack (4.2.5) lib/action_dispatch/middleware/callbacks.rb:29:in `block in call'
+  activesupport (4.2.5) lib/active_support/callbacks.rb:88:in `__run_callbacks__'
+  activesupport (4.2.5) lib/active_support/callbacks.rb:778:in `_run_call_callbacks'
+  activesupport (4.2.5) lib/active_support/callbacks.rb:81:in `run_callbacks'
+  actionpack (4.2.5) lib/action_dispatch/middleware/callbacks.rb:27:in `call'
+  actionpack (4.2.5) lib/action_dispatch/middleware/reloader.rb:73:in `call'
+  actionpack (4.2.5) lib/action_dispatch/middleware/remote_ip.rb:78:in `call'
+  actionpack (4.2.5) lib/action_dispatch/middleware/debug_exceptions.rb:17:in `call'
+  actionpack (4.2.5) lib/action_dispatch/middleware/show_exceptions.rb:30:in `call'
+  railties (4.2.5) lib/rails/rack/logger.rb:38:in `call_app'
+  railties (4.2.5) lib/rails/rack/logger.rb:20:in `block in call'
+  activesupport (4.2.5) lib/active_support/tagged_logging.rb:68:in `block in tagged'
+  activesupport (4.2.5) lib/active_support/tagged_logging.rb:26:in `tagged'
+  activesupport (4.2.5) lib/active_support/tagged_logging.rb:68:in `tagged'
+  railties (4.2.5) lib/rails/rack/logger.rb:20:in `call'
+  actionpack (4.2.5) lib/action_dispatch/middleware/request_id.rb:21:in `call'
+  rack (1.6.4) lib/rack/runtime.rb:18:in `call'
+  activesupport (4.2.5) lib/active_support/cache/strategy/local_cache_middleware.rb:28:in `call'
+  rack (1.6.4) lib/rack/lock.rb:17:in `call'
+  actionpack (4.2.5) lib/action_dispatch/middleware/static.rb:116:in `call'
+  railties (4.2.5) lib/rails/engine.rb:518:in `call'
+  railties (4.2.5) lib/rails/application.rb:165:in `call'
+  rack (1.6.4) lib/rack/lock.rb:17:in `call'
+  rack (1.6.4) lib/rack/content_length.rb:15:in `call'
+  rack (1.6.4) lib/rack/handler/webrick.rb:88:in `service'
+  /Users/apprentice/.rbenv/versions/2.2.5/lib/ruby/2.2.0/webrick/httpserver.rb:138:in `service'
+  /Users/apprentice/.rbenv/versions/2.2.5/lib/ruby/2.2.0/webrick/httpserver.rb:94:in `run'
+  /Users/apprentice/.rbenv/versions/2.2.5/lib/ruby/2.2.0/webrick/server.rb:294:in `block in start_thread'
+
+
+  Rendered /Users/apprentice/.rbenv/versions/2.2.5/lib/ruby/gems/2.2.0/gems/actionpack-4.2.5/lib/action_dispatch/middleware/templates/rescues/unknown_action.html.erb within rescues/layout (0.6ms)
+
+
+Started GET "/places/new" for ::1 at 2016-06-29 09:42:41 -0700
+Processing by PlacesController#new as HTML
+Completed 200 OK in 4ms (ActiveRecord: 0.0ms)
+
+
+Started GET "/places/new" for ::1 at 2016-06-29 09:42:53 -0700
+Processing by PlacesController#new as HTML
+Completed 200 OK in 0ms (ActiveRecord: 0.0ms)
+
+
+Started GET "/places/new" for ::1 at 2016-06-29 09:42:56 -0700
+Processing by PlacesController#new as HTML
+Completed 200 OK in 0ms (ActiveRecord: 0.0ms)
+
+
+Started GET "/places/new" for ::1 at 2016-06-29 09:44:16 -0700
+Processing by PlacesController#new as HTML
+Completed 200 OK in 5ms (ActiveRecord: 0.0ms)
+
+
+Started GET "/places/new" for ::1 at 2016-06-29 09:45:03 -0700
+Processing by PlacesController#new as HTML
+Completed 200 OK in 0ms (ActiveRecord: 0.0ms)
+
+
+Started GET "/places/new" for ::1 at 2016-06-29 09:47:46 -0700
+Processing by PlacesController#new as HTML
+  Rendered places/new.html.haml (0.0ms)
+Completed 200 OK in 9ms (Views: 4.5ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/places/new" for ::1 at 2016-06-29 09:52:00 -0700
+Processing by PlacesController#new as HTML
+Completed 200 OK in 4ms (ActiveRecord: 0.0ms)
+
+
+Started GET "/places/new" for ::1 at 2016-06-29 09:52:07 -0700
+Processing by PlacesController#new as HTML
+Completed 200 OK in 0ms (ActiveRecord: 0.0ms)
+
+
+Started GET "/places/new" for ::1 at 2016-06-29 09:52:22 -0700
+Processing by PlacesController#new as HTML
+Completed 200 OK in 0ms (ActiveRecord: 0.0ms)
+
+
+Started GET "/places/new" for ::1 at 2016-06-29 09:52:24 -0700
+Processing by PlacesController#new as HTML
+Completed 200 OK in 0ms (ActiveRecord: 0.0ms)
+
+
+Started GET "/" for ::1 at 2016-06-29 09:55:30 -0700
+Processing by PlacesController#index as HTML
+  [1m[36mPlace Load (0.6ms)[0m  [1mSELECT  "places".* FROM "places" WHERE ((
+          (ACOS(least(1,COS(0.0)*COS(0.0)*COS(RADIANS(places.lat))*COS(RADIANS(places.lng))+
+          COS(0.0)*SIN(0.0)*COS(RADIANS(places.lat))*SIN(RADIANS(places.lng))+
+          SIN(0.0)*SIN(RADIANS(places.lat))))*3963.1899999999996)
+          <= 20)) LIMIT 20[0m
+Completed 200 OK in 11ms (Views: 0.1ms | ActiveRecord: 1.7ms)
+
+
+Started GET "/places/new" for ::1 at 2016-06-29 09:55:33 -0700
+Processing by PlacesController#new as HTML
+Completed 200 OK in 0ms (ActiveRecord: 0.0ms)
+
+
+Started GET "/places/new" for ::1 at 2016-06-29 10:20:35 -0700
+
+ActionController::RoutingError (undefined method `protect_from_forgery' for ApplicationController:Class):
+  app/controllers/application_controller.rb:4:in `<class:ApplicationController>'
+  app/controllers/application_controller.rb:1:in `<top (required)>'
+  app/controllers/places_controller.rb:1:in `<top (required)>'
+
+
+  Rendered /Users/apprentice/.rbenv/versions/2.2.5/lib/ruby/gems/2.2.0/gems/actionpack-4.2.5/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb (3.0ms)
+  Rendered /Users/apprentice/.rbenv/versions/2.2.5/lib/ruby/gems/2.2.0/gems/actionpack-4.2.5/lib/action_dispatch/middleware/templates/routes/_route.html.erb (3.5ms)
+  Rendered /Users/apprentice/.rbenv/versions/2.2.5/lib/ruby/gems/2.2.0/gems/actionpack-4.2.5/lib/action_dispatch/middleware/templates/routes/_table.html.erb (41.9ms)
+  Rendered /Users/apprentice/.rbenv/versions/2.2.5/lib/ruby/gems/2.2.0/gems/actionpack-4.2.5/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb (1.4ms)
+  Rendered /Users/apprentice/.rbenv/versions/2.2.5/lib/ruby/gems/2.2.0/gems/actionpack-4.2.5/lib/action_dispatch/middleware/templates/rescues/routing_error.html.erb within rescues/layout (166.1ms)
+
+
+Started GET "/places/new" for ::1 at 2016-06-29 10:20:51 -0700
+Processing by PlacesController#new as HTML
+Completed 200 OK in 5ms (ActiveRecord: 0.0ms)

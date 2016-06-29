@@ -30,7 +30,6 @@ class PlacesController < ApplicationController
 
   def new
     @types = Type.all
-    render 'new.html.haml'
   end
 
   def create

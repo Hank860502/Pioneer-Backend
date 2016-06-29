@@ -3370,3 +3370,50 @@ WHERE c.contype = 'f'
 ORDER BY c.conname
 [0m
   [1m[36mPlace Load (0.7ms)[0m  [1mSELECT  "places".* FROM "places"  ORDER BY "places"."id" ASC LIMIT 1[0m
+
+
+Started GET "/" for ::1 at 2016-06-29 10:59:00 -0700
+  [1m[36mActiveRecord::SchemaMigration Load (0.5ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+
+SyntaxError (/Users/apprentice/Desktop/Pioneer-Backend/app/controllers/places_controller.rb:56: syntax error, unexpected '\n', expecting =>
+/Users/apprentice/Desktop/Pioneer-Backend/app/controllers/places_controller.rb:67: syntax error, unexpected '}', expecting keyword_end
+/Users/apprentice/Desktop/Pioneer-Backend/app/controllers/places_controller.rb:69: syntax error, unexpected '\n', expecting =>
+/Users/apprentice/Desktop/Pioneer-Backend/app/controllers/places_controller.rb:73: syntax error, unexpected '}', expecting keyword_end):
+  app/controllers/places_controller.rb:56: syntax error, unexpected '\n', expecting =>
+  app/controllers/places_controller.rb:67: syntax error, unexpected '}', expecting keyword_end
+  app/controllers/places_controller.rb:69: syntax error, unexpected '\n', expecting =>
+  app/controllers/places_controller.rb:73: syntax error, unexpected '}', expecting keyword_end
+
+
+  Rendered /Users/apprentice/.rbenv/versions/2.2.5/lib/ruby/gems/2.2.0/gems/actionpack-4.2.5/lib/action_dispatch/middleware/templates/rescues/_source.erb (4.8ms)
+  Rendered /Users/apprentice/.rbenv/versions/2.2.5/lib/ruby/gems/2.2.0/gems/actionpack-4.2.5/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb (7.2ms)
+  Rendered /Users/apprentice/.rbenv/versions/2.2.5/lib/ruby/gems/2.2.0/gems/actionpack-4.2.5/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb (1.8ms)
+  Rendered /Users/apprentice/.rbenv/versions/2.2.5/lib/ruby/gems/2.2.0/gems/actionpack-4.2.5/lib/action_dispatch/middleware/templates/rescues/diagnostics.html.erb within rescues/layout (78.5ms)
+
+
+Started GET "/" for ::1 at 2016-06-29 10:59:01 -0700
+
+SyntaxError (/Users/apprentice/Desktop/Pioneer-Backend/app/controllers/places_controller.rb:56: syntax error, unexpected '\n', expecting =>
+/Users/apprentice/Desktop/Pioneer-Backend/app/controllers/places_controller.rb:67: syntax error, unexpected '}', expecting keyword_end
+/Users/apprentice/Desktop/Pioneer-Backend/app/controllers/places_controller.rb:69: syntax error, unexpected '\n', expecting =>
+/Users/apprentice/Desktop/Pioneer-Backend/app/controllers/places_controller.rb:73: syntax error, unexpected '}', expecting keyword_end):
+  app/controllers/places_controller.rb:56: syntax error, unexpected '\n', expecting =>
+  app/controllers/places_controller.rb:67: syntax error, unexpected '}', expecting keyword_end
+  app/controllers/places_controller.rb:69: syntax error, unexpected '\n', expecting =>
+  app/controllers/places_controller.rb:73: syntax error, unexpected '}', expecting keyword_end
+
+
+  Rendered /Users/apprentice/.rbenv/versions/2.2.5/lib/ruby/gems/2.2.0/gems/actionpack-4.2.5/lib/action_dispatch/middleware/templates/rescues/_source.erb (4.3ms)
+  Rendered /Users/apprentice/.rbenv/versions/2.2.5/lib/ruby/gems/2.2.0/gems/actionpack-4.2.5/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb (2.0ms)
+  Rendered /Users/apprentice/.rbenv/versions/2.2.5/lib/ruby/gems/2.2.0/gems/actionpack-4.2.5/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb (1.0ms)
+  Rendered /Users/apprentice/.rbenv/versions/2.2.5/lib/ruby/gems/2.2.0/gems/actionpack-4.2.5/lib/action_dispatch/middleware/templates/rescues/diagnostics.html.erb within rescues/layout (58.1ms)
+
+
+Started GET "/" for ::1 at 2016-06-29 11:00:46 -0700
+Processing by PlacesController#index as HTML
+  [1m[35mPlace Load (1.5ms)[0m  SELECT  "places".* FROM "places" WHERE ((
+          (ACOS(least(1,COS(0.0)*COS(0.0)*COS(RADIANS(places.lat))*COS(RADIANS(places.lng))+
+          COS(0.0)*SIN(0.0)*COS(RADIANS(places.lat))*SIN(RADIANS(places.lng))+
+          SIN(0.0)*SIN(RADIANS(places.lat))))*3963.1899999999996)
+          <= 20)) LIMIT 20
+Completed 200 OK in 18ms (Views: 0.1ms | ActiveRecord: 2.5ms)

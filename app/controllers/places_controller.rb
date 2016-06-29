@@ -52,7 +52,7 @@ class PlacesController < ApplicationController
   end
 
 
-  def add_types(types, place_id) {
+  def add_types(types, place_id)
     type_arr = types.split(",")
     type_arr.each do |type|
       exist_type = Type.find_by(name: type)
@@ -63,13 +63,13 @@ class PlacesController < ApplicationController
         PlacesType.create(place_id: place_id, type_id: new_type.id)
       end
     end
+  end
 
-  }
-  def add_photos(photos, place_id) {
+  def add_photos(photos, place_id)
     photo_arr = photos.split(",")
     photo_arr.each do |photo|
       Photo.create(place_id: place_id, image_url: photo)
     end
-  }
+  end
 
 end

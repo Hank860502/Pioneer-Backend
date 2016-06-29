@@ -42,6 +42,21 @@ Photo.create(
   image_url: "https://instagram.fsnc1-1.fna.fbcdn.net/t51.2885-15/e35/11311457_1435769073419954_921661701_n.jpg"
 )
 
+Photo.create(
+  place_id: alcatraz.id,
+  image_url: "https://scontent-ord1-1.cdninstagram.com/t51.2885-15/sh0.08/e35/p750x750/13551542_296265964050045_968262688_n.jpg"
+)
+
+Photo.create(
+  place_id: alcatraz.id,
+  image_url: "https://scontent-ord1-1.cdninstagram.com/t51.2885-15/e35/13534155_1753543778263870_2122610248_n.jpg"
+)
+
+Photo.create(
+  place_id: alcatraz.id,
+  image_url: "https://scontent-ord1-1.cdninstagram.com/t51.2885-15/s750x750/sh0.08/e35/13525390_1625581291103383_1438385699_n.jpg"
+)
+
 # Comstock Saloon
 comstock_saloon = Place.create(
   name: "Comstock Saloon",
@@ -69,6 +84,11 @@ Photo.create(
   image_url: "https://s3-media3.fl.yelpcdn.com/bphoto/Rmo7lQ0HG2B2FZmwD7iLoQ/o.jpg"
 )
 
+Photo.create(
+  place_id: comstock_saloon.id,
+  image_url: "http://s3-media2.fl.yelpcdn.com/bphoto/Dx7drUCpbeNHvGnaHKY0yg/o.jpg"
+)
+
 # Aquarium Of The Bay
 aquarium_of_the_bay = Place.create(
   name: "Aquarium of the Bay",
@@ -76,7 +96,7 @@ aquarium_of_the_bay = Place.create(
   lat: 37.808678,
   lng: -122.409200,
   address: "2 Beach St, San Francisco, CA 94133",
-  rating: 3.9,
+  rating: 3.7,
   duration: 120,
   price: 2
   )
@@ -99,6 +119,11 @@ PlacesType.create(
 Photo.create(
   place_id: aquarium_of_the_bay.id,
   image_url: "https://instagram.fsnc1-1.fna.fbcdn.net/t51.2885-15/e35/11820625_156774028000203_656280027_n.jpg"
+)
+
+Photo.create(
+  place_id: aquarium_of_the_bay.id,
+  image_url: "http://s3-media3.fl.yelpcdn.com/bphoto/bunFeKv23vlZi4dzh1TKeA/o.jpg"
 )
 
 # Cable Car
@@ -126,6 +151,11 @@ PlacesType.create(
 Photo.create(
   place_id: cable_car.id,
   image_url: "https://instagram.fsnc1-1.fna.fbcdn.net/t51.2885-15/e35/12135272_895455643886085_1883463243_n.jpg"
+)
+
+Photo.create(
+  place_id: cable_car.id,
+  image_url: "https://scontent-ord1-1.cdninstagram.com/t51.2885-15/e35/13355494_974735939301994_446993832_n.jpg"
 )
 
 # Muir Woods
@@ -197,6 +227,11 @@ Photo.create(
   image_url: "https://instagram.fsnc1-1.fna.fbcdn.net/t51.2885-15/e35/13109081_1723896514559583_614709634_n.jpg"
 )
 
+Photo.create(
+  place_id: sf_moma.id,
+  image_url: "https://scontent-ord1-1.cdninstagram.com/t51.2885-15/e35/13392826_1554636864831431_1766105952_n.jpg"
+)
+
 # Battery Spencer
 battery_spencer = Place.create(
   name: "Battery Spencer",
@@ -254,6 +289,16 @@ PlacesType.create(
 Photo.create(
   place_id: china_town.id,
   image_url: "https://instagram.fsnc1-1.fna.fbcdn.net/t51.2885-15/e35/1516888_166301770399020_702906097_n.jpg"
+)
+
+Photo.create(
+  place_id: china_town.id,
+  image_url: "https://scontent-ord1-1.cdninstagram.com/t51.2885-15/e35/13473183_1751496511741754_1717884244_n.jpg"
+)
+
+Photo.create(
+  place_id: china_town.id,
+  image_url: "https://scontent-ord1-1.cdninstagram.com/t51.2885-15/e35/13285416_557374784445950_1257112129_n.jpg"
 )
 
 # Alamo Square

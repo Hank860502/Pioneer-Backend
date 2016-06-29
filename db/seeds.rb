@@ -16,6 +16,7 @@ alcatraz = Place.create(
   description: "Notorious prison & once home to Al Capone, now a museum with audio tour, accessible by ferry.",
   lat: 37.826986,
   lng: -122.422972,
+  address: "San Francisco, CA 94133",
   rating: 4.9,
   duration: 300,
   price: 2
@@ -47,6 +48,7 @@ comstock_saloon = Place.create(
   description: "Fancy, turn-of-the-century digs house vintage cocktails, upscale bar fare, cozy booths & live jazz.",
   lat: 37.796795,
   lng: -122.405626,
+  address: "155 Columbus Ave, San Francisco, CA 94133",
   rating: 4.4,
   duration: 180,
   price: 2
@@ -73,6 +75,7 @@ aquarium_of_the_bay = Place.create(
   description: "Aquarium by the bay description",
   lat: 37.808678,
   lng: -122.409200,
+  address: "2 Beach St, San Francisco, CA 94133",
   rating: 3.9,
   duration: 120,
   price: 2
@@ -104,6 +107,7 @@ cable_car = Place.create(
   description: "Old cable cars, long waiting lines",
   lat: 37.784814,
   lng: -122.407740,
+  address: "870 Market St, San Francisco, CA 94102",
   rating: 3.5,
   duration: 45,
   price: 1
@@ -130,6 +134,7 @@ muir_woods = Place.create(
   description: "Redwoods by the bay",
   lat: 37.895386,
   lng: -122.578141,
+  address: "1 Muir Woods Rd, Mill Valley, CA 94941",
   rating: 4.6,
   duration: 300,
   price: 1
@@ -166,6 +171,7 @@ sf_moma = Place.create(
   description: "SFMOMA description",
   lat: 37.785735,
   lng: -122.400992,
+  address: "151 3rd St, San Francisco, CA 94103",
   rating: 4.5,
   duration: 120,
   price: 1
@@ -197,6 +203,7 @@ battery_spencer = Place.create(
   description: "Battery Spencer description",
   lat: 37.827698,
   lng: -122.481799,
+  address: "Conzelman Rd, Sausalito, CA 94965",
   rating: 4.2,
   duration: 30,
   price: 0
@@ -228,6 +235,7 @@ china_town = Place.create(
   description: "China Town Description",
   lat: 37.793346,
   lng: -122.406139,
+  address: "662 Grant Ave, San Francisco, CA 94108",
   rating: 4.1,
   duration: 120,
   price: 1,
@@ -254,6 +262,7 @@ alamo_square = Place.create(
   description: "Painted ladies and old houses with great view on SF",
   lat: 37.776269,
   lng: -122.432967,
+  address: "Steiner St, San Francisco, CA 94117",
   rating: 4.2,
   duration: 45,
   price: 0
@@ -284,6 +293,7 @@ z_and_y_restaurant = Place.create(
   description: "Basic quarters for dining on Sichuan & Northern Chinese dishes packed with plenty of spice.",
   lat: 37.795927,
   lng: -122.406017,
+  address: "655 Jackson St, San Francisco, CA 94133",
   rating: 3.9,
   duration: 90,
   price: 2
@@ -305,6 +315,7 @@ castro_district = Place.create(
   description: "Castro District Description",
   lat: 37.762000,
   lng: -122.434875,
+  address: "429 Castro St, San Francisco, CA 94114",
   rating: 4.1,
   duration: 60,
   price: 0
@@ -331,6 +342,7 @@ lombard_street = Place.create(
   description: "Lombard Street - 'World's mot crooked street' - is famous for a steep, one-block section with eight hairpin turns and a flowery sidewalk.",
   lat: 37.802071,
   lng: -122.419083,
+  address: "Lombard St, San Francisco, CA 94133",
   rating: 4.5,
   duration: 30,
   price: 0
@@ -357,6 +369,7 @@ palace_of_fine_arts = Place.create(
   description: "The Palace of Fine Arts in the Marina District of San Francisco, California, is a monumental structure originally constructed for the 1915 Panama-Pacific Exposition in order to exhibit works of art presented there",
   lat: 37.801470,
   lng: -122.448154,
+  address: "3301 Lyon St, San Francisco, CA 94123",
   rating: 4.8,
   duration: 30,
   price: 0
@@ -387,6 +400,7 @@ transamerica_pyramid = Place.create(
   description: "The Transamerica Pyramid is the tallest skyscraper in the San Francisco skyline",
   lat: 37.795177,
   lng: -122.402693,
+  address: "600 Montgomery St, San Francisco, CA 94111",
   rating: 4.5,
   duration: 15,
   price: 0
@@ -412,6 +426,7 @@ sutro_tower = Place.create(
   description: "Sutro Tower is a 977 ft (298 m) three-pronged TV and radio antenna tower in San Francisco, CA. Rising from a hill between Twin Peaks and Mount Sutro near Clarendon Heights, it is a prominent feature of the city skyline and a landmark for city residents and visitors.",
   lat: 37.755183,
   lng: -122.452811,
+  address: "Sutro Tower, San Francisco, CA 94131",
   rating: 2.8,
   duration: 0,
   price: 0,
@@ -431,11 +446,13 @@ Photo.create(
   place_id: sutro_tower.id,
   image_url: "https://instagram.fsnc1-1.fna.fbcdn.net/t51.2885-15/e35/12093482_626976757445643_1739892906_n.jpg"
 )
+
 seventeen_sixty_restaurant = Place.create(
   name: "1760 Restaurant & Cocktail Bar",
   description: "Carefully sourced, ambitious New American cuisine & cocktails in a sleek space with a long bar.",
   lat: 37.793144,
   lng: -122.421024,
+  address: "1760 Polk St, San Francisco, CA 94109",
   rating: 4.4,
   duration: 90,
   price: 3
@@ -461,6 +478,7 @@ twin_peaks = Place.create(
   description: "The Twin Peaks are two prominent hills with an elevation of about 925 feet located near the geographic center of San Francisco, California.",
   lat: 37.752098,
   lng: -122.447303,
+  address: "501 Twin Peaks Blvd, San Francisco, CA 94114",
   rating: 4.8,
   duration: 45,
   price: 0,
@@ -486,6 +504,7 @@ lands_end = Place.create(
   description: "Lands End is a park in San Francisco within the Golden Gate National Recreation Area. It is a rocky and windswept shoreline at the mouth of the Golden Gate",
   lat: 37.786376,
   lng: -122.505750,
+  address: "680 Point Lobos Ave, San Francisco, CA 94121",
   rating: 4.8,
   duration: 180,
   price: 0,
@@ -511,6 +530,7 @@ sutro_baths = Place.create(
   description: "The Sutro Baths were (now ruins) a large, privately owned public saltwater swimming pool complex in the Lands End area of the Outer Richmond District in western San Francisco, California",
   lat: 37.780356,
   lng: -122.513671,
+  address: "680 Point Lobos Ave, San Francisco, CA 94121",
   rating: 4.7,
   duration: 60,
   price: 0,
@@ -536,6 +556,7 @@ civic_center = Place.create(
   description: "The Civic Center in San Francisco, California, is an area of a few blocks north of the intersection of Market Street and Van Ness Avenue that contains many of the city's largest government and cultural institutions.",
   lat: 37.779515,
   lng: -122.417643,
+  address: "1 Dr Carlton B Goodlett Pl, San Francisco, CA 94102",
   rating: 3.1,
   duration: 30,
   price: 0
@@ -561,6 +582,7 @@ golden_gate_bridge = Place.create(
   description: "The Golden Gate Bridge is a suspension bridge spanning the Golden Gate strait, the one-mile-wide, three-mile-long channel between San Francisco Bay and the Pacific Ocean.",
   lat: 37.819946,
   lng: -122.478234,
+  address: "Golden Gate Bridge, California",
   rating: 4.7,
   duration: 45,
   price: 0
@@ -586,6 +608,7 @@ chiang_kai_shek_memorial_hall = Place.create(
   description: "The National Chiang Kai-shek Memorial Hall is a Taiwanese national monument, landmark and tourist attraction erected in memory of Chiang Kai-shek, former President of the Republic of China.",
   lat: 25.035368,
   lng: 121.519588,
+  address: "No. 21, Zhongshan S Rd, Zhongzheng District, Taipei City, Taiwan 100",
   rating: 4.4,
   duration: 45,
   price: 0
@@ -616,6 +639,7 @@ long_shan_temple = Place.create(
   description: "Lungshan Temple of Manka is a temple in Wanhua District, Taipei, Taiwan. The temple was built in Taipei in 1738 by settlers from Fujian during Qing rule. It served as a place of worship and a gathering place for the Chinese settlers.",
   lat: 25.037007,
   lng: 121.499772,
+  address: "No. 211, Guangzhou St, Wanhua District, Taipei City, Taiwan 10853",
   rating: 4.3,
   duration: 60,
   price: 0
@@ -646,6 +670,7 @@ din_tai_fung = Place.create(
   description: "Popular global chain known for elevated dim sum & Asian dishes served in bustling quarters.",
   lat: 25.041061,
   lng: 121.543277,
+  address: "106, Taiwan, Taipei City, Da’an District, Section 3, Zhongxiao E Rd, 300號B2",
   rating: 4.6,
   duration: 60,
   price: 2

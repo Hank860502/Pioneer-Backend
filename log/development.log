@@ -3508,3 +3508,823 @@ Completed 200 OK in 104ms (ActiveRecord: 81.2ms)
   [1m[36mType Load (0.7ms)[0m  [1mSELECT "types".* FROM "types" INNER JOIN "places_types" ON "types"."id" = "places_types"."type_id" WHERE "places_types"."place_id" = $1[0m  [["place_id", 26]]
   [1m[35mPlace Load (0.5ms)[0m  SELECT  "places".* FROM "places"  ORDER BY "places"."id" DESC LIMIT 1
   [1m[36mPhoto Load (0.3ms)[0m  [1mSELECT "photos".* FROM "photos" WHERE "photos"."place_id" = $1[0m  [["place_id", 26]]
+  [1m[36m (5081.4ms)[0m  [1mDROP DATABASE IF EXISTS "api_development"[0m
+  [1m[35m (191.1ms)[0m  DROP DATABASE IF EXISTS "api_test"
+  [1m[36m (0.4ms)[0m  [1mCREATE DATABASE "api_development" ENCODING = 'unicode'[0m
+  [1m[35m (577.7ms)[0m  CREATE DATABASE "api_test" ENCODING = 'unicode'
+  [1m[36mSQL (0.3ms)[0m  [1mCREATE EXTENSION IF NOT EXISTS "plpgsql"[0m
+  [1m[35m (95.6ms)[0m  DROP TABLE "photos" CASCADE
+  [1m[36m (22.4ms)[0m  [1mCREATE TABLE "photos" ("id" serial primary key, "image_url" character varying, "place_id" integer, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL) [0m
+  [1m[35m (2.0ms)[0m  DROP TABLE "places" CASCADE
+  [1m[36m (3.7ms)[0m  [1mCREATE TABLE "places" ("id" serial primary key, "name" character varying, "description" character varying, "duration" integer, "price" integer, "lng" float, "lat" float, "rating" float, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL, "address" character varying) [0m
+  [1m[35m (2.3ms)[0m  DROP TABLE "places_types" CASCADE
+  [1m[36m (2.8ms)[0m  [1mCREATE TABLE "places_types" ("id" serial primary key, "place_id" integer, "type_id" integer, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL) [0m
+  [1m[35m (1.3ms)[0m  DROP TABLE "places_wishlists" CASCADE
+  [1m[36m (3.2ms)[0m  [1mCREATE TABLE "places_wishlists" ("id" serial primary key, "place_id" integer, "wishlist_id" integer, "liked" boolean, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL) [0m
+  [1m[35m (1.5ms)[0m  DROP TABLE "types" CASCADE
+  [1m[36m (3.6ms)[0m  [1mCREATE TABLE "types" ("id" serial primary key, "name" character varying, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL) [0m
+  [1m[35m (2.3ms)[0m  DROP TABLE "users" CASCADE
+  [1m[36m (3.6ms)[0m  [1mCREATE TABLE "users" ("id" serial primary key, "username" character varying, "password_digest" character varying, "email" character varying, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL) [0m
+  [1m[35m (1.8ms)[0m  DROP TABLE "wishlists" CASCADE
+  [1m[36m (44.0ms)[0m  [1mCREATE TABLE "wishlists" ("id" serial primary key, "user_id" integer, "description" character varying, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL) [0m
+  [1m[35m (14.8ms)[0m  SELECT version FROM "schema_migrations"
+  [1m[36mSQL (0.3ms)[0m  [1mCREATE EXTENSION IF NOT EXISTS "plpgsql"[0m
+  [1m[35m (145.0ms)[0m  CREATE TABLE "photos" ("id" serial primary key, "image_url" character varying, "place_id" integer, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL) 
+  [1m[36m (82.4ms)[0m  [1mCREATE TABLE "places" ("id" serial primary key, "name" character varying, "description" character varying, "duration" integer, "price" integer, "lng" float, "lat" float, "rating" float, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL, "address" character varying) [0m
+  [1m[35m (22.0ms)[0m  CREATE TABLE "places_types" ("id" serial primary key, "place_id" integer, "type_id" integer, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL) 
+  [1m[36m (3.4ms)[0m  [1mCREATE TABLE "places_wishlists" ("id" serial primary key, "place_id" integer, "wishlist_id" integer, "liked" boolean, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL) [0m
+  [1m[35m (41.5ms)[0m  CREATE TABLE "types" ("id" serial primary key, "name" character varying, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL) 
+  [1m[36m (3.9ms)[0m  [1mCREATE TABLE "users" ("id" serial primary key, "username" character varying, "password_digest" character varying, "email" character varying, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL) [0m
+  [1m[35m (5.1ms)[0m  CREATE TABLE "wishlists" ("id" serial primary key, "user_id" integer, "description" character varying, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL) 
+  [1m[36m (2.3ms)[0m  [1mCREATE TABLE "schema_migrations" ("version" character varying NOT NULL) [0m
+  [1m[35m (2.0ms)[0m  CREATE UNIQUE INDEX  "unique_schema_migrations" ON "schema_migrations"  ("version")
+  [1m[36m (0.7ms)[0m  [1mSELECT version FROM "schema_migrations"[0m
+  [1m[35m (1.0ms)[0m  INSERT INTO "schema_migrations" (version) VALUES ('20160629172305')
+  [1m[36m (0.7ms)[0m  [1mINSERT INTO "schema_migrations" (version) VALUES ('20160624001700')[0m
+  [1m[35m (0.7ms)[0m  INSERT INTO "schema_migrations" (version) VALUES ('20160624002043')
+  [1m[36m (0.5ms)[0m  [1mINSERT INTO "schema_migrations" (version) VALUES ('20160624002259')[0m
+  [1m[35m (0.5ms)[0m  INSERT INTO "schema_migrations" (version) VALUES ('20160624002833')
+  [1m[36m (0.4ms)[0m  [1mINSERT INTO "schema_migrations" (version) VALUES ('20160627172302')[0m
+  [1m[35m (0.4ms)[0m  INSERT INTO "schema_migrations" (version) VALUES ('20160627172435')
+  [1m[36m (0.4ms)[0m  [1mINSERT INTO "schema_migrations" (version) VALUES ('20160627172845')[0m
+  [1m[35m (0.4ms)[0m  INSERT INTO "schema_migrations" (version) VALUES ('20160628175928')
+  [1m[36mActiveRecord::SchemaMigration Load (0.4ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[35m (0.2ms)[0m  BEGIN
+  [1m[36mSQL (0.7ms)[0m  [1mINSERT INTO "types" ("name", "created_at", "updated_at") VALUES ($1, $2, $3) RETURNING "id"[0m  [["name", "aquarium"], ["created_at", "2016-06-29 21:50:09.569324"], ["updated_at", "2016-06-29 21:50:09.569324"]]
+  [1m[35m (14.7ms)[0m  COMMIT
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.3ms)[0m  INSERT INTO "types" ("name", "created_at", "updated_at") VALUES ($1, $2, $3) RETURNING "id"  [["name", "bar"], ["created_at", "2016-06-29 21:50:09.641077"], ["updated_at", "2016-06-29 21:50:09.641077"]]
+  [1m[36m (0.4ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "types" ("name", "created_at", "updated_at") VALUES ($1, $2, $3) RETURNING "id"[0m  [["name", "casino"], ["created_at", "2016-06-29 21:50:09.643797"], ["updated_at", "2016-06-29 21:50:09.643797"]]
+  [1m[35m (0.4ms)[0m  COMMIT
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "types" ("name", "created_at", "updated_at") VALUES ($1, $2, $3) RETURNING "id"  [["name", "museum"], ["created_at", "2016-06-29 21:50:09.646286"], ["updated_at", "2016-06-29 21:50:09.646286"]]
+  [1m[36m (0.4ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "types" ("name", "created_at", "updated_at") VALUES ($1, $2, $3) RETURNING "id"[0m  [["name", "night_club"], ["created_at", "2016-06-29 21:50:09.648719"], ["updated_at", "2016-06-29 21:50:09.648719"]]
+  [1m[35m (0.4ms)[0m  COMMIT
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "types" ("name", "created_at", "updated_at") VALUES ($1, $2, $3) RETURNING "id"  [["name", "park"], ["created_at", "2016-06-29 21:50:09.651150"], ["updated_at", "2016-06-29 21:50:09.651150"]]
+  [1m[36m (0.4ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "types" ("name", "created_at", "updated_at") VALUES ($1, $2, $3) RETURNING "id"[0m  [["name", "restaurant"], ["created_at", "2016-06-29 21:50:09.653536"], ["updated_at", "2016-06-29 21:50:09.653536"]]
+  [1m[35m (0.4ms)[0m  COMMIT
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "types" ("name", "created_at", "updated_at") VALUES ($1, $2, $3) RETURNING "id"  [["name", "zoo"], ["created_at", "2016-06-29 21:50:09.655849"], ["updated_at", "2016-06-29 21:50:09.655849"]]
+  [1m[36m (0.4ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "types" ("name", "created_at", "updated_at") VALUES ($1, $2, $3) RETURNING "id"[0m  [["name", "place_of_interest"], ["created_at", "2016-06-29 21:50:09.658132"], ["updated_at", "2016-06-29 21:50:09.658132"]]
+  [1m[35m (0.4ms)[0m  COMMIT
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "types" ("name", "created_at", "updated_at") VALUES ($1, $2, $3) RETURNING "id"  [["name", "tourist_destination"], ["created_at", "2016-06-29 21:50:09.660504"], ["updated_at", "2016-06-29 21:50:09.660504"]]
+  [1m[36m (0.4ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.5ms)[0m  [1mINSERT INTO "places" ("name", "description", "lat", "lng", "address", "rating", "duration", "price", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10) RETURNING "id"[0m  [["name", "Alcatraz Island"], ["description", "Notorious prison & once home to Al Capone, now a museum with audio tour, accessible by ferry."], ["lat", 37.826986], ["lng", -122.422972], ["address", "San Francisco, CA 94133"], ["rating", 4.9], ["duration", 300], ["price", 2], ["created_at", "2016-06-29 21:50:09.702274"], ["updated_at", "2016-06-29 21:50:09.702274"]]
+  [1m[35m (0.4ms)[0m  COMMIT
+  [1m[36m (0.2ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.5ms)[0m  INSERT INTO "places_types" ("place_id", "type_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"  [["place_id", 1], ["type_id", 4], ["created_at", "2016-06-29 21:50:09.712291"], ["updated_at", "2016-06-29 21:50:09.712291"]]
+  [1m[36m (15.6ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  BEGIN
+  [1m[36mSQL (0.3ms)[0m  [1mINSERT INTO "places_types" ("place_id", "type_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["place_id", 1], ["type_id", 9], ["created_at", "2016-06-29 21:50:09.731148"], ["updated_at", "2016-06-29 21:50:09.731148"]]
+  [1m[35m (0.5ms)[0m  COMMIT
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "places_types" ("place_id", "type_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"  [["place_id", 1], ["type_id", 10], ["created_at", "2016-06-29 21:50:09.734249"], ["updated_at", "2016-06-29 21:50:09.734249"]]
+  [1m[36m (0.5ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.4ms)[0m  [1mINSERT INTO "photos" ("place_id", "image_url", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["place_id", 1], ["image_url", "https://instagram.fsnc1-1.fna.fbcdn.net/t51.2885-15/e35/11311457_1435769073419954_921661701_n.jpg"], ["created_at", "2016-06-29 21:50:09.743736"], ["updated_at", "2016-06-29 21:50:09.743736"]]
+  [1m[35m (15.7ms)[0m  COMMIT
+  [1m[36m (0.2ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.3ms)[0m  INSERT INTO "photos" ("place_id", "image_url", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"  [["place_id", 1], ["image_url", "https://scontent-ord1-1.cdninstagram.com/t51.2885-15/sh0.08/e35/p750x750/13551542_296265964050045_968262688_n.jpg"], ["created_at", "2016-06-29 21:50:09.762274"], ["updated_at", "2016-06-29 21:50:09.762274"]]
+  [1m[36m (0.5ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  BEGIN
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "photos" ("place_id", "image_url", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["place_id", 1], ["image_url", "https://scontent-ord1-1.cdninstagram.com/t51.2885-15/e35/13534155_1753543778263870_2122610248_n.jpg"], ["created_at", "2016-06-29 21:50:09.765340"], ["updated_at", "2016-06-29 21:50:09.765340"]]
+  [1m[35m (0.5ms)[0m  COMMIT
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "photos" ("place_id", "image_url", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"  [["place_id", 1], ["image_url", "https://scontent-ord1-1.cdninstagram.com/t51.2885-15/s750x750/sh0.08/e35/13525390_1625581291103383_1438385699_n.jpg"], ["created_at", "2016-06-29 21:50:09.767835"], ["updated_at", "2016-06-29 21:50:09.767835"]]
+  [1m[36m (0.4ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.3ms)[0m  [1mINSERT INTO "places" ("name", "description", "lat", "lng", "address", "rating", "duration", "price", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10) RETURNING "id"[0m  [["name", "Comstock Saloon"], ["description", "Fancy, turn-of-the-century digs house vintage cocktails, upscale bar fare, cozy booths & live jazz."], ["lat", 37.796795], ["lng", -122.405626], ["address", "155 Columbus Ave, San Francisco, CA 94133"], ["rating", 4.4], ["duration", 180], ["price", 2], ["created_at", "2016-06-29 21:50:09.770541"], ["updated_at", "2016-06-29 21:50:09.770541"]]
+  [1m[35m (1.1ms)[0m  COMMIT
+  [1m[36m (0.2ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "places_types" ("place_id", "type_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"  [["place_id", 2], ["type_id", 2], ["created_at", "2016-06-29 21:50:09.774140"], ["updated_at", "2016-06-29 21:50:09.774140"]]
+  [1m[36m (0.4ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "places_types" ("place_id", "type_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["place_id", 2], ["type_id", 10], ["created_at", "2016-06-29 21:50:09.776349"], ["updated_at", "2016-06-29 21:50:09.776349"]]
+  [1m[35m (0.4ms)[0m  COMMIT
+  [1m[36m (0.2ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "photos" ("place_id", "image_url", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"  [["place_id", 2], ["image_url", "https://s3-media3.fl.yelpcdn.com/bphoto/Rmo7lQ0HG2B2FZmwD7iLoQ/o.jpg"], ["created_at", "2016-06-29 21:50:09.778510"], ["updated_at", "2016-06-29 21:50:09.778510"]]
+  [1m[36m (0.4ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "photos" ("place_id", "image_url", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["place_id", 2], ["image_url", "http://s3-media2.fl.yelpcdn.com/bphoto/Dx7drUCpbeNHvGnaHKY0yg/o.jpg"], ["created_at", "2016-06-29 21:50:09.780388"], ["updated_at", "2016-06-29 21:50:09.780388"]]
+  [1m[35m (0.3ms)[0m  COMMIT
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "places" ("name", "description", "lat", "lng", "address", "rating", "duration", "price", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10) RETURNING "id"  [["name", "Aquarium of the Bay"], ["description", "Aquarium by the bay description"], ["lat", 37.808678], ["lng", -122.4092], ["address", "2 Beach St, San Francisco, CA 94133"], ["rating", 3.7], ["duration", 120], ["price", 2], ["created_at", "2016-06-29 21:50:09.782515"], ["updated_at", "2016-06-29 21:50:09.782515"]]
+  [1m[36m (0.4ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "places_types" ("place_id", "type_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["place_id", 3], ["type_id", 1], ["created_at", "2016-06-29 21:50:09.784839"], ["updated_at", "2016-06-29 21:50:09.784839"]]
+  [1m[35m (0.4ms)[0m  COMMIT
+  [1m[36m (0.2ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.1ms)[0m  INSERT INTO "places_types" ("place_id", "type_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"  [["place_id", 3], ["type_id", 9], ["created_at", "2016-06-29 21:50:09.786896"], ["updated_at", "2016-06-29 21:50:09.786896"]]
+  [1m[36m (0.4ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.1ms)[0m  [1mINSERT INTO "places_types" ("place_id", "type_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["place_id", 3], ["type_id", 10], ["created_at", "2016-06-29 21:50:09.788597"], ["updated_at", "2016-06-29 21:50:09.788597"]]
+  [1m[35m (0.4ms)[0m  COMMIT
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.1ms)[0m  INSERT INTO "photos" ("place_id", "image_url", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"  [["place_id", 3], ["image_url", "https://instagram.fsnc1-1.fna.fbcdn.net/t51.2885-15/e35/11820625_156774028000203_656280027_n.jpg"], ["created_at", "2016-06-29 21:50:09.790413"], ["updated_at", "2016-06-29 21:50:09.790413"]]
+  [1m[36m (0.4ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.1ms)[0m  [1mINSERT INTO "photos" ("place_id", "image_url", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["place_id", 3], ["image_url", "http://s3-media3.fl.yelpcdn.com/bphoto/bunFeKv23vlZi4dzh1TKeA/o.jpg"], ["created_at", "2016-06-29 21:50:09.792179"], ["updated_at", "2016-06-29 21:50:09.792179"]]
+  [1m[35m (0.4ms)[0m  COMMIT
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "places" ("name", "description", "lat", "lng", "address", "rating", "duration", "price", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10) RETURNING "id"  [["name", "Cable Car"], ["description", "Old cable cars, long waiting lines"], ["lat", 37.784814], ["lng", -122.40774], ["address", "870 Market St, San Francisco, CA 94102"], ["rating", 3.5], ["duration", 45], ["price", 1], ["created_at", "2016-06-29 21:50:09.794284"], ["updated_at", "2016-06-29 21:50:09.794284"]]
+  [1m[36m (0.4ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "places_types" ("place_id", "type_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["place_id", 4], ["type_id", 4], ["created_at", "2016-06-29 21:50:09.796587"], ["updated_at", "2016-06-29 21:50:09.796587"]]
+  [1m[35m (0.4ms)[0m  COMMIT
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "places_types" ("place_id", "type_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"  [["place_id", 4], ["type_id", 10], ["created_at", "2016-06-29 21:50:09.798364"], ["updated_at", "2016-06-29 21:50:09.798364"]]
+  [1m[36m (0.4ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "photos" ("place_id", "image_url", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["place_id", 4], ["image_url", "https://instagram.fsnc1-1.fna.fbcdn.net/t51.2885-15/e35/12135272_895455643886085_1883463243_n.jpg"], ["created_at", "2016-06-29 21:50:09.800067"], ["updated_at", "2016-06-29 21:50:09.800067"]]
+  [1m[35m (0.4ms)[0m  COMMIT
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.1ms)[0m  INSERT INTO "photos" ("place_id", "image_url", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"  [["place_id", 4], ["image_url", "https://scontent-ord1-1.cdninstagram.com/t51.2885-15/e35/13355494_974735939301994_446993832_n.jpg"], ["created_at", "2016-06-29 21:50:09.801845"], ["updated_at", "2016-06-29 21:50:09.801845"]]
+  [1m[36m (0.4ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "places" ("name", "description", "lat", "lng", "address", "rating", "duration", "price", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10) RETURNING "id"[0m  [["name", "Muir Woods National Monument"], ["description", "Redwoods by the bay"], ["lat", 37.895386], ["lng", -122.578141], ["address", "1 Muir Woods Rd, Mill Valley, CA 94941"], ["rating", 4.6], ["duration", 300], ["price", 1], ["created_at", "2016-06-29 21:50:09.803812"], ["updated_at", "2016-06-29 21:50:09.803812"]]
+  [1m[35m (0.4ms)[0m  COMMIT
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "places_types" ("place_id", "type_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"  [["place_id", 5], ["type_id", 6], ["created_at", "2016-06-29 21:50:09.805963"], ["updated_at", "2016-06-29 21:50:09.805963"]]
+  [1m[36m (0.4ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "places_types" ("place_id", "type_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["place_id", 5], ["type_id", 9], ["created_at", "2016-06-29 21:50:09.807722"], ["updated_at", "2016-06-29 21:50:09.807722"]]
+  [1m[35m (0.4ms)[0m  COMMIT
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "places_types" ("place_id", "type_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"  [["place_id", 3], ["type_id", 10], ["created_at", "2016-06-29 21:50:09.809342"], ["updated_at", "2016-06-29 21:50:09.809342"]]
+  [1m[36m (0.4ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.1ms)[0m  [1mINSERT INTO "photos" ("place_id", "image_url", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["place_id", 5], ["image_url", "https://instagram.fsnc1-1.fna.fbcdn.net/t51.2885-15/e35/13092278_1156458994386146_1264682601_n.jpg"], ["created_at", "2016-06-29 21:50:09.811063"], ["updated_at", "2016-06-29 21:50:09.811063"]]
+  [1m[35m (0.4ms)[0m  COMMIT
+  [1m[36m (0.2ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.3ms)[0m  INSERT INTO "photos" ("place_id", "image_url", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"  [["place_id", 5], ["image_url", "https://scontent-ord1-1.cdninstagram.com/t51.2885-15/e35/13534628_271839613176555_233902339_n.jpg"], ["created_at", "2016-06-29 21:50:09.813222"], ["updated_at", "2016-06-29 21:50:09.813222"]]
+  [1m[36m (0.5ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "places" ("name", "description", "lat", "lng", "address", "rating", "duration", "price", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10) RETURNING "id"[0m  [["name", "SFMOMA San Francisco Museum of Modern Art"], ["description", "SFMOMA description"], ["lat", 37.785735], ["lng", -122.400992], ["address", "151 3rd St, San Francisco, CA 94103"], ["rating", 4.5], ["duration", 120], ["price", 1], ["created_at", "2016-06-29 21:50:09.816129"], ["updated_at", "2016-06-29 21:50:09.816129"]]
+  [1m[35m (0.4ms)[0m  COMMIT
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "places_types" ("place_id", "type_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"  [["place_id", 6], ["type_id", 4], ["created_at", "2016-06-29 21:50:09.818409"], ["updated_at", "2016-06-29 21:50:09.818409"]]
+  [1m[36m (0.4ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.1ms)[0m  [1mINSERT INTO "places_types" ("place_id", "type_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["place_id", 6], ["type_id", 9], ["created_at", "2016-06-29 21:50:09.820220"], ["updated_at", "2016-06-29 21:50:09.820220"]]
+  [1m[35m (0.4ms)[0m  COMMIT
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.1ms)[0m  INSERT INTO "places_types" ("place_id", "type_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"  [["place_id", 6], ["type_id", 10], ["created_at", "2016-06-29 21:50:09.821846"], ["updated_at", "2016-06-29 21:50:09.821846"]]
+  [1m[36m (0.4ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.1ms)[0m  [1mINSERT INTO "photos" ("place_id", "image_url", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["place_id", 6], ["image_url", "https://instagram.fsnc1-1.fna.fbcdn.net/t51.2885-15/e35/13109081_1723896514559583_614709634_n.jpg"], ["created_at", "2016-06-29 21:50:09.823629"], ["updated_at", "2016-06-29 21:50:09.823629"]]
+  [1m[35m (0.4ms)[0m  COMMIT
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.1ms)[0m  INSERT INTO "photos" ("place_id", "image_url", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"  [["place_id", 6], ["image_url", "https://scontent-ord1-1.cdninstagram.com/t51.2885-15/e35/13392826_1554636864831431_1766105952_n.jpg"], ["created_at", "2016-06-29 21:50:09.825486"], ["updated_at", "2016-06-29 21:50:09.825486"]]
+  [1m[36m (0.4ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "places" ("name", "description", "lat", "lng", "address", "rating", "duration", "price", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10) RETURNING "id"[0m  [["name", "Battery Spencer"], ["description", "Battery Spencer description"], ["lat", 37.827698], ["lng", -122.481799], ["address", "Conzelman Rd, Sausalito, CA 94965"], ["rating", 4.2], ["duration", 30], ["price", 0], ["created_at", "2016-06-29 21:50:09.827574"], ["updated_at", "2016-06-29 21:50:09.827574"]]
+  [1m[35m (0.4ms)[0m  COMMIT
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "places_types" ("place_id", "type_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"  [["place_id", 7], ["type_id", 6], ["created_at", "2016-06-29 21:50:09.829737"], ["updated_at", "2016-06-29 21:50:09.829737"]]
+  [1m[36m (0.4ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "places_types" ("place_id", "type_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["place_id", 7], ["type_id", 9], ["created_at", "2016-06-29 21:50:09.831437"], ["updated_at", "2016-06-29 21:50:09.831437"]]
+  [1m[35m (0.3ms)[0m  COMMIT
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.1ms)[0m  INSERT INTO "places_types" ("place_id", "type_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"  [["place_id", 7], ["type_id", 10], ["created_at", "2016-06-29 21:50:09.833019"], ["updated_at", "2016-06-29 21:50:09.833019"]]
+  [1m[36m (0.4ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.1ms)[0m  [1mINSERT INTO "photos" ("place_id", "image_url", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["place_id", 7], ["image_url", "https://instagram.fsnc1-1.fna.fbcdn.net/t51.2885-15/sh0.08/e35/p750x750/12724618_1571822593147746_505749575_n.jpg"], ["created_at", "2016-06-29 21:50:09.834785"], ["updated_at", "2016-06-29 21:50:09.834785"]]
+  [1m[35m (0.4ms)[0m  COMMIT
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "places" ("name", "description", "lat", "lng", "address", "rating", "duration", "price", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10) RETURNING "id"  [["name", "China Town"], ["description", "China Town Description"], ["lat", 37.793346], ["lng", -122.406139], ["address", "662 Grant Ave, San Francisco, CA 94108"], ["rating", 4.1], ["duration", 120], ["price", 1], ["created_at", "2016-06-29 21:50:09.836799"], ["updated_at", "2016-06-29 21:50:09.836799"]]
+  [1m[36m (0.4ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "places_types" ("place_id", "type_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["place_id", 8], ["type_id", 9], ["created_at", "2016-06-29 21:50:09.838915"], ["updated_at", "2016-06-29 21:50:09.838915"]]
+  [1m[35m (0.4ms)[0m  COMMIT
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "places_types" ("place_id", "type_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"  [["place_id", 8], ["type_id", 10], ["created_at", "2016-06-29 21:50:09.840644"], ["updated_at", "2016-06-29 21:50:09.840644"]]
+  [1m[36m (0.4ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "photos" ("place_id", "image_url", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["place_id", 8], ["image_url", "https://instagram.fsnc1-1.fna.fbcdn.net/t51.2885-15/e35/1516888_166301770399020_702906097_n.jpg"], ["created_at", "2016-06-29 21:50:09.842377"], ["updated_at", "2016-06-29 21:50:09.842377"]]
+  [1m[35m (0.3ms)[0m  COMMIT
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "photos" ("place_id", "image_url", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"  [["place_id", 8], ["image_url", "https://scontent-ord1-1.cdninstagram.com/t51.2885-15/e35/13473183_1751496511741754_1717884244_n.jpg"], ["created_at", "2016-06-29 21:50:09.844177"], ["updated_at", "2016-06-29 21:50:09.844177"]]
+  [1m[36m (0.4ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.1ms)[0m  [1mINSERT INTO "photos" ("place_id", "image_url", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["place_id", 8], ["image_url", "https://scontent-ord1-1.cdninstagram.com/t51.2885-15/e35/13285416_557374784445950_1257112129_n.jpg"], ["created_at", "2016-06-29 21:50:09.845997"], ["updated_at", "2016-06-29 21:50:09.845997"]]
+  [1m[35m (0.3ms)[0m  COMMIT
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "places" ("name", "description", "lat", "lng", "address", "rating", "duration", "price", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10) RETURNING "id"  [["name", "Alamo Square"], ["description", "Painted ladies and old houses with great view on SF"], ["lat", 37.776269], ["lng", -122.432967], ["address", "Steiner St, San Francisco, CA 94117"], ["rating", 4.2], ["duration", 45], ["price", 0], ["created_at", "2016-06-29 21:50:09.848018"], ["updated_at", "2016-06-29 21:50:09.848018"]]
+  [1m[36m (0.4ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "places_types" ("place_id", "type_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["place_id", 9], ["type_id", 6], ["created_at", "2016-06-29 21:50:09.850264"], ["updated_at", "2016-06-29 21:50:09.850264"]]
+  [1m[35m (0.4ms)[0m  COMMIT
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "places_types" ("place_id", "type_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"  [["place_id", 9], ["type_id", 9], ["created_at", "2016-06-29 21:50:09.852015"], ["updated_at", "2016-06-29 21:50:09.852015"]]
+  [1m[36m (0.4ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.1ms)[0m  [1mINSERT INTO "places_types" ("place_id", "type_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["place_id", 9], ["type_id", 10], ["created_at", "2016-06-29 21:50:09.853655"], ["updated_at", "2016-06-29 21:50:09.853655"]]
+  [1m[35m (0.4ms)[0m  COMMIT
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.1ms)[0m  INSERT INTO "photos" ("place_id", "image_url", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"  [["place_id", 9], ["image_url", "https://instagram.fsnc1-1.fna.fbcdn.net/t51.2885-15/e35/12751408_259692627695424_311922490_n.jpg"], ["created_at", "2016-06-29 21:50:09.855376"], ["updated_at", "2016-06-29 21:50:09.855376"]]
+  [1m[36m (0.4ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "places" ("name", "description", "lat", "lng", "address", "rating", "duration", "price", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10) RETURNING "id"[0m  [["name", "Z + Y Restaurant"], ["description", "Basic quarters for dining on Sichuan & Northern Chinese dishes packed with plenty of spice."], ["lat", 37.795927], ["lng", -122.406017], ["address", "655 Jackson St, San Francisco, CA 94133"], ["rating", 3.9], ["duration", 90], ["price", 2], ["created_at", "2016-06-29 21:50:09.857490"], ["updated_at", "2016-06-29 21:50:09.857490"]]
+  [1m[35m (0.4ms)[0m  COMMIT
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "places_types" ("place_id", "type_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"  [["place_id", 10], ["type_id", 7], ["created_at", "2016-06-29 21:50:09.859627"], ["updated_at", "2016-06-29 21:50:09.859627"]]
+  [1m[36m (0.4ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "photos" ("place_id", "image_url", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["place_id", 10], ["image_url", "https://scontent-ord1-1.cdninstagram.com/t51.2885-15/e35/12822315_1572804843038082_501174903_n.jpg"], ["created_at", "2016-06-29 21:50:09.861515"], ["updated_at", "2016-06-29 21:50:09.861515"]]
+  [1m[35m (0.4ms)[0m  COMMIT
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "places" ("name", "description", "lat", "lng", "address", "rating", "duration", "price", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10) RETURNING "id"  [["name", "Castro District"], ["description", "Castro District Description"], ["lat", 37.762], ["lng", -122.434875], ["address", "429 Castro St, San Francisco, CA 94114"], ["rating", 4.1], ["duration", 60], ["price", 0], ["created_at", "2016-06-29 21:50:09.863519"], ["updated_at", "2016-06-29 21:50:09.863519"]]
+  [1m[36m (0.5ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "places_types" ("place_id", "type_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["place_id", 11], ["type_id", 9], ["created_at", "2016-06-29 21:50:09.865731"], ["updated_at", "2016-06-29 21:50:09.865731"]]
+  [1m[35m (0.4ms)[0m  COMMIT
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "places_types" ("place_id", "type_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"  [["place_id", 11], ["type_id", 10], ["created_at", "2016-06-29 21:50:09.867528"], ["updated_at", "2016-06-29 21:50:09.867528"]]
+  [1m[36m (0.4ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.1ms)[0m  [1mINSERT INTO "photos" ("place_id", "image_url", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["place_id", 11], ["image_url", "https://instagram.fsnc1-1.fna.fbcdn.net/t51.2885-15/e35/13397451_285829265095213_2012320115_n.jpg"], ["created_at", "2016-06-29 21:50:09.869261"], ["updated_at", "2016-06-29 21:50:09.869261"]]
+  [1m[35m (0.4ms)[0m  COMMIT
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "places" ("name", "description", "lat", "lng", "address", "rating", "duration", "price", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10) RETURNING "id"  [["name", "Lombard Street"], ["description", "Lombard Street - 'World's mot crooked street' - is famous for a steep, one-block section with eight hairpin turns and a flowery sidewalk."], ["lat", 37.802071], ["lng", -122.419083], ["address", "Lombard St, San Francisco, CA 94133"], ["rating", 4.5], ["duration", 30], ["price", 0], ["created_at", "2016-06-29 21:50:09.871411"], ["updated_at", "2016-06-29 21:50:09.871411"]]
+  [1m[36m (0.4ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "places_types" ("place_id", "type_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["place_id", 12], ["type_id", 9], ["created_at", "2016-06-29 21:50:09.873574"], ["updated_at", "2016-06-29 21:50:09.873574"]]
+  [1m[35m (0.3ms)[0m  COMMIT
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "places_types" ("place_id", "type_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"  [["place_id", 12], ["type_id", 10], ["created_at", "2016-06-29 21:50:09.875197"], ["updated_at", "2016-06-29 21:50:09.875197"]]
+  [1m[36m (0.4ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "photos" ("place_id", "image_url", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["place_id", 12], ["image_url", "https://instagram.fsnc1-1.fna.fbcdn.net/t51.2885-15/e35/12912355_267495800257880_1905434648_n.jpg"], ["created_at", "2016-06-29 21:50:09.876992"], ["updated_at", "2016-06-29 21:50:09.876992"]]
+  [1m[35m (0.7ms)[0m  COMMIT
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "places" ("name", "description", "lat", "lng", "address", "rating", "duration", "price", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10) RETURNING "id"  [["name", "Palace of Fine Arts"], ["description", "The Palace of Fine Arts in the Marina District of San Francisco, California, is a monumental structure originally constructed for the 1915 Panama-Pacific Exposition in order to exhibit works of art presented there"], ["lat", 37.80147], ["lng", -122.448154], ["address", "3301 Lyon St, San Francisco, CA 94123"], ["rating", 4.8], ["duration", 30], ["price", 0], ["created_at", "2016-06-29 21:50:09.879688"], ["updated_at", "2016-06-29 21:50:09.879688"]]
+  [1m[36m (0.5ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "places_types" ("place_id", "type_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["place_id", 13], ["type_id", 6], ["created_at", "2016-06-29 21:50:09.882092"], ["updated_at", "2016-06-29 21:50:09.882092"]]
+  [1m[35m (0.4ms)[0m  COMMIT
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "places_types" ("place_id", "type_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"  [["place_id", 13], ["type_id", 9], ["created_at", "2016-06-29 21:50:09.883844"], ["updated_at", "2016-06-29 21:50:09.883844"]]
+  [1m[36m (0.4ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "places_types" ("place_id", "type_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["place_id", 13], ["type_id", 10], ["created_at", "2016-06-29 21:50:09.885497"], ["updated_at", "2016-06-29 21:50:09.885497"]]
+  [1m[35m (0.4ms)[0m  COMMIT
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.1ms)[0m  INSERT INTO "photos" ("place_id", "image_url", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"  [["place_id", 13], ["image_url", "https://instagram.fsnc1-1.fna.fbcdn.net/t51.2885-15/e35/11347790_1166531286695489_2021504333_n.jpg"], ["created_at", "2016-06-29 21:50:09.887206"], ["updated_at", "2016-06-29 21:50:09.887206"]]
+  [1m[36m (0.4ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "places" ("name", "description", "lat", "lng", "address", "rating", "duration", "price", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10) RETURNING "id"[0m  [["name", "Trans-america Pyramid"], ["description", "The Transamerica Pyramid is the tallest skyscraper in the San Francisco skyline"], ["lat", 37.795177], ["lng", -122.402693], ["address", "600 Montgomery St, San Francisco, CA 94111"], ["rating", 4.5], ["duration", 15], ["price", 0], ["created_at", "2016-06-29 21:50:09.889197"], ["updated_at", "2016-06-29 21:50:09.889197"]]
+  [1m[35m (0.4ms)[0m  COMMIT
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.1ms)[0m  INSERT INTO "places_types" ("place_id", "type_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"  [["place_id", 14], ["type_id", 9], ["created_at", "2016-06-29 21:50:09.891302"], ["updated_at", "2016-06-29 21:50:09.891302"]]
+  [1m[36m (0.4ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.1ms)[0m  [1mINSERT INTO "places_types" ("place_id", "type_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["place_id", 14], ["type_id", 10], ["created_at", "2016-06-29 21:50:09.893014"], ["updated_at", "2016-06-29 21:50:09.893014"]]
+  [1m[35m (0.3ms)[0m  COMMIT
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.1ms)[0m  INSERT INTO "photos" ("place_id", "image_url", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"  [["place_id", 14], ["image_url", "https://instagram.fsnc1-1.fna.fbcdn.net/t51.2885-15/sh0.08/e35/p750x750/12825796_528342577326118_1262316311_n.jpg"], ["created_at", "2016-06-29 21:50:09.894646"], ["updated_at", "2016-06-29 21:50:09.894646"]]
+  [1m[36m (0.4ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "places" ("name", "description", "lat", "lng", "address", "rating", "duration", "price", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10) RETURNING "id"[0m  [["name", "Sutro Tower"], ["description", "Sutro Tower is a 977 ft (298 m) three-pronged TV and radio antenna tower in San Francisco, CA. Rising from a hill between Twin Peaks and Mount Sutro near Clarendon Heights, it is a prominent feature of the city skyline and a landmark for city residents and visitors."], ["lat", 37.755183], ["lng", -122.452811], ["address", "Sutro Tower, San Francisco, CA 94131"], ["rating", 2.8], ["duration", 0], ["price", 0], ["created_at", "2016-06-29 21:50:09.896694"], ["updated_at", "2016-06-29 21:50:09.896694"]]
+  [1m[35m (0.4ms)[0m  COMMIT
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "places_types" ("place_id", "type_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"  [["place_id", 15], ["type_id", 9], ["created_at", "2016-06-29 21:50:09.898853"], ["updated_at", "2016-06-29 21:50:09.898853"]]
+  [1m[36m (0.4ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "places_types" ("place_id", "type_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["place_id", 15], ["type_id", 10], ["created_at", "2016-06-29 21:50:09.900556"], ["updated_at", "2016-06-29 21:50:09.900556"]]
+  [1m[35m (0.4ms)[0m  COMMIT
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.1ms)[0m  INSERT INTO "photos" ("place_id", "image_url", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"  [["place_id", 15], ["image_url", "https://instagram.fsnc1-1.fna.fbcdn.net/t51.2885-15/e35/12093482_626976757445643_1739892906_n.jpg"], ["created_at", "2016-06-29 21:50:09.902377"], ["updated_at", "2016-06-29 21:50:09.902377"]]
+  [1m[36m (0.5ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "places" ("name", "description", "lat", "lng", "address", "rating", "duration", "price", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10) RETURNING "id"[0m  [["name", "1760 Restaurant & Cocktail Bar"], ["description", "Carefully sourced, ambitious New American cuisine & cocktails in a sleek space with a long bar."], ["lat", 37.793144], ["lng", -122.421024], ["address", "1760 Polk St, San Francisco, CA 94109"], ["rating", 4.4], ["duration", 90], ["price", 3], ["created_at", "2016-06-29 21:50:09.904594"], ["updated_at", "2016-06-29 21:50:09.904594"]]
+  [1m[35m (0.4ms)[0m  COMMIT
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.1ms)[0m  INSERT INTO "places_types" ("place_id", "type_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"  [["place_id", 16], ["type_id", 7], ["created_at", "2016-06-29 21:50:09.906812"], ["updated_at", "2016-06-29 21:50:09.906812"]]
+  [1m[36m (0.4ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.1ms)[0m  [1mINSERT INTO "places_types" ("place_id", "type_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["place_id", 16], ["type_id", 2], ["created_at", "2016-06-29 21:50:09.908587"], ["updated_at", "2016-06-29 21:50:09.908587"]]
+  [1m[35m (0.8ms)[0m  COMMIT
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "photos" ("place_id", "image_url", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"  [["place_id", 16], ["image_url", "https://s3-media2.fl.yelpcdn.com/bphoto/-HTjDquqxj7EmQobBK3fTA/o.jpg"], ["created_at", "2016-06-29 21:50:09.911043"], ["updated_at", "2016-06-29 21:50:09.911043"]]
+  [1m[36m (0.4ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "places" ("name", "description", "lat", "lng", "address", "rating", "duration", "price", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10) RETURNING "id"[0m  [["name", "Twin Peaks"], ["description", "The Twin Peaks are two prominent hills with an elevation of about 925 feet located near the geographic center of San Francisco, California."], ["lat", 37.752098], ["lng", -122.447303], ["address", "501 Twin Peaks Blvd, San Francisco, CA 94114"], ["rating", 4.8], ["duration", 45], ["price", 0], ["created_at", "2016-06-29 21:50:09.913397"], ["updated_at", "2016-06-29 21:50:09.913397"]]
+  [1m[35m (0.4ms)[0m  COMMIT
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "places_types" ("place_id", "type_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"  [["place_id", 17], ["type_id", 9], ["created_at", "2016-06-29 21:50:09.915681"], ["updated_at", "2016-06-29 21:50:09.915681"]]
+  [1m[36m (0.4ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "places_types" ("place_id", "type_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["place_id", 17], ["type_id", 10], ["created_at", "2016-06-29 21:50:09.917488"], ["updated_at", "2016-06-29 21:50:09.917488"]]
+  [1m[35m (0.4ms)[0m  COMMIT
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.1ms)[0m  INSERT INTO "photos" ("place_id", "image_url", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"  [["place_id", 17], ["image_url", "https://scontent-ord1-1.cdninstagram.com/t51.2885-15/e35/13549344_642567335893188_812231539_n.jpg"], ["created_at", "2016-06-29 21:50:09.919302"], ["updated_at", "2016-06-29 21:50:09.919302"]]
+  [1m[36m (0.4ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "places" ("name", "description", "lat", "lng", "address", "rating", "duration", "price", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10) RETURNING "id"[0m  [["name", "Land End Trail"], ["description", "Lands End is a park in San Francisco within the Golden Gate National Recreation Area. It is a rocky and windswept shoreline at the mouth of the Golden Gate"], ["lat", 37.786376], ["lng", -122.50575], ["address", "680 Point Lobos Ave, San Francisco, CA 94121"], ["rating", 4.8], ["duration", 180], ["price", 0], ["created_at", "2016-06-29 21:50:09.921421"], ["updated_at", "2016-06-29 21:50:09.921421"]]
+  [1m[35m (0.4ms)[0m  COMMIT
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "places_types" ("place_id", "type_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"  [["place_id", 18], ["type_id", 9], ["created_at", "2016-06-29 21:50:09.923699"], ["updated_at", "2016-06-29 21:50:09.923699"]]
+  [1m[36m (0.4ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "places_types" ("place_id", "type_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["place_id", 18], ["type_id", 10], ["created_at", "2016-06-29 21:50:09.925467"], ["updated_at", "2016-06-29 21:50:09.925467"]]
+  [1m[35m (0.4ms)[0m  COMMIT
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "photos" ("place_id", "image_url", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"  [["place_id", 18], ["image_url", "https://scontent-ord1-1.cdninstagram.com/l/t51.2885-15/e35/13557010_1707891832818246_1852511319_n.jpg"], ["created_at", "2016-06-29 21:50:09.927287"], ["updated_at", "2016-06-29 21:50:09.927287"]]
+  [1m[36m (0.4ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "places" ("name", "description", "lat", "lng", "address", "rating", "duration", "price", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10) RETURNING "id"[0m  [["name", "Sutro Baths"], ["description", "The Sutro Baths were (now ruins) a large, privately owned public saltwater swimming pool complex in the Lands End area of the Outer Richmond District in western San Francisco, California"], ["lat", 37.780356], ["lng", -122.513671], ["address", "680 Point Lobos Ave, San Francisco, CA 94121"], ["rating", 4.7], ["duration", 60], ["price", 0], ["created_at", "2016-06-29 21:50:09.929468"], ["updated_at", "2016-06-29 21:50:09.929468"]]
+  [1m[35m (0.4ms)[0m  COMMIT
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "places_types" ("place_id", "type_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"  [["place_id", 19], ["type_id", 9], ["created_at", "2016-06-29 21:50:09.931733"], ["updated_at", "2016-06-29 21:50:09.931733"]]
+  [1m[36m (0.4ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.1ms)[0m  [1mINSERT INTO "places_types" ("place_id", "type_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["place_id", 19], ["type_id", 10], ["created_at", "2016-06-29 21:50:09.933575"], ["updated_at", "2016-06-29 21:50:09.933575"]]
+  [1m[35m (0.4ms)[0m  COMMIT
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "photos" ("place_id", "image_url", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"  [["place_id", 19], ["image_url", "https://scontent-ord1-1.cdninstagram.com/t51.2885-15/e35/13531860_656196461194008_916778377_n.jpg"], ["created_at", "2016-06-29 21:50:09.935433"], ["updated_at", "2016-06-29 21:50:09.935433"]]
+  [1m[36m (0.3ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "places" ("name", "description", "lat", "lng", "address", "rating", "duration", "price", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10) RETURNING "id"[0m  [["name", "Civic Center"], ["description", "The Civic Center in San Francisco, California, is an area of a few blocks north of the intersection of Market Street and Van Ness Avenue that contains many of the city's largest government and cultural institutions."], ["lat", 37.779515], ["lng", -122.417643], ["address", "1 Dr Carlton B Goodlett Pl, San Francisco, CA 94102"], ["rating", 3.1], ["duration", 30], ["price", 0], ["created_at", "2016-06-29 21:50:09.937499"], ["updated_at", "2016-06-29 21:50:09.937499"]]
+  [1m[35m (0.4ms)[0m  COMMIT
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "places_types" ("place_id", "type_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"  [["place_id", 20], ["type_id", 9], ["created_at", "2016-06-29 21:50:09.939749"], ["updated_at", "2016-06-29 21:50:09.939749"]]
+  [1m[36m (0.4ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.1ms)[0m  [1mINSERT INTO "places_types" ("place_id", "type_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["place_id", 20], ["type_id", 10], ["created_at", "2016-06-29 21:50:09.941512"], ["updated_at", "2016-06-29 21:50:09.941512"]]
+  [1m[35m (0.4ms)[0m  COMMIT
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.1ms)[0m  INSERT INTO "photos" ("place_id", "image_url", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"  [["place_id", 20], ["image_url", "https://instagram.fsnc1-1.fna.fbcdn.net/t51.2885-15/e35/12960174_1685985931618996_1337015684_n.jpg"], ["created_at", "2016-06-29 21:50:09.943307"], ["updated_at", "2016-06-29 21:50:09.943307"]]
+  [1m[36m (0.4ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "places" ("name", "description", "lat", "lng", "address", "rating", "duration", "price", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10) RETURNING "id"[0m  [["name", "Golden Gate Bridge"], ["description", "The Golden Gate Bridge is a suspension bridge spanning the Golden Gate strait, the one-mile-wide, three-mile-long channel between San Francisco Bay and the Pacific Ocean."], ["lat", 37.819946], ["lng", -122.478234], ["address", "Golden Gate Bridge, California"], ["rating", 4.7], ["duration", 45], ["price", 0], ["created_at", "2016-06-29 21:50:09.945397"], ["updated_at", "2016-06-29 21:50:09.945397"]]
+  [1m[35m (0.4ms)[0m  COMMIT
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "places_types" ("place_id", "type_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"  [["place_id", 21], ["type_id", 9], ["created_at", "2016-06-29 21:50:09.947704"], ["updated_at", "2016-06-29 21:50:09.947704"]]
+  [1m[36m (0.4ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "places_types" ("place_id", "type_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["place_id", 21], ["type_id", 10], ["created_at", "2016-06-29 21:50:09.949598"], ["updated_at", "2016-06-29 21:50:09.949598"]]
+  [1m[35m (0.4ms)[0m  COMMIT
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "photos" ("place_id", "image_url", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"  [["place_id", 21], ["image_url", "https://scontent-ord1-1.cdninstagram.com/t51.2885-15/e35/12339059_941804632578634_2076641008_n.jpg"], ["created_at", "2016-06-29 21:50:09.951371"], ["updated_at", "2016-06-29 21:50:09.951371"]]
+  [1m[36m (0.4ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "places" ("name", "description", "lat", "lng", "address", "rating", "duration", "price", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10) RETURNING "id"[0m  [["name", "chiang kai-shek memorial hall"], ["description", "The National Chiang Kai-shek Memorial Hall is a Taiwanese national monument, landmark and tourist attraction erected in memory of Chiang Kai-shek, former President of the Republic of China."], ["lat", 25.035368], ["lng", 121.519588], ["address", "No. 21, Zhongshan S Rd, Zhongzheng District, Taipei City, Taiwan 100"], ["rating", 4.4], ["duration", 45], ["price", 0], ["created_at", "2016-06-29 21:50:09.953426"], ["updated_at", "2016-06-29 21:50:09.953426"]]
+  [1m[35m (0.4ms)[0m  COMMIT
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "places_types" ("place_id", "type_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"  [["place_id", 22], ["type_id", 9], ["created_at", "2016-06-29 21:50:09.955701"], ["updated_at", "2016-06-29 21:50:09.955701"]]
+  [1m[36m (0.4ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "places_types" ("place_id", "type_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["place_id", 22], ["type_id", 10], ["created_at", "2016-06-29 21:50:09.957498"], ["updated_at", "2016-06-29 21:50:09.957498"]]
+  [1m[35m (0.3ms)[0m  COMMIT
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.1ms)[0m  INSERT INTO "places_types" ("place_id", "type_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"  [["place_id", 22], ["type_id", 4], ["created_at", "2016-06-29 21:50:09.959127"], ["updated_at", "2016-06-29 21:50:09.959127"]]
+  [1m[36m (0.4ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "photos" ("place_id", "image_url", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["place_id", 22], ["image_url", "https://scontent-ord1-1.cdninstagram.com/t51.2885-15/e35/12530934_999508493451333_806608021_n.jpg"], ["created_at", "2016-06-29 21:50:09.960935"], ["updated_at", "2016-06-29 21:50:09.960935"]]
+  [1m[35m (0.3ms)[0m  COMMIT
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.1ms)[0m  INSERT INTO "places" ("name", "description", "lat", "lng", "address", "rating", "duration", "price", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10) RETURNING "id"  [["name", "Long Shan Temple"], ["description", "Lungshan Temple of Manka is a temple in Wanhua District, Taipei, Taiwan. The temple was built in Taipei in 1738 by settlers from Fujian during Qing rule. It served as a place of worship and a gathering place for the Chinese settlers."], ["lat", 25.037007], ["lng", 121.499772], ["address", "No. 211, Guangzhou St, Wanhua District, Taipei City, Taiwan 10853"], ["rating", 4.3], ["duration", 60], ["price", 0], ["created_at", "2016-06-29 21:50:09.962908"], ["updated_at", "2016-06-29 21:50:09.962908"]]
+  [1m[36m (0.4ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.1ms)[0m  [1mINSERT INTO "places_types" ("place_id", "type_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["place_id", 23], ["type_id", 9], ["created_at", "2016-06-29 21:50:09.965183"], ["updated_at", "2016-06-29 21:50:09.965183"]]
+  [1m[35m (0.4ms)[0m  COMMIT
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.1ms)[0m  INSERT INTO "places_types" ("place_id", "type_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"  [["place_id", 23], ["type_id", 10], ["created_at", "2016-06-29 21:50:09.967017"], ["updated_at", "2016-06-29 21:50:09.967017"]]
+  [1m[36m (0.3ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "places_types" ("place_id", "type_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["place_id", 23], ["type_id", 4], ["created_at", "2016-06-29 21:50:09.968606"], ["updated_at", "2016-06-29 21:50:09.968606"]]
+  [1m[35m (0.4ms)[0m  COMMIT
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "photos" ("place_id", "image_url", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"  [["place_id", 23], ["image_url", "https://scontent-ord1-1.cdninstagram.com/t51.2885-15/s1080x1080/e15/fr/13525539_1188879921145432_140057277_n.jpg"], ["created_at", "2016-06-29 21:50:09.970346"], ["updated_at", "2016-06-29 21:50:09.970346"]]
+  [1m[36m (0.4ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "places" ("name", "description", "lat", "lng", "address", "rating", "duration", "price", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10) RETURNING "id"[0m  [["name", "鼎泰豐 Din Tai Fung"], ["description", "Popular global chain known for elevated dim sum & Asian dishes served in bustling quarters."], ["lat", 25.041061], ["lng", 121.543277], ["address", "106, Taiwan, Taipei City, Da’an District, Section 3, Zhongxiao E Rd, 300號B2"], ["rating", 4.6], ["duration", 60], ["price", 2], ["created_at", "2016-06-29 21:50:09.972388"], ["updated_at", "2016-06-29 21:50:09.972388"]]
+  [1m[35m (0.4ms)[0m  COMMIT
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "places_types" ("place_id", "type_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"  [["place_id", 24], ["type_id", 7], ["created_at", "2016-06-29 21:50:09.974556"], ["updated_at", "2016-06-29 21:50:09.974556"]]
+  [1m[36m (0.4ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "photos" ("place_id", "image_url", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["place_id", 24], ["image_url", "https://scontent-ord1-1.cdninstagram.com/t51.2885-15/e15/10724197_1632237020336765_235564369_n.jpg"], ["created_at", "2016-06-29 21:50:09.976344"], ["updated_at", "2016-06-29 21:50:09.976344"]]
+  [1m[35m (0.4ms)[0m  COMMIT
+  [1m[36m (5046.5ms)[0m  [1mDROP DATABASE IF EXISTS "api_development"[0m
+  [1m[35m (119.8ms)[0m  DROP DATABASE IF EXISTS "api_test"
+  [1m[36m (0.4ms)[0m  [1mCREATE DATABASE "api_development" ENCODING = 'unicode'[0m
+  [1m[35m (276.2ms)[0m  CREATE DATABASE "api_test" ENCODING = 'unicode'
+  [1m[36mSQL (0.2ms)[0m  [1mCREATE EXTENSION IF NOT EXISTS "plpgsql"[0m
+  [1m[35m (3.1ms)[0m  DROP TABLE "photos" CASCADE
+  [1m[36m (4.7ms)[0m  [1mCREATE TABLE "photos" ("id" serial primary key, "image_url" character varying, "place_id" integer, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL) [0m
+  [1m[35m (1.6ms)[0m  DROP TABLE "places" CASCADE
+  [1m[36m (5.4ms)[0m  [1mCREATE TABLE "places" ("id" serial primary key, "name" character varying, "description" character varying, "duration" integer, "price" integer, "lng" float, "lat" float, "rating" float, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL, "address" character varying) [0m
+  [1m[35m (1.8ms)[0m  DROP TABLE "places_types" CASCADE
+  [1m[36m (2.8ms)[0m  [1mCREATE TABLE "places_types" ("id" serial primary key, "place_id" integer, "type_id" integer, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL) [0m
+  [1m[35m (1.6ms)[0m  DROP TABLE "places_wishlists" CASCADE
+  [1m[36m (3.7ms)[0m  [1mCREATE TABLE "places_wishlists" ("id" serial primary key, "place_id" integer, "wishlist_id" integer, "liked" boolean, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL) [0m
+  [1m[35m (1.9ms)[0m  DROP TABLE "types" CASCADE
+  [1m[36m (4.0ms)[0m  [1mCREATE TABLE "types" ("id" serial primary key, "name" character varying, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL) [0m
+  [1m[35m (2.3ms)[0m  DROP TABLE "users" CASCADE
+  [1m[36m (13.8ms)[0m  [1mCREATE TABLE "users" ("id" serial primary key, "username" character varying, "password_digest" character varying, "email" character varying, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL) [0m
+  [1m[35m (1.4ms)[0m  DROP TABLE "wishlists" CASCADE
+  [1m[36m (3.6ms)[0m  [1mCREATE TABLE "wishlists" ("id" serial primary key, "user_id" integer, "description" character varying, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL) [0m
+  [1m[35m (0.4ms)[0m  SELECT version FROM "schema_migrations"
+  [1m[36mSQL (0.3ms)[0m  [1mCREATE EXTENSION IF NOT EXISTS "plpgsql"[0m
+  [1m[35m (5.3ms)[0m  CREATE TABLE "photos" ("id" serial primary key, "image_url" character varying, "place_id" integer, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL) 
+  [1m[36m (3.6ms)[0m  [1mCREATE TABLE "places" ("id" serial primary key, "name" character varying, "description" character varying, "duration" integer, "price" integer, "lng" float, "lat" float, "rating" float, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL, "address" character varying) [0m
+  [1m[35m (3.2ms)[0m  CREATE TABLE "places_types" ("id" serial primary key, "place_id" integer, "type_id" integer, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL) 
+  [1m[36m (2.7ms)[0m  [1mCREATE TABLE "places_wishlists" ("id" serial primary key, "place_id" integer, "wishlist_id" integer, "liked" boolean, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL) [0m
+  [1m[35m (3.7ms)[0m  CREATE TABLE "types" ("id" serial primary key, "name" character varying, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL) 
+  [1m[36m (3.5ms)[0m  [1mCREATE TABLE "users" ("id" serial primary key, "username" character varying, "password_digest" character varying, "email" character varying, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL) [0m
+  [1m[35m (5.4ms)[0m  CREATE TABLE "wishlists" ("id" serial primary key, "user_id" integer, "description" character varying, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL) 
+  [1m[36m (2.7ms)[0m  [1mCREATE TABLE "schema_migrations" ("version" character varying NOT NULL) [0m
+  [1m[35m (1.9ms)[0m  CREATE UNIQUE INDEX  "unique_schema_migrations" ON "schema_migrations"  ("version")
+  [1m[36m (0.6ms)[0m  [1mSELECT version FROM "schema_migrations"[0m
+  [1m[35m (0.9ms)[0m  INSERT INTO "schema_migrations" (version) VALUES ('20160629172305')
+  [1m[36m (0.6ms)[0m  [1mINSERT INTO "schema_migrations" (version) VALUES ('20160624001700')[0m
+  [1m[35m (0.6ms)[0m  INSERT INTO "schema_migrations" (version) VALUES ('20160624002043')
+  [1m[36m (0.6ms)[0m  [1mINSERT INTO "schema_migrations" (version) VALUES ('20160624002259')[0m
+  [1m[35m (0.7ms)[0m  INSERT INTO "schema_migrations" (version) VALUES ('20160624002833')
+  [1m[36m (0.6ms)[0m  [1mINSERT INTO "schema_migrations" (version) VALUES ('20160627172302')[0m
+  [1m[35m (0.4ms)[0m  INSERT INTO "schema_migrations" (version) VALUES ('20160627172435')
+  [1m[36m (0.3ms)[0m  [1mINSERT INTO "schema_migrations" (version) VALUES ('20160627172845')[0m
+  [1m[35m (0.3ms)[0m  INSERT INTO "schema_migrations" (version) VALUES ('20160628175928')
+  [1m[36mActiveRecord::SchemaMigration Load (0.4ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[35m (0.3ms)[0m  BEGIN
+  [1m[36mSQL (0.5ms)[0m  [1mINSERT INTO "types" ("name", "created_at", "updated_at") VALUES ($1, $2, $3) RETURNING "id"[0m  [["name", "aquarium"], ["created_at", "2016-06-29 21:50:29.012737"], ["updated_at", "2016-06-29 21:50:29.012737"]]
+  [1m[35m (0.5ms)[0m  COMMIT
+  [1m[36m (0.2ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.3ms)[0m  INSERT INTO "types" ("name", "created_at", "updated_at") VALUES ($1, $2, $3) RETURNING "id"  [["name", "bar"], ["created_at", "2016-06-29 21:50:29.017996"], ["updated_at", "2016-06-29 21:50:29.017996"]]
+  [1m[36m (0.4ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "types" ("name", "created_at", "updated_at") VALUES ($1, $2, $3) RETURNING "id"[0m  [["name", "casino"], ["created_at", "2016-06-29 21:50:29.020287"], ["updated_at", "2016-06-29 21:50:29.020287"]]
+  [1m[35m (0.4ms)[0m  COMMIT
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "types" ("name", "created_at", "updated_at") VALUES ($1, $2, $3) RETURNING "id"  [["name", "museum"], ["created_at", "2016-06-29 21:50:29.022282"], ["updated_at", "2016-06-29 21:50:29.022282"]]
+  [1m[36m (0.4ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "types" ("name", "created_at", "updated_at") VALUES ($1, $2, $3) RETURNING "id"[0m  [["name", "night_club"], ["created_at", "2016-06-29 21:50:29.024442"], ["updated_at", "2016-06-29 21:50:29.024442"]]
+  [1m[35m (0.4ms)[0m  COMMIT
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "types" ("name", "created_at", "updated_at") VALUES ($1, $2, $3) RETURNING "id"  [["name", "park"], ["created_at", "2016-06-29 21:50:29.026237"], ["updated_at", "2016-06-29 21:50:29.026237"]]
+  [1m[36m (0.4ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.1ms)[0m  [1mINSERT INTO "types" ("name", "created_at", "updated_at") VALUES ($1, $2, $3) RETURNING "id"[0m  [["name", "restaurant"], ["created_at", "2016-06-29 21:50:29.028129"], ["updated_at", "2016-06-29 21:50:29.028129"]]
+  [1m[35m (0.3ms)[0m  COMMIT
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.1ms)[0m  INSERT INTO "types" ("name", "created_at", "updated_at") VALUES ($1, $2, $3) RETURNING "id"  [["name", "zoo"], ["created_at", "2016-06-29 21:50:29.029750"], ["updated_at", "2016-06-29 21:50:29.029750"]]
+  [1m[36m (0.4ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.1ms)[0m  [1mINSERT INTO "types" ("name", "created_at", "updated_at") VALUES ($1, $2, $3) RETURNING "id"[0m  [["name", "place_of_interest"], ["created_at", "2016-06-29 21:50:29.031477"], ["updated_at", "2016-06-29 21:50:29.031477"]]
+  [1m[35m (0.4ms)[0m  COMMIT
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.1ms)[0m  INSERT INTO "types" ("name", "created_at", "updated_at") VALUES ($1, $2, $3) RETURNING "id"  [["name", "tourist_destination"], ["created_at", "2016-06-29 21:50:29.033162"], ["updated_at", "2016-06-29 21:50:29.033162"]]
+  [1m[36m (0.4ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.5ms)[0m  [1mINSERT INTO "places" ("name", "description", "lat", "lng", "address", "rating", "duration", "price", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10) RETURNING "id"[0m  [["name", "Alcatraz Island"], ["description", "Notorious prison & once home to Al Capone, now a museum with audio tour, accessible by ferry."], ["lat", 37.826986], ["lng", -122.422972], ["address", "San Francisco, CA 94133"], ["rating", 4.9], ["duration", 300], ["price", 2], ["created_at", "2016-06-29 21:50:29.052387"], ["updated_at", "2016-06-29 21:50:29.052387"]]
+  [1m[35m (0.4ms)[0m  COMMIT
+  [1m[36m (0.2ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.6ms)[0m  INSERT INTO "places_types" ("place_id", "type_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"  [["place_id", 1], ["type_id", 4], ["created_at", "2016-06-29 21:50:29.061106"], ["updated_at", "2016-06-29 21:50:29.061106"]]
+  [1m[36m (0.4ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "places_types" ("place_id", "type_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["place_id", 1], ["type_id", 9], ["created_at", "2016-06-29 21:50:29.064497"], ["updated_at", "2016-06-29 21:50:29.064497"]]
+  [1m[35m (0.4ms)[0m  COMMIT
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "places_types" ("place_id", "type_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"  [["place_id", 1], ["type_id", 10], ["created_at", "2016-06-29 21:50:29.066668"], ["updated_at", "2016-06-29 21:50:29.066668"]]
+  [1m[36m (0.4ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.5ms)[0m  [1mINSERT INTO "photos" ("place_id", "image_url", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["place_id", 1], ["image_url", "https://instagram.fsnc1-1.fna.fbcdn.net/t51.2885-15/e35/11311457_1435769073419954_921661701_n.jpg"], ["created_at", "2016-06-29 21:50:29.074890"], ["updated_at", "2016-06-29 21:50:29.074890"]]
+  [1m[35m (0.4ms)[0m  COMMIT
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "photos" ("place_id", "image_url", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"  [["place_id", 1], ["image_url", "https://scontent-ord1-1.cdninstagram.com/t51.2885-15/sh0.08/e35/p750x750/13551542_296265964050045_968262688_n.jpg"], ["created_at", "2016-06-29 21:50:29.077454"], ["updated_at", "2016-06-29 21:50:29.077454"]]
+  [1m[36m (0.4ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "photos" ("place_id", "image_url", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["place_id", 1], ["image_url", "https://scontent-ord1-1.cdninstagram.com/t51.2885-15/e35/13534155_1753543778263870_2122610248_n.jpg"], ["created_at", "2016-06-29 21:50:29.079213"], ["updated_at", "2016-06-29 21:50:29.079213"]]
+  [1m[35m (0.4ms)[0m  COMMIT
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "photos" ("place_id", "image_url", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"  [["place_id", 1], ["image_url", "https://scontent-ord1-1.cdninstagram.com/t51.2885-15/s750x750/sh0.08/e35/13525390_1625581291103383_1438385699_n.jpg"], ["created_at", "2016-06-29 21:50:29.081020"], ["updated_at", "2016-06-29 21:50:29.081020"]]
+  [1m[36m (0.4ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "places" ("name", "description", "lat", "lng", "address", "rating", "duration", "price", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10) RETURNING "id"[0m  [["name", "Comstock Saloon"], ["description", "Fancy, turn-of-the-century digs house vintage cocktails, upscale bar fare, cozy booths & live jazz."], ["lat", 37.796795], ["lng", -122.405626], ["address", "155 Columbus Ave, San Francisco, CA 94133"], ["rating", 4.4], ["duration", 180], ["price", 2], ["created_at", "2016-06-29 21:50:29.083106"], ["updated_at", "2016-06-29 21:50:29.083106"]]
+  [1m[35m (0.4ms)[0m  COMMIT
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.3ms)[0m  INSERT INTO "places_types" ("place_id", "type_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"  [["place_id", 2], ["type_id", 2], ["created_at", "2016-06-29 21:50:29.085301"], ["updated_at", "2016-06-29 21:50:29.085301"]]
+  [1m[36m (0.3ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "places_types" ("place_id", "type_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["place_id", 2], ["type_id", 10], ["created_at", "2016-06-29 21:50:29.087143"], ["updated_at", "2016-06-29 21:50:29.087143"]]
+  [1m[35m (0.4ms)[0m  COMMIT
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "photos" ("place_id", "image_url", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"  [["place_id", 2], ["image_url", "https://s3-media3.fl.yelpcdn.com/bphoto/Rmo7lQ0HG2B2FZmwD7iLoQ/o.jpg"], ["created_at", "2016-06-29 21:50:29.088869"], ["updated_at", "2016-06-29 21:50:29.088869"]]
+  [1m[36m (0.4ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "photos" ("place_id", "image_url", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["place_id", 2], ["image_url", "http://s3-media2.fl.yelpcdn.com/bphoto/Dx7drUCpbeNHvGnaHKY0yg/o.jpg"], ["created_at", "2016-06-29 21:50:29.090664"], ["updated_at", "2016-06-29 21:50:29.090664"]]
+  [1m[35m (0.4ms)[0m  COMMIT
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "places" ("name", "description", "lat", "lng", "address", "rating", "duration", "price", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10) RETURNING "id"  [["name", "Aquarium of the Bay"], ["description", "Aquarium by the bay description"], ["lat", 37.808678], ["lng", -122.4092], ["address", "2 Beach St, San Francisco, CA 94133"], ["rating", 3.7], ["duration", 120], ["price", 2], ["created_at", "2016-06-29 21:50:29.092671"], ["updated_at", "2016-06-29 21:50:29.092671"]]
+  [1m[36m (0.6ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "places_types" ("place_id", "type_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["place_id", 3], ["type_id", 1], ["created_at", "2016-06-29 21:50:29.095278"], ["updated_at", "2016-06-29 21:50:29.095278"]]
+  [1m[35m (0.4ms)[0m  COMMIT
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.1ms)[0m  INSERT INTO "places_types" ("place_id", "type_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"  [["place_id", 3], ["type_id", 9], ["created_at", "2016-06-29 21:50:29.097156"], ["updated_at", "2016-06-29 21:50:29.097156"]]
+  [1m[36m (0.4ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "places_types" ("place_id", "type_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["place_id", 3], ["type_id", 10], ["created_at", "2016-06-29 21:50:29.098740"], ["updated_at", "2016-06-29 21:50:29.098740"]]
+  [1m[35m (0.3ms)[0m  COMMIT
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.1ms)[0m  INSERT INTO "photos" ("place_id", "image_url", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"  [["place_id", 3], ["image_url", "https://instagram.fsnc1-1.fna.fbcdn.net/t51.2885-15/e35/11820625_156774028000203_656280027_n.jpg"], ["created_at", "2016-06-29 21:50:29.100447"], ["updated_at", "2016-06-29 21:50:29.100447"]]
+  [1m[36m (0.4ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.1ms)[0m  [1mINSERT INTO "photos" ("place_id", "image_url", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["place_id", 3], ["image_url", "http://s3-media3.fl.yelpcdn.com/bphoto/bunFeKv23vlZi4dzh1TKeA/o.jpg"], ["created_at", "2016-06-29 21:50:29.102197"], ["updated_at", "2016-06-29 21:50:29.102197"]]
+  [1m[35m (0.3ms)[0m  COMMIT
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "places" ("name", "description", "lat", "lng", "address", "rating", "duration", "price", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10) RETURNING "id"  [["name", "Cable Car"], ["description", "Old cable cars, long waiting lines"], ["lat", 37.784814], ["lng", -122.40774], ["address", "870 Market St, San Francisco, CA 94102"], ["rating", 3.5], ["duration", 45], ["price", 1], ["created_at", "2016-06-29 21:50:29.104118"], ["updated_at", "2016-06-29 21:50:29.104118"]]
+  [1m[36m (0.4ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "places_types" ("place_id", "type_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["place_id", 4], ["type_id", 4], ["created_at", "2016-06-29 21:50:29.106256"], ["updated_at", "2016-06-29 21:50:29.106256"]]
+  [1m[35m (0.4ms)[0m  COMMIT
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "places_types" ("place_id", "type_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"  [["place_id", 4], ["type_id", 10], ["created_at", "2016-06-29 21:50:29.107948"], ["updated_at", "2016-06-29 21:50:29.107948"]]
+  [1m[36m (0.4ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.1ms)[0m  [1mINSERT INTO "photos" ("place_id", "image_url", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["place_id", 4], ["image_url", "https://instagram.fsnc1-1.fna.fbcdn.net/t51.2885-15/e35/12135272_895455643886085_1883463243_n.jpg"], ["created_at", "2016-06-29 21:50:29.109644"], ["updated_at", "2016-06-29 21:50:29.109644"]]
+  [1m[35m (0.3ms)[0m  COMMIT
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.1ms)[0m  INSERT INTO "photos" ("place_id", "image_url", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"  [["place_id", 4], ["image_url", "https://scontent-ord1-1.cdninstagram.com/t51.2885-15/e35/13355494_974735939301994_446993832_n.jpg"], ["created_at", "2016-06-29 21:50:29.111343"], ["updated_at", "2016-06-29 21:50:29.111343"]]
+  [1m[36m (0.4ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "places" ("name", "description", "lat", "lng", "address", "rating", "duration", "price", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10) RETURNING "id"[0m  [["name", "Muir Woods National Monument"], ["description", "Redwoods by the bay"], ["lat", 37.895386], ["lng", -122.578141], ["address", "1 Muir Woods Rd, Mill Valley, CA 94941"], ["rating", 4.6], ["duration", 300], ["price", 1], ["created_at", "2016-06-29 21:50:29.113304"], ["updated_at", "2016-06-29 21:50:29.113304"]]
+  [1m[35m (0.4ms)[0m  COMMIT
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "places_types" ("place_id", "type_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"  [["place_id", 5], ["type_id", 6], ["created_at", "2016-06-29 21:50:29.115370"], ["updated_at", "2016-06-29 21:50:29.115370"]]
+  [1m[36m (0.4ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.1ms)[0m  [1mINSERT INTO "places_types" ("place_id", "type_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["place_id", 5], ["type_id", 9], ["created_at", "2016-06-29 21:50:29.117069"], ["updated_at", "2016-06-29 21:50:29.117069"]]
+  [1m[35m (0.3ms)[0m  COMMIT
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.1ms)[0m  INSERT INTO "places_types" ("place_id", "type_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"  [["place_id", 3], ["type_id", 10], ["created_at", "2016-06-29 21:50:29.118616"], ["updated_at", "2016-06-29 21:50:29.118616"]]
+  [1m[36m (0.4ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "photos" ("place_id", "image_url", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["place_id", 5], ["image_url", "https://instagram.fsnc1-1.fna.fbcdn.net/t51.2885-15/e35/13092278_1156458994386146_1264682601_n.jpg"], ["created_at", "2016-06-29 21:50:29.120321"], ["updated_at", "2016-06-29 21:50:29.120321"]]
+  [1m[35m (0.4ms)[0m  COMMIT
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.1ms)[0m  INSERT INTO "photos" ("place_id", "image_url", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"  [["place_id", 5], ["image_url", "https://scontent-ord1-1.cdninstagram.com/t51.2885-15/e35/13534628_271839613176555_233902339_n.jpg"], ["created_at", "2016-06-29 21:50:29.122112"], ["updated_at", "2016-06-29 21:50:29.122112"]]
+  [1m[36m (0.3ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "places" ("name", "description", "lat", "lng", "address", "rating", "duration", "price", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10) RETURNING "id"[0m  [["name", "SFMOMA San Francisco Museum of Modern Art"], ["description", "SFMOMA description"], ["lat", 37.785735], ["lng", -122.400992], ["address", "151 3rd St, San Francisco, CA 94103"], ["rating", 4.5], ["duration", 120], ["price", 1], ["created_at", "2016-06-29 21:50:29.124054"], ["updated_at", "2016-06-29 21:50:29.124054"]]
+  [1m[35m (0.4ms)[0m  COMMIT
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "places_types" ("place_id", "type_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"  [["place_id", 6], ["type_id", 4], ["created_at", "2016-06-29 21:50:29.126251"], ["updated_at", "2016-06-29 21:50:29.126251"]]
+  [1m[36m (0.8ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "places_types" ("place_id", "type_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["place_id", 6], ["type_id", 9], ["created_at", "2016-06-29 21:50:29.128681"], ["updated_at", "2016-06-29 21:50:29.128681"]]
+  [1m[35m (0.4ms)[0m  COMMIT
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.1ms)[0m  INSERT INTO "places_types" ("place_id", "type_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"  [["place_id", 6], ["type_id", 10], ["created_at", "2016-06-29 21:50:29.130494"], ["updated_at", "2016-06-29 21:50:29.130494"]]
+  [1m[36m (0.4ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "photos" ("place_id", "image_url", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["place_id", 6], ["image_url", "https://instagram.fsnc1-1.fna.fbcdn.net/t51.2885-15/e35/13109081_1723896514559583_614709634_n.jpg"], ["created_at", "2016-06-29 21:50:29.132184"], ["updated_at", "2016-06-29 21:50:29.132184"]]
+  [1m[35m (0.4ms)[0m  COMMIT
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.1ms)[0m  INSERT INTO "photos" ("place_id", "image_url", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"  [["place_id", 6], ["image_url", "https://scontent-ord1-1.cdninstagram.com/t51.2885-15/e35/13392826_1554636864831431_1766105952_n.jpg"], ["created_at", "2016-06-29 21:50:29.134000"], ["updated_at", "2016-06-29 21:50:29.134000"]]
+  [1m[36m (0.4ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "places" ("name", "description", "lat", "lng", "address", "rating", "duration", "price", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10) RETURNING "id"[0m  [["name", "Battery Spencer"], ["description", "Battery Spencer description"], ["lat", 37.827698], ["lng", -122.481799], ["address", "Conzelman Rd, Sausalito, CA 94965"], ["rating", 4.2], ["duration", 30], ["price", 0], ["created_at", "2016-06-29 21:50:29.135969"], ["updated_at", "2016-06-29 21:50:29.135969"]]
+  [1m[35m (0.4ms)[0m  COMMIT
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "places_types" ("place_id", "type_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"  [["place_id", 7], ["type_id", 6], ["created_at", "2016-06-29 21:50:29.138107"], ["updated_at", "2016-06-29 21:50:29.138107"]]
+  [1m[36m (0.4ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.1ms)[0m  [1mINSERT INTO "places_types" ("place_id", "type_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["place_id", 7], ["type_id", 9], ["created_at", "2016-06-29 21:50:29.139771"], ["updated_at", "2016-06-29 21:50:29.139771"]]
+  [1m[35m (0.4ms)[0m  COMMIT
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.1ms)[0m  INSERT INTO "places_types" ("place_id", "type_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"  [["place_id", 7], ["type_id", 10], ["created_at", "2016-06-29 21:50:29.141338"], ["updated_at", "2016-06-29 21:50:29.141338"]]
+  [1m[36m (0.4ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "photos" ("place_id", "image_url", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["place_id", 7], ["image_url", "https://instagram.fsnc1-1.fna.fbcdn.net/t51.2885-15/sh0.08/e35/p750x750/12724618_1571822593147746_505749575_n.jpg"], ["created_at", "2016-06-29 21:50:29.143001"], ["updated_at", "2016-06-29 21:50:29.143001"]]
+  [1m[35m (0.4ms)[0m  COMMIT
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "places" ("name", "description", "lat", "lng", "address", "rating", "duration", "price", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10) RETURNING "id"  [["name", "China Town"], ["description", "China Town Description"], ["lat", 37.793346], ["lng", -122.406139], ["address", "662 Grant Ave, San Francisco, CA 94108"], ["rating", 4.1], ["duration", 120], ["price", 1], ["created_at", "2016-06-29 21:50:29.145011"], ["updated_at", "2016-06-29 21:50:29.145011"]]
+  [1m[36m (0.4ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "places_types" ("place_id", "type_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["place_id", 8], ["type_id", 9], ["created_at", "2016-06-29 21:50:29.147106"], ["updated_at", "2016-06-29 21:50:29.147106"]]
+  [1m[35m (0.4ms)[0m  COMMIT
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.1ms)[0m  INSERT INTO "places_types" ("place_id", "type_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"  [["place_id", 8], ["type_id", 10], ["created_at", "2016-06-29 21:50:29.148815"], ["updated_at", "2016-06-29 21:50:29.148815"]]
+  [1m[36m (0.5ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "photos" ("place_id", "image_url", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["place_id", 8], ["image_url", "https://instagram.fsnc1-1.fna.fbcdn.net/t51.2885-15/e35/1516888_166301770399020_702906097_n.jpg"], ["created_at", "2016-06-29 21:50:29.150640"], ["updated_at", "2016-06-29 21:50:29.150640"]]
+  [1m[35m (0.4ms)[0m  COMMIT
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.1ms)[0m  INSERT INTO "photos" ("place_id", "image_url", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"  [["place_id", 8], ["image_url", "https://scontent-ord1-1.cdninstagram.com/t51.2885-15/e35/13473183_1751496511741754_1717884244_n.jpg"], ["created_at", "2016-06-29 21:50:29.152489"], ["updated_at", "2016-06-29 21:50:29.152489"]]
+  [1m[36m (0.4ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.1ms)[0m  [1mINSERT INTO "photos" ("place_id", "image_url", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["place_id", 8], ["image_url", "https://scontent-ord1-1.cdninstagram.com/t51.2885-15/e35/13285416_557374784445950_1257112129_n.jpg"], ["created_at", "2016-06-29 21:50:29.154245"], ["updated_at", "2016-06-29 21:50:29.154245"]]
+  [1m[35m (0.4ms)[0m  COMMIT
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "places" ("name", "description", "lat", "lng", "address", "rating", "duration", "price", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10) RETURNING "id"  [["name", "Alamo Square"], ["description", "Painted ladies and old houses with great view on SF"], ["lat", 37.776269], ["lng", -122.432967], ["address", "Steiner St, San Francisco, CA 94117"], ["rating", 4.2], ["duration", 45], ["price", 0], ["created_at", "2016-06-29 21:50:29.156209"], ["updated_at", "2016-06-29 21:50:29.156209"]]
+  [1m[36m (0.4ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "places_types" ("place_id", "type_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["place_id", 9], ["type_id", 6], ["created_at", "2016-06-29 21:50:29.158347"], ["updated_at", "2016-06-29 21:50:29.158347"]]
+  [1m[35m (0.4ms)[0m  COMMIT
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "places_types" ("place_id", "type_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"  [["place_id", 9], ["type_id", 9], ["created_at", "2016-06-29 21:50:29.160039"], ["updated_at", "2016-06-29 21:50:29.160039"]]
+  [1m[36m (0.4ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.1ms)[0m  [1mINSERT INTO "places_types" ("place_id", "type_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["place_id", 9], ["type_id", 10], ["created_at", "2016-06-29 21:50:29.161644"], ["updated_at", "2016-06-29 21:50:29.161644"]]
+  [1m[35m (0.4ms)[0m  COMMIT
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.1ms)[0m  INSERT INTO "photos" ("place_id", "image_url", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"  [["place_id", 9], ["image_url", "https://instagram.fsnc1-1.fna.fbcdn.net/t51.2885-15/e35/12751408_259692627695424_311922490_n.jpg"], ["created_at", "2016-06-29 21:50:29.163367"], ["updated_at", "2016-06-29 21:50:29.163367"]]
+  [1m[36m (0.4ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "places" ("name", "description", "lat", "lng", "address", "rating", "duration", "price", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10) RETURNING "id"[0m  [["name", "Z + Y Restaurant"], ["description", "Basic quarters for dining on Sichuan & Northern Chinese dishes packed with plenty of spice."], ["lat", 37.795927], ["lng", -122.406017], ["address", "655 Jackson St, San Francisco, CA 94133"], ["rating", 3.9], ["duration", 90], ["price", 2], ["created_at", "2016-06-29 21:50:29.165380"], ["updated_at", "2016-06-29 21:50:29.165380"]]
+  [1m[35m (0.4ms)[0m  COMMIT
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "places_types" ("place_id", "type_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"  [["place_id", 10], ["type_id", 7], ["created_at", "2016-06-29 21:50:29.167444"], ["updated_at", "2016-06-29 21:50:29.167444"]]
+  [1m[36m (0.4ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "photos" ("place_id", "image_url", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["place_id", 10], ["image_url", "https://scontent-ord1-1.cdninstagram.com/t51.2885-15/e35/12822315_1572804843038082_501174903_n.jpg"], ["created_at", "2016-06-29 21:50:29.169212"], ["updated_at", "2016-06-29 21:50:29.169212"]]
+  [1m[35m (0.4ms)[0m  COMMIT
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "places" ("name", "description", "lat", "lng", "address", "rating", "duration", "price", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10) RETURNING "id"  [["name", "Castro District"], ["description", "Castro District Description"], ["lat", 37.762], ["lng", -122.434875], ["address", "429 Castro St, San Francisco, CA 94114"], ["rating", 4.1], ["duration", 60], ["price", 0], ["created_at", "2016-06-29 21:50:29.171259"], ["updated_at", "2016-06-29 21:50:29.171259"]]
+  [1m[36m (0.4ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "places_types" ("place_id", "type_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["place_id", 11], ["type_id", 9], ["created_at", "2016-06-29 21:50:29.173319"], ["updated_at", "2016-06-29 21:50:29.173319"]]
+  [1m[35m (0.4ms)[0m  COMMIT
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.1ms)[0m  INSERT INTO "places_types" ("place_id", "type_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"  [["place_id", 11], ["type_id", 10], ["created_at", "2016-06-29 21:50:29.175103"], ["updated_at", "2016-06-29 21:50:29.175103"]]
+  [1m[36m (0.4ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "photos" ("place_id", "image_url", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["place_id", 11], ["image_url", "https://instagram.fsnc1-1.fna.fbcdn.net/t51.2885-15/e35/13397451_285829265095213_2012320115_n.jpg"], ["created_at", "2016-06-29 21:50:29.176861"], ["updated_at", "2016-06-29 21:50:29.176861"]]
+  [1m[35m (0.4ms)[0m  COMMIT
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "places" ("name", "description", "lat", "lng", "address", "rating", "duration", "price", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10) RETURNING "id"  [["name", "Lombard Street"], ["description", "Lombard Street - 'World's mot crooked street' - is famous for a steep, one-block section with eight hairpin turns and a flowery sidewalk."], ["lat", 37.802071], ["lng", -122.419083], ["address", "Lombard St, San Francisco, CA 94133"], ["rating", 4.5], ["duration", 30], ["price", 0], ["created_at", "2016-06-29 21:50:29.178979"], ["updated_at", "2016-06-29 21:50:29.178979"]]
+  [1m[36m (0.4ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "places_types" ("place_id", "type_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["place_id", 12], ["type_id", 9], ["created_at", "2016-06-29 21:50:29.181117"], ["updated_at", "2016-06-29 21:50:29.181117"]]
+  [1m[35m (0.4ms)[0m  COMMIT
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "places_types" ("place_id", "type_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"  [["place_id", 12], ["type_id", 10], ["created_at", "2016-06-29 21:50:29.182835"], ["updated_at", "2016-06-29 21:50:29.182835"]]
+  [1m[36m (0.3ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "photos" ("place_id", "image_url", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["place_id", 12], ["image_url", "https://instagram.fsnc1-1.fna.fbcdn.net/t51.2885-15/e35/12912355_267495800257880_1905434648_n.jpg"], ["created_at", "2016-06-29 21:50:29.184514"], ["updated_at", "2016-06-29 21:50:29.184514"]]
+  [1m[35m (0.4ms)[0m  COMMIT
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "places" ("name", "description", "lat", "lng", "address", "rating", "duration", "price", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10) RETURNING "id"  [["name", "Palace of Fine Arts"], ["description", "The Palace of Fine Arts in the Marina District of San Francisco, California, is a monumental structure originally constructed for the 1915 Panama-Pacific Exposition in order to exhibit works of art presented there"], ["lat", 37.80147], ["lng", -122.448154], ["address", "3301 Lyon St, San Francisco, CA 94123"], ["rating", 4.8], ["duration", 30], ["price", 0], ["created_at", "2016-06-29 21:50:29.186564"], ["updated_at", "2016-06-29 21:50:29.186564"]]
+  [1m[36m (0.4ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.1ms)[0m  [1mINSERT INTO "places_types" ("place_id", "type_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["place_id", 13], ["type_id", 6], ["created_at", "2016-06-29 21:50:29.188631"], ["updated_at", "2016-06-29 21:50:29.188631"]]
+  [1m[35m (0.4ms)[0m  COMMIT
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.1ms)[0m  INSERT INTO "places_types" ("place_id", "type_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"  [["place_id", 13], ["type_id", 9], ["created_at", "2016-06-29 21:50:29.190311"], ["updated_at", "2016-06-29 21:50:29.190311"]]
+  [1m[36m (0.4ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.1ms)[0m  [1mINSERT INTO "places_types" ("place_id", "type_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["place_id", 13], ["type_id", 10], ["created_at", "2016-06-29 21:50:29.191826"], ["updated_at", "2016-06-29 21:50:29.191826"]]
+  [1m[35m (0.3ms)[0m  COMMIT
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.1ms)[0m  INSERT INTO "photos" ("place_id", "image_url", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"  [["place_id", 13], ["image_url", "https://instagram.fsnc1-1.fna.fbcdn.net/t51.2885-15/e35/11347790_1166531286695489_2021504333_n.jpg"], ["created_at", "2016-06-29 21:50:29.193405"], ["updated_at", "2016-06-29 21:50:29.193405"]]
+  [1m[36m (0.4ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "places" ("name", "description", "lat", "lng", "address", "rating", "duration", "price", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10) RETURNING "id"[0m  [["name", "Trans-america Pyramid"], ["description", "The Transamerica Pyramid is the tallest skyscraper in the San Francisco skyline"], ["lat", 37.795177], ["lng", -122.402693], ["address", "600 Montgomery St, San Francisco, CA 94111"], ["rating", 4.5], ["duration", 15], ["price", 0], ["created_at", "2016-06-29 21:50:29.195395"], ["updated_at", "2016-06-29 21:50:29.195395"]]
+  [1m[35m (0.4ms)[0m  COMMIT
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "places_types" ("place_id", "type_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"  [["place_id", 14], ["type_id", 9], ["created_at", "2016-06-29 21:50:29.197470"], ["updated_at", "2016-06-29 21:50:29.197470"]]
+  [1m[36m (0.4ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.1ms)[0m  [1mINSERT INTO "places_types" ("place_id", "type_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["place_id", 14], ["type_id", 10], ["created_at", "2016-06-29 21:50:29.199166"], ["updated_at", "2016-06-29 21:50:29.199166"]]
+  [1m[35m (0.4ms)[0m  COMMIT
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.1ms)[0m  INSERT INTO "photos" ("place_id", "image_url", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"  [["place_id", 14], ["image_url", "https://instagram.fsnc1-1.fna.fbcdn.net/t51.2885-15/sh0.08/e35/p750x750/12825796_528342577326118_1262316311_n.jpg"], ["created_at", "2016-06-29 21:50:29.200871"], ["updated_at", "2016-06-29 21:50:29.200871"]]
+  [1m[36m (0.4ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.1ms)[0m  [1mINSERT INTO "places" ("name", "description", "lat", "lng", "address", "rating", "duration", "price", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10) RETURNING "id"[0m  [["name", "Sutro Tower"], ["description", "Sutro Tower is a 977 ft (298 m) three-pronged TV and radio antenna tower in San Francisco, CA. Rising from a hill between Twin Peaks and Mount Sutro near Clarendon Heights, it is a prominent feature of the city skyline and a landmark for city residents and visitors."], ["lat", 37.755183], ["lng", -122.452811], ["address", "Sutro Tower, San Francisco, CA 94131"], ["rating", 2.8], ["duration", 0], ["price", 0], ["created_at", "2016-06-29 21:50:29.202869"], ["updated_at", "2016-06-29 21:50:29.202869"]]
+  [1m[35m (0.4ms)[0m  COMMIT
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "places_types" ("place_id", "type_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"  [["place_id", 15], ["type_id", 9], ["created_at", "2016-06-29 21:50:29.204990"], ["updated_at", "2016-06-29 21:50:29.204990"]]
+  [1m[36m (0.4ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.1ms)[0m  [1mINSERT INTO "places_types" ("place_id", "type_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["place_id", 15], ["type_id", 10], ["created_at", "2016-06-29 21:50:29.206753"], ["updated_at", "2016-06-29 21:50:29.206753"]]
+  [1m[35m (0.3ms)[0m  COMMIT
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.1ms)[0m  INSERT INTO "photos" ("place_id", "image_url", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"  [["place_id", 15], ["image_url", "https://instagram.fsnc1-1.fna.fbcdn.net/t51.2885-15/e35/12093482_626976757445643_1739892906_n.jpg"], ["created_at", "2016-06-29 21:50:29.208332"], ["updated_at", "2016-06-29 21:50:29.208332"]]
+  [1m[36m (0.4ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "places" ("name", "description", "lat", "lng", "address", "rating", "duration", "price", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10) RETURNING "id"[0m  [["name", "1760 Restaurant & Cocktail Bar"], ["description", "Carefully sourced, ambitious New American cuisine & cocktails in a sleek space with a long bar."], ["lat", 37.793144], ["lng", -122.421024], ["address", "1760 Polk St, San Francisco, CA 94109"], ["rating", 4.4], ["duration", 90], ["price", 3], ["created_at", "2016-06-29 21:50:29.210357"], ["updated_at", "2016-06-29 21:50:29.210357"]]
+  [1m[35m (0.4ms)[0m  COMMIT
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "places_types" ("place_id", "type_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"  [["place_id", 16], ["type_id", 7], ["created_at", "2016-06-29 21:50:29.212525"], ["updated_at", "2016-06-29 21:50:29.212525"]]
+  [1m[36m (0.4ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.1ms)[0m  [1mINSERT INTO "places_types" ("place_id", "type_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["place_id", 16], ["type_id", 2], ["created_at", "2016-06-29 21:50:29.214334"], ["updated_at", "2016-06-29 21:50:29.214334"]]
+  [1m[35m (0.4ms)[0m  COMMIT
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.1ms)[0m  INSERT INTO "photos" ("place_id", "image_url", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"  [["place_id", 16], ["image_url", "https://s3-media2.fl.yelpcdn.com/bphoto/-HTjDquqxj7EmQobBK3fTA/o.jpg"], ["created_at", "2016-06-29 21:50:29.216045"], ["updated_at", "2016-06-29 21:50:29.216045"]]
+  [1m[36m (0.4ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "places" ("name", "description", "lat", "lng", "address", "rating", "duration", "price", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10) RETURNING "id"[0m  [["name", "Twin Peaks"], ["description", "The Twin Peaks are two prominent hills with an elevation of about 925 feet located near the geographic center of San Francisco, California."], ["lat", 37.752098], ["lng", -122.447303], ["address", "501 Twin Peaks Blvd, San Francisco, CA 94114"], ["rating", 4.8], ["duration", 45], ["price", 0], ["created_at", "2016-06-29 21:50:29.218151"], ["updated_at", "2016-06-29 21:50:29.218151"]]
+  [1m[35m (0.4ms)[0m  COMMIT
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.1ms)[0m  INSERT INTO "places_types" ("place_id", "type_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"  [["place_id", 17], ["type_id", 9], ["created_at", "2016-06-29 21:50:29.220306"], ["updated_at", "2016-06-29 21:50:29.220306"]]
+  [1m[36m (0.4ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "places_types" ("place_id", "type_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["place_id", 17], ["type_id", 10], ["created_at", "2016-06-29 21:50:29.222099"], ["updated_at", "2016-06-29 21:50:29.222099"]]
+  [1m[35m (0.4ms)[0m  COMMIT
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.1ms)[0m  INSERT INTO "photos" ("place_id", "image_url", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"  [["place_id", 17], ["image_url", "https://scontent-ord1-1.cdninstagram.com/t51.2885-15/e35/13549344_642567335893188_812231539_n.jpg"], ["created_at", "2016-06-29 21:50:29.223858"], ["updated_at", "2016-06-29 21:50:29.223858"]]
+  [1m[36m (0.3ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "places" ("name", "description", "lat", "lng", "address", "rating", "duration", "price", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10) RETURNING "id"[0m  [["name", "Land End Trail"], ["description", "Lands End is a park in San Francisco within the Golden Gate National Recreation Area. It is a rocky and windswept shoreline at the mouth of the Golden Gate"], ["lat", 37.786376], ["lng", -122.50575], ["address", "680 Point Lobos Ave, San Francisco, CA 94121"], ["rating", 4.8], ["duration", 180], ["price", 0], ["created_at", "2016-06-29 21:50:29.225987"], ["updated_at", "2016-06-29 21:50:29.225987"]]
+  [1m[35m (0.5ms)[0m  COMMIT
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "places_types" ("place_id", "type_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"  [["place_id", 18], ["type_id", 9], ["created_at", "2016-06-29 21:50:29.228314"], ["updated_at", "2016-06-29 21:50:29.228314"]]
+  [1m[36m (0.3ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "places_types" ("place_id", "type_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["place_id", 18], ["type_id", 10], ["created_at", "2016-06-29 21:50:29.230048"], ["updated_at", "2016-06-29 21:50:29.230048"]]
+  [1m[35m (0.5ms)[0m  COMMIT
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.1ms)[0m  INSERT INTO "photos" ("place_id", "image_url", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"  [["place_id", 18], ["image_url", "https://scontent-ord1-1.cdninstagram.com/l/t51.2885-15/e35/13557010_1707891832818246_1852511319_n.jpg"], ["created_at", "2016-06-29 21:50:29.231896"], ["updated_at", "2016-06-29 21:50:29.231896"]]
+  [1m[36m (0.4ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "places" ("name", "description", "lat", "lng", "address", "rating", "duration", "price", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10) RETURNING "id"[0m  [["name", "Sutro Baths"], ["description", "The Sutro Baths were (now ruins) a large, privately owned public saltwater swimming pool complex in the Lands End area of the Outer Richmond District in western San Francisco, California"], ["lat", 37.780356], ["lng", -122.513671], ["address", "680 Point Lobos Ave, San Francisco, CA 94121"], ["rating", 4.7], ["duration", 60], ["price", 0], ["created_at", "2016-06-29 21:50:29.234114"], ["updated_at", "2016-06-29 21:50:29.234114"]]
+  [1m[35m (0.4ms)[0m  COMMIT
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "places_types" ("place_id", "type_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"  [["place_id", 19], ["type_id", 9], ["created_at", "2016-06-29 21:50:29.236398"], ["updated_at", "2016-06-29 21:50:29.236398"]]
+  [1m[36m (0.4ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "places_types" ("place_id", "type_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["place_id", 19], ["type_id", 10], ["created_at", "2016-06-29 21:50:29.238174"], ["updated_at", "2016-06-29 21:50:29.238174"]]
+  [1m[35m (0.3ms)[0m  COMMIT
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "photos" ("place_id", "image_url", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"  [["place_id", 19], ["image_url", "https://scontent-ord1-1.cdninstagram.com/t51.2885-15/e35/13531860_656196461194008_916778377_n.jpg"], ["created_at", "2016-06-29 21:50:29.239905"], ["updated_at", "2016-06-29 21:50:29.239905"]]
+  [1m[36m (0.4ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "places" ("name", "description", "lat", "lng", "address", "rating", "duration", "price", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10) RETURNING "id"[0m  [["name", "Civic Center"], ["description", "The Civic Center in San Francisco, California, is an area of a few blocks north of the intersection of Market Street and Van Ness Avenue that contains many of the city's largest government and cultural institutions."], ["lat", 37.779515], ["lng", -122.417643], ["address", "1 Dr Carlton B Goodlett Pl, San Francisco, CA 94102"], ["rating", 3.1], ["duration", 30], ["price", 0], ["created_at", "2016-06-29 21:50:29.242158"], ["updated_at", "2016-06-29 21:50:29.242158"]]
+  [1m[35m (0.3ms)[0m  COMMIT
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "places_types" ("place_id", "type_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"  [["place_id", 20], ["type_id", 9], ["created_at", "2016-06-29 21:50:29.244205"], ["updated_at", "2016-06-29 21:50:29.244205"]]
+  [1m[36m (0.4ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "places_types" ("place_id", "type_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["place_id", 20], ["type_id", 10], ["created_at", "2016-06-29 21:50:29.245929"], ["updated_at", "2016-06-29 21:50:29.245929"]]
+  [1m[35m (0.4ms)[0m  COMMIT
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "photos" ("place_id", "image_url", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"  [["place_id", 20], ["image_url", "https://instagram.fsnc1-1.fna.fbcdn.net/t51.2885-15/e35/12960174_1685985931618996_1337015684_n.jpg"], ["created_at", "2016-06-29 21:50:29.247678"], ["updated_at", "2016-06-29 21:50:29.247678"]]
+  [1m[36m (0.4ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "places" ("name", "description", "lat", "lng", "address", "rating", "duration", "price", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10) RETURNING "id"[0m  [["name", "Golden Gate Bridge"], ["description", "The Golden Gate Bridge is a suspension bridge spanning the Golden Gate strait, the one-mile-wide, three-mile-long channel between San Francisco Bay and the Pacific Ocean."], ["lat", 37.819946], ["lng", -122.478234], ["address", "Golden Gate Bridge, California"], ["rating", 4.7], ["duration", 45], ["price", 0], ["created_at", "2016-06-29 21:50:29.249763"], ["updated_at", "2016-06-29 21:50:29.249763"]]
+  [1m[35m (0.4ms)[0m  COMMIT
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "places_types" ("place_id", "type_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"  [["place_id", 21], ["type_id", 9], ["created_at", "2016-06-29 21:50:29.251905"], ["updated_at", "2016-06-29 21:50:29.251905"]]
+  [1m[36m (0.4ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.1ms)[0m  [1mINSERT INTO "places_types" ("place_id", "type_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["place_id", 21], ["type_id", 10], ["created_at", "2016-06-29 21:50:29.253625"], ["updated_at", "2016-06-29 21:50:29.253625"]]
+  [1m[35m (0.4ms)[0m  COMMIT
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "photos" ("place_id", "image_url", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"  [["place_id", 21], ["image_url", "https://scontent-ord1-1.cdninstagram.com/t51.2885-15/e35/12339059_941804632578634_2076641008_n.jpg"], ["created_at", "2016-06-29 21:50:29.255319"], ["updated_at", "2016-06-29 21:50:29.255319"]]
+  [1m[36m (0.4ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "places" ("name", "description", "lat", "lng", "address", "rating", "duration", "price", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10) RETURNING "id"[0m  [["name", "chiang kai-shek memorial hall"], ["description", "The National Chiang Kai-shek Memorial Hall is a Taiwanese national monument, landmark and tourist attraction erected in memory of Chiang Kai-shek, former President of the Republic of China."], ["lat", 25.035368], ["lng", 121.519588], ["address", "No. 21, Zhongshan S Rd, Zhongzheng District, Taipei City, Taiwan 100"], ["rating", 4.4], ["duration", 45], ["price", 0], ["created_at", "2016-06-29 21:50:29.257387"], ["updated_at", "2016-06-29 21:50:29.257387"]]
+  [1m[35m (0.4ms)[0m  COMMIT
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "places_types" ("place_id", "type_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"  [["place_id", 22], ["type_id", 9], ["created_at", "2016-06-29 21:50:29.259737"], ["updated_at", "2016-06-29 21:50:29.259737"]]
+  [1m[36m (0.5ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "places_types" ("place_id", "type_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["place_id", 22], ["type_id", 10], ["created_at", "2016-06-29 21:50:29.261684"], ["updated_at", "2016-06-29 21:50:29.261684"]]
+  [1m[35m (0.4ms)[0m  COMMIT
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "places_types" ("place_id", "type_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"  [["place_id", 22], ["type_id", 4], ["created_at", "2016-06-29 21:50:29.263389"], ["updated_at", "2016-06-29 21:50:29.263389"]]
+  [1m[36m (0.3ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.1ms)[0m  [1mINSERT INTO "photos" ("place_id", "image_url", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["place_id", 22], ["image_url", "https://scontent-ord1-1.cdninstagram.com/t51.2885-15/e35/12530934_999508493451333_806608021_n.jpg"], ["created_at", "2016-06-29 21:50:29.265140"], ["updated_at", "2016-06-29 21:50:29.265140"]]
+  [1m[35m (0.4ms)[0m  COMMIT
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "places" ("name", "description", "lat", "lng", "address", "rating", "duration", "price", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10) RETURNING "id"  [["name", "Long Shan Temple"], ["description", "Lungshan Temple of Manka is a temple in Wanhua District, Taipei, Taiwan. The temple was built in Taipei in 1738 by settlers from Fujian during Qing rule. It served as a place of worship and a gathering place for the Chinese settlers."], ["lat", 25.037007], ["lng", 121.499772], ["address", "No. 211, Guangzhou St, Wanhua District, Taipei City, Taiwan 10853"], ["rating", 4.3], ["duration", 60], ["price", 0], ["created_at", "2016-06-29 21:50:29.267178"], ["updated_at", "2016-06-29 21:50:29.267178"]]
+  [1m[36m (0.4ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "places_types" ("place_id", "type_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["place_id", 23], ["type_id", 9], ["created_at", "2016-06-29 21:50:29.269340"], ["updated_at", "2016-06-29 21:50:29.269340"]]
+  [1m[35m (0.4ms)[0m  COMMIT
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "places_types" ("place_id", "type_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"  [["place_id", 23], ["type_id", 10], ["created_at", "2016-06-29 21:50:29.271016"], ["updated_at", "2016-06-29 21:50:29.271016"]]
+  [1m[36m (0.8ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "places_types" ("place_id", "type_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["place_id", 23], ["type_id", 4], ["created_at", "2016-06-29 21:50:29.273293"], ["updated_at", "2016-06-29 21:50:29.273293"]]
+  [1m[35m (0.4ms)[0m  COMMIT
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.1ms)[0m  INSERT INTO "photos" ("place_id", "image_url", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"  [["place_id", 23], ["image_url", "https://scontent-ord1-1.cdninstagram.com/t51.2885-15/s1080x1080/e15/fr/13525539_1188879921145432_140057277_n.jpg"], ["created_at", "2016-06-29 21:50:29.275252"], ["updated_at", "2016-06-29 21:50:29.275252"]]
+  [1m[36m (0.4ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "places" ("name", "description", "lat", "lng", "address", "rating", "duration", "price", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10) RETURNING "id"[0m  [["name", "鼎泰豐 Din Tai Fung"], ["description", "Popular global chain known for elevated dim sum & Asian dishes served in bustling quarters."], ["lat", 25.041061], ["lng", 121.543277], ["address", "106, Taiwan, Taipei City, Da’an District, Section 3, Zhongxiao E Rd, 300號B2"], ["rating", 4.6], ["duration", 60], ["price", 2], ["created_at", "2016-06-29 21:50:29.277304"], ["updated_at", "2016-06-29 21:50:29.277304"]]
+  [1m[35m (0.4ms)[0m  COMMIT
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "places_types" ("place_id", "type_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"  [["place_id", 24], ["type_id", 7], ["created_at", "2016-06-29 21:50:29.279514"], ["updated_at", "2016-06-29 21:50:29.279514"]]
+  [1m[36m (0.4ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "photos" ("place_id", "image_url", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["place_id", 24], ["image_url", "https://scontent-ord1-1.cdninstagram.com/t51.2885-15/e15/10724197_1632237020336765_235564369_n.jpg"], ["created_at", "2016-06-29 21:50:29.281385"], ["updated_at", "2016-06-29 21:50:29.281385"]]
+  [1m[35m (0.3ms)[0m  COMMIT

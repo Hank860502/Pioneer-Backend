@@ -181,7 +181,7 @@ PlacesType.create(
   )
 
 PlacesType.create(
-  place_id: aquarium_of_the_bay.id,
+  place_id: muir_woods.id,
   type_id: tourist_destination.id
   )
 
